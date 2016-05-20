@@ -246,6 +246,7 @@ DEPENDENCIES
   pry-theme
   rails (= 4.2.6)
   rspec-rails (~> 3.4)
+  selenium-webdriver
   solano
   spring
   web-console (~> 2.0)

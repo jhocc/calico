@@ -40,6 +40,7 @@ group :test do
   gem 'solano', require: false
 
   gem 'capybara', require: false
+  gem 'selenium-webdriver'
   gem 'capybara-accessible', require: false, git: 'git@github.com:Casecommons/capybara-accessible.git', ref: '9681e59f326ca9b227e16f45a22d29063f6a6b90'
   gem 'capybara-firebug', require: false
   gem 'capybara-screenshot', require: false
