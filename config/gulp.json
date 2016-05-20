@@ -1,0 +1,28 @@
+{
+  "outputRoot": "public/",
+  "outputSubDir": "assets/",
+  "tmpDir": "tmp/assets/",
+  "js": {
+    "entries": ["app/assets/javascripts/app.js"],
+    "outputFile": "app.js",
+    "testDir": "spec/javascripts/",
+    "testOutputFile": "app-test.js"
+  },
+  "css": {
+    "src": [
+      "app/assets/stylesheets/application.scss"
+    ],
+    "sassOptions": {
+      "includePaths": [
+        "node_modules/",
+        "vendor/bower_components"
+      ],
+      "outputStyle": "expanded"
+    }
+  },
+  "images": {
+    "src": [
+      "app/assets/images/**/*"
+    ]
+  }
+}

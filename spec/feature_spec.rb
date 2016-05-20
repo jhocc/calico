@@ -3,6 +3,6 @@ require 'rails_helper'
 feature 'test feature' do
   scenario 'load the page' do
     visit '/'
-    expect(page).to have_content 'Hello Casebook'
+    expect(page).to have_content 'Hello World'
   end
 end

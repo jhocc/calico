@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ROOT="$(dirname "$0")/.."
+
+cd "$ROOT"
+
+set -e
+set -x
+
+exec foreman "$@" --procfile='Procfile-dev'

@@ -15,4 +15,10 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore node modules
 node_modules
+public/assets/app.js
+public/assets/app.js.map
+public/assets/vendor.js.map
+public/assets/vendor.js
