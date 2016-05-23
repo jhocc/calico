@@ -2,12 +2,7 @@
 
 import React, { Component, DOM } from 'react'
 import ReactDOM from 'react-dom'
-
-class HelloReact extends Component {
-  render() {
-    return DOM.div({}, "Hello World")
-  }
-}
+import HelloReact from 'components/HelloReact'
 
 var node = document.getElementById('container')
 
