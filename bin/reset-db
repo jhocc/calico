@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ROOT="$(dirname "$0")/.."
+
+set -e
+set -x
+
+cd "$ROOT"
+dropdb --if-exists casebook2_development
+dropdb --if-exists casebook2_test
+bundle exec rake --trace db:create
+bundle exec rake --trace db:migrate db:seed
+RAILS_ENV=test bundle exec rake --trace db:create db:migrate db:seed
