@@ -22,6 +22,7 @@ var connect = require('gulp-connect')
 var glob = require('glob')
 var gulp = require('gulp')
 var runSequence = require('run-sequence')
+var sass = require('gulp-sass')
 var sourcemaps = require('gulp-sourcemaps')
 var uglify = require('gulp-uglify')
 var vinylBuffer = require('vinyl-buffer')
@@ -39,7 +40,7 @@ function seq(task) {
 }
 
 gulp.task('default', function(callback) {
-  return seq(['js'], callback)()
+  return seq(['js', 'css'], callback)()
 })
 
 gulp.task('server', function() {

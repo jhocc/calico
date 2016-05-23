@@ -20,9 +20,4 @@
 node_modules
 
 # Ignore compile assets
-public/assets/app.js
-public/assets/app.js.map
-public/assets/vendor.js.map
-public/assets/vendor.js
-public/assets/app-test.js
-public/assets/app-test.js.map
+public/assets/
