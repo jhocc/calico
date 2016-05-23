@@ -4,7 +4,12 @@ import React, { Component, DOM } from 'react'
 
 class HelloReact extends Component {
   render() {
-    return <div>Hello World</div>
+    return (
+      <div className="jumbotron">
+        <h1>Hello World</h1>
+        <p>California Dream</p>
+      </div>
+    )
   }
 }
 

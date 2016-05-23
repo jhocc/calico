@@ -113,6 +113,7 @@ var npmDependencies = getNPMPackageIds()
 
 var appPack = browserify({
   entries: config.js.entries,
+  paths: ['./app/assets/javascripts/', './assets/javascripts/components'],
   extensions: ['.jsx'],
   debug: true,
 }).external(npmDependencies)
