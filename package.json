@@ -3,6 +3,7 @@
   "dependencies": {
     "babel-polyfill": "6.2.0",
     "backbone": "1.2.3",
+    "bootstrap": "^3.3.6",
     "flux": "2.0.3",
     "immutable": "3.7.5",
     "jquery": "2.1.4",
@@ -17,7 +18,6 @@
   },
   "devDependencies": {
     "babelify": "^6.1.2",
-    "bower": "^1.4.1",
     "browserify": "^10.2.4",
     "browserify-shim": "^3.8.8",
     "eslint": "^1.8.0",

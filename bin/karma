@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ROOT="$(dirname "$0")/.."
+
+set -e
+
+cd "$ROOT"
+
+if [[ -n "$TDDIUM" ]]; then
+  set -x
+  options='--reporters dots'
+fi
+
+./node_modules/.bin/gulp js-vendor js-test
+./node_modules/.bin/karma start spec/karma.conf.js $options "$@"

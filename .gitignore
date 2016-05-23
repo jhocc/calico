@@ -18,7 +18,6 @@
 
 # Ignore node modules
 node_modules
-public/assets/app.js
-public/assets/app.js.map
-public/assets/vendor.js.map
-public/assets/vendor.js
+
+# Ignore compile assets
+public/assets/

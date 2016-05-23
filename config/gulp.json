@@ -14,8 +14,7 @@
     ],
     "sassOptions": {
       "includePaths": [
-        "node_modules/",
-        "vendor/bower_components"
+        "node_modules/"
       ],
       "outputStyle": "expanded"
     }
