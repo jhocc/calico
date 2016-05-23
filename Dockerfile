@@ -46,4 +46,5 @@ ONBUILD RUN bundle install
 COPY . /app
 RUN bundle install
 RUN npm install
-CMD foreman start -f Procfile-Dev
+RUN npm rebuild node-sass
+CMD foreman start -f Procfile-dev
