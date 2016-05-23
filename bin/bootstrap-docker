@@ -1,7 +1,8 @@
 #!/bin/bash
 
 PORT=3000
+ASSET_PORT=4857
 docker build --tag cc/calico .
-docker run --name calico --publish $PORT:$PORT --detach cc/calico
+docker run --name calico --publish $PORT:$PORT --publish $ASSET_PORT:$ASSET_PORT --detach cc/calico
 host_ip=$(docker-machine ip)
 echo "Can access app as http://$host_ip:$PORT"
