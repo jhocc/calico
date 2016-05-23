@@ -14,7 +14,8 @@
     "react-addons-css-transition-group": "15.0.2",
     "react-addons-test-utils": "15.0.2",
     "react-bootstrap": "0.29.4",
-    "react-dom": "15.0.2"
+    "react-dom": "15.0.2",
+    "react-router": "^2.4.1"
   },
   "devDependencies": {
     "babelify": "^6.1.2",
