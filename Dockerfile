@@ -47,4 +47,7 @@ COPY . /app
 RUN bundle install
 RUN npm install
 RUN npm rebuild node-sass
+
+EXPOSE 3000
+
 CMD foreman start -f Procfile-dev
