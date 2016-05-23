@@ -14,25 +14,18 @@ if(!env || env == 'development' || env == 'test') {
   config.rev = true
   config.compress = true
 }
-Object.freeze(config)
 
-module.exports = config
 var _ = require('lodash')
 var babelify = require('babelify')
 var browserify = require('browserify')
 var connect = require('gulp-connect')
 var glob = require('glob')
 var gulp = require('gulp')
-var requireDir = require('require-dir')
 var runSequence = require('run-sequence')
 var sourcemaps = require('gulp-sourcemaps')
 var uglify = require('gulp-uglify')
 var vinylBuffer = require('vinyl-buffer')
 var vinylSource = require('vinyl-source-stream')
-
-var config = require('./lib/tasks/gulp/config')
-
-requireDir('./lib/tasks/gulp')
 
 function seq(task) {
   var runner = _.partial(runSequence, task)
@@ -95,3 +88,47 @@ gulp.task('css', function() {
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.nonRevOutputDir))
 })
+
+function getNPMPackageIds() {
+  var packageManifest = {};
+  try {
+    packageManifest = require('./package.json');
+  } catch (e) {}
+  var deps = Object.keys(packageManifest.dependencies) || []
+  return deps
+}
+
+function bundle(browserifyPack, name) {
+  var p = browserifyPack.bundle()
+    .pipe(vinylSource(name))
+    .pipe(vinylBuffer())
+  if(config.compress) { p = p.pipe(uglify({preserveComments: 'some'})) }
+  return p.pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(config.nonRevOutputDir))
+}
+
+var npmDependencies = getNPMPackageIds()
+
+var appPack = browserify({
+  entries: config.js.entries,
+  extensions: ['.jsx'],
+  debug: true,
+}).external(npmDependencies)
+
+var testPack = browserify({
+  entries: glob.sync(config.js.testDir + '/**/*Spec.js?(x)'),
+  paths: ['./app/assets/javascripts/', './assets/javascripts/components'],
+  extensions: ['.jsx'],
+  debug: true,
+}).external(npmDependencies).transform(babelify)
+
+var vendorPack = browserify({
+  debug: false,
+  require: npmDependencies,
+})
+
+gulp.task('js', ['js-vendor', 'js-app'])
+gulp.task('js-app', function() { return bundle(appPack, config.js.outputFile) })
+gulp.task('js-test', function() { return bundle(testPack, config.js.testOutputFile) })
+gulp.task('js-vendor', function() { return bundle(vendorPack, 'vendor.js') })
