@@ -3,36 +3,10 @@ require 'capybara/accessible'
 
 Capybara.default_driver = :accessible
 Capybara.javascript_driver = Capybara.default_driver
-
-Capybara.default_wait_time = (ENV['CI'] || ENV['SOLANO']) ? 30 : 10
-
 Capybara.server_port = 3101
 
-RSpec.configure do |config|
-  config.before(:each, js: true) do
-    begin
-      Capybara.page.driver.browser.manage.window.resize_to(1280,1024)
-    rescue ChildProcess::TimeoutError, Selenium::WebDriver::Error::WebDriverError => e
-      if ENV['SOLANO']
-        puts '*** MEMORY ***'
-        puts `free -m`
-        puts '*** RESOURCE USAGE ***'
-        puts `ps -eo pmem,pcpu,vsize,pid,cmd | sort -k 1 -nr | head -5`
-        puts '*** FIREFOX ***'
-        puts `ps auxwwwf | grep -i -C 7 [f]irefox`
-        puts '*** WORKER IDENTITY ***'
-        puts `uname -a`
-        puts `hostname`
-        fail e.message
-      else
-        raise e
-      end
-    end
-  end
-end
-
 # Logging
-Capybara.server do |app, port|
+Capybara.register_server :webrick do |app, port, host|
   require 'rack/handler/webrick'
   Rack::Handler::WEBrick.run(app, :Port => port, :AccessLog => [], :Logger => WEBrick::Log::new(Rails.root.join('log/capybara_server.log').to_s))
 end
