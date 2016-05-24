@@ -1,0 +1,31 @@
+#!/bin/bash
+
+ROOT="$(dirname "$0")/.."
+PIDFILE="$ROOT/tmp/pids/server.pid"
+PROGRAM=$(basename "$0")
+
+if [[ -z "$@" ]]; then
+  echo "Usage: $PROGRAM start|stop|restart [argument ...]" >&2
+  exit 1
+fi
+
+set -e
+
+start() {
+   bundle exec rails server "$@"
+}
+
+stop() {
+  if [ ! -f "$PIDFILE" ]; then
+    echo 'Looks like server is not started.' >&2
+    return 1
+  fi
+  kill $(cat "$PIDFILE")
+}
+
+restart() {
+  stop
+  start -d
+}
+
+"$@"
