@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CaliforniaPrototype</title>
+  <title>Calico</title>
   <%= javascript_include_tag gulp_asset_path('vendor.js'), defer: true %>
-  <%= javascript_include_tag gulp_asset_path('app.js'), defer: true %>
+  <% if user_signed_in? %>
+    <%= javascript_include_tag gulp_asset_path('app.js'), defer: true %>
+  <% end %>
   <%= stylesheet_link_tag gulp_asset_path('application.css'), defer: true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <div id="container">
+  <div id="container" class="container">
     <%= yield %>
   </div>
-
 </body>
 </html>
