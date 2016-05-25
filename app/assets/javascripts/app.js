@@ -1,3 +1,5 @@
-'use strict'
+import 'jquery-helpers'
+import 'babel-polyfill'
 import React, { Component, DOM } from 'react'
 import ReactDOM from 'react-dom'
+import rails from 'jquery-ujs'
