@@ -28,6 +28,7 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'solano', require: false
+  gem 'database_cleaner'
   gem 'capybara', require: false
   gem 'selenium-webdriver'
   gem 'capybara-firebug', require: false

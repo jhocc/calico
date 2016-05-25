@@ -60,6 +60,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -243,6 +244,7 @@ DEPENDENCIES
   capybara
   capybara-firebug
   capybara-screenshot
+  database_cleaner
   devise (= 4.1.1)
   factory_girl_rails
   faker
