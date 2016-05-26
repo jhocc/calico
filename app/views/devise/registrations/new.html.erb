@@ -18,30 +18,32 @@
   </div>
 
   <div class="field form-group">
-    <%= f.label :email %>
+    <%= f.label :email, 'Email Address' %>
     <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address' %>
   </div>
 
-  <div class="field form-group">
-    <%= f.label :address %>
-    <%= f.text_field :address, class: 'form-control', placeholder: 'Primary Mailing Address' %>
-  </div>
-
-  <div class="field form-group row">
-    <div class="col-xs-6">
-      <%= f.label :city %>
-      <%= f.text_field :city, class: 'form-control', placeholder: 'City' %>
+  <%= f.fields_for :addresses do |addresses_form| %>
+    <div class="field form-group">
+      <%= addresses_form.label :street_address, 'Street Address' %>
+      <%= addresses_form.text_field :street_address, class: 'form-control', placeholder: 'Primary Mailing Address' %>
     </div>
-    <div class="col-xs-6">
-      <%= f.label :state %>
-      <%= f.select :state, options_for_select(us_states), {}, class: 'form-control' %>
-    </div>
-  </div>
 
-  <div class="field form-group">
-    <%= f.label :zip_code, 'Zip Code' %>
-    <%= f.number_field :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
-  </div>
+    <div class="field form-group row">
+      <div class="col-xs-6">
+        <%= addresses_form.label :city %>
+        <%= addresses_form.text_field :city, class: 'form-control', placeholder: 'City' %>
+      </div>
+      <div class="col-xs-6">
+        <%= addresses_form.label :state %>
+        <%= addresses_form.select :state, options_for_select(us_states), {}, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="field form-group">
+      <%= addresses_form.label :zip_code, 'Zip Code' %>
+      <%= addresses_form.number_field :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
+    </div>
+  <% end %>
 
   <div class="field form-group">
     <%= f.label :password %>
