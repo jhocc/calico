@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
   has_many :addresses
+  accepts_nested_attributes_for :addresses
 
   def primary_address
     addresses.order(created_at: :desc).first
