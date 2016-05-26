@@ -7,7 +7,7 @@ feature 'Sign up' do
     expect(page).to have_content 'First Name'
     expect(page).to have_content 'Email Address'
     expect(page).to have_content 'Zip Code'
-    expect(page).to have_button 'Upload Profile Picture'
+    expect(page).to have_button('Upload Profile Picture', disabled: true)
     expect(page).to have_button 'Save'
   end
 
