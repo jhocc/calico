@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CaliforniaPrototype</title>
+  <title>Calico</title>
+  <%= stylesheet_link_tag gulp_asset_path('application.css'), defer: true %>
   <%= javascript_include_tag gulp_asset_path('vendor.js'), defer: true %>
   <%= javascript_include_tag gulp_asset_path('app.js'), defer: true %>
-  <%= stylesheet_link_tag gulp_asset_path('application.css'), defer: true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <div id="container">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class='navbar-text'>
+          CALICO
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="container" class="container">
     <%= yield %>
   </div>
-
 </body>
 </html>

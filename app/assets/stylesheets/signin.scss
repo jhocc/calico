@@ -1,0 +1,32 @@
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+
+  .form-signin-circle {
+    border: 1px #eee solid;
+    border-radius: 25px;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    margin: auto;
+    top: -30px; left: 0; bottom: 0; right: 0;
+    background-color: white;
+  }
+
+  .form-signin-divider {
+    position: relative;
+    height: 30px;
+  }
+
+  .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+  }
+}

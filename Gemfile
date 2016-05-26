@@ -4,8 +4,11 @@ gem 'rails', '4.2.6'
 gem 'pg'
 gem 'foreman', require: false
 
+gem 'devise', '4.1.1'
+
 group :development, :test do
   gem 'factory_girl_rails', require: false
+  gem 'faker'
 
   gem 'pry'
   gem 'pry-byebug'
@@ -25,6 +28,7 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'solano', require: false
+  gem 'database_cleaner'
   gem 'capybara', require: false
   gem 'selenium-webdriver'
   gem 'capybara-firebug', require: false

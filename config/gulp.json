@@ -14,7 +14,8 @@
     ],
     "sassOptions": {
       "includePaths": [
-        "node_modules/"
+        "node_modules/",
+        "app/assets/stylesheets/"
       ],
       "outputStyle": "expanded"
     }
