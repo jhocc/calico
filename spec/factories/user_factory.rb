@@ -7,7 +7,7 @@ FactoryGirl.define do
       # posts_count is declared as a transient attribute and available in
       # attributes on the factory, as well as the callback via the evaluator
       transient do
-        posts_count 2
+        posts_count 1
       end
 
       # the after(:create) yields two values; the user instance itself and the
