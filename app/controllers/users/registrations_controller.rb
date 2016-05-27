@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def update_resource(resource, update_account_params)
-    if params[:current_password].present?
+    if update_account_params[:current_password].present?
       resource.update_with_password(update_account_params)
     else
       resource.update_attributes(update_account_params)
