@@ -12,15 +12,30 @@ fi
 set -e
 
 start() {
-   bundle exec rails server -b 0.0.0.0 "$@"
+  if [ -f "$PIDFILE" ]; then
+    echo 'server.pid exists. Killing pid' >&2
+    echo $(cat "$PIDFILE")
+    if [ -z $(cat "$PIDFILE") ]; then
+      rm "$PIDFILE"
+    else
+      kill $(cat "$PIDFILE")
+      rm "$PIDFILE"
+    fi
+  fi
+  bundle exec rails server -b 0.0.0.0 "$@"
 }
 
 stop() {
   if [ ! -f "$PIDFILE" ]; then
     echo 'Looks like server is not started.' >&2
     return 1
+  else
+    if [ -z $(cat "$PIDFILE") ]; then
+      rm "$PIDFILE"
+    else
+      kill $(cat "$PIDFILE")
+    fi
   fi
-  kill $(cat "$PIDFILE")
 }
 
 restart() {
