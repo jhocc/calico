@@ -1,13 +1,15 @@
 #!/bin/bash
 
 ROOT="$(dirname "$0")/.."
-
 set -e
 set -x
 
+USER=${PG_USER:-calico}
+HOST=${PG_HOST:-localhost}
+PORT=${PG_PORT:-5432}
+
 cd "$ROOT"
-dropdb --if-exists casebook2_development
-dropdb --if-exists casebook2_test
-bundle exec rake --trace db:create
-bundle exec rake --trace db:migrate db:seed
+dropdb -h "$HOST" -p "$PORT" -w -U "$USER" --if-exists casebook2_development
+dropdb -h "$HOST" -p "$PORT" -w -U "$USER" --if-exists casebook2_test
+RAILS_ENV=development bundle exec rake --trace db:create db:migrate db:seed
 RAILS_ENV=test bundle exec rake --trace db:create db:migrate db:seed
