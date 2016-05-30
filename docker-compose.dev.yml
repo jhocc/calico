@@ -1,0 +1,14 @@
+app:
+  build: .
+  dockerfile: Dockerfile
+  ports:
+    - "3000:3000"
+    - "4857:4857"
+  volumes:
+    - casebook2:/app
+  environment:
+    RAILS_ENV: development
+    PG_USER: calico
+postgresql:
+  environment:
+    POSTGRES_DB: ca_development
