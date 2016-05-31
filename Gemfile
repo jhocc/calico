@@ -5,6 +5,7 @@ gem 'pg'
 gem 'foreman', require: false
 
 gem 'devise', '4.1.1'
+gem 'puma'
 
 gem 'soda-ruby', :require => 'soda'
 
