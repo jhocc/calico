@@ -12,10 +12,6 @@ class ResourcesController < ApplicationController
     @resources = client.get(DATA_SET_URL, '$where' => query)
   end
 
-  def show
-    @resource = client.get(DATA_SET_URL, 'facility_number' => params[:id]).first
-  end
-
   def client
     @client ||= ::SODA::Client.new
   end
