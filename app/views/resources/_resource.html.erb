@@ -1,0 +1,8 @@
+<tr>
+  <td> <%= resource.facility_name %> </td>
+  <td>
+    <%= [resource.facility_address, resource.facility_city, resource.facility_state].join(', ') %>
+    <%= resource.facility_zip %>
+  </td>
+  <td> <%= resource.facility_telephone_number %> </td>
+</tr>
