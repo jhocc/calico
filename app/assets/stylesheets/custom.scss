@@ -20,6 +20,10 @@ body {
 	margin-bottom: 20px;
 }
 
+.double-margin-bottom {
+	margin-bottom: 40px;
+}
+
 .half-margin-bottom {
 	margin-bottom: 10px;
 }
@@ -68,6 +72,37 @@ body {
 	a:hover {
 		color: #d6d7d9;
 	}
+}
+
+// VALIDATIONS //
+
+#error_explanation {
+	background-color: #f9dede;
+	padding: 1em;
+	margin-bottom:20px;
+	padding-left:7rem;
+}
+
+#error_explanation h2 {
+	font-size:2rem;
+	margin: 0 0 2rem 0;
+	padding:0;
+	line-height: 2.6rem;
+}
+
+#error_explanation:after{
+	content: "\f06a";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    position: absolute;
+    font-size: 3rem;
+    color: #333;
+    top: 50%;
+    left: 50%;
+    margin: -374px 0 0 -141px;
+    z-index: 1;
 }
 
 // FORM //
