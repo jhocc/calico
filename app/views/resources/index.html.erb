@@ -1,0 +1,14 @@
+<%= render "shared/dashboard" %>
+<h2> Foster Family Agencies in <b><%= current_user.primary_address.zip_code %></b> </h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Facility Name</th>
+      <th>Facility Address</th>
+      <th>Facility Phone Number</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render partial: "resource", collection: @resources %>
+  </tbody>
+</table>

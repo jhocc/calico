@@ -6,6 +6,8 @@ gem 'foreman', require: false
 
 gem 'devise', '4.1.1'
 
+gem 'soda-ruby', :require => 'soda'
+
 group :development, :test do
   gem 'factory_girl_rails', require: false
   gem 'faker'
