@@ -1,8 +1,6 @@
 #!/bin/bash
 
-PORT=3000
+ROOT="$(dirname "$0")/.."
+cd "$ROOT"
 eval $(docker-machine env)
-docker build --tag cc/calico .
-docker run --name calico --publish $PORT:$PORT --detach cc/calico
-host_ip=$(docker-machine ip)
-echo "Can access app as http://$host_ip:$PORT"
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
