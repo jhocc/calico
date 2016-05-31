@@ -1,5 +1,5 @@
 <tr>
-  <td> <%= resource.facility_name %> </td>
+  <td> <%= link_to(resource.facility_name, resource_path(resource.facility_number))%> </td>
   <td>
     <%= [resource.facility_address, resource.facility_city, resource.facility_state].join(', ') %>
     <%= resource.facility_zip %>
