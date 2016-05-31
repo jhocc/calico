@@ -1,14 +1,20 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-signin'}) do |f| %>
-  <div class="field">
+  
+  <div class="field form-group">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address' %>
   </div>
 
-  <div class="field">
+  <div class="field half-margin-bottom ">
     <%= f.label :password %>
     <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
   </div>
 
+  <div class="margin-bottom ">
+    <%- if devise_mapping.recoverable? %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+    <% end -%>
+  </div>
   <div class="actions">
     <%= f.submit "Sign In", class: 'btn btn-lg btn-primary btn-block btn-success' %><br />
     <div class="form-signin-divider">
@@ -18,7 +24,3 @@
     <%= link_to "Sign Up", new_registration_path(resource_name), class: 'btn btn-lg btn-primary btn-block' %><br />
   </div>
 <% end %>
-
-<%- if devise_mapping.recoverable? %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-<% end -%>
