@@ -106,20 +106,30 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
 }
 
 .btn-primary {
-	background-color: #8ba6ca;
+	background-color: #0071BC;
 }
 
 .btn-primary:hover {
-	background-color: #4773aa;
+	background-color: #205493;
 }
 
-.btn-success {
-	background-color: #94bfa2;
-	border: none;
+.btn-primary:active {
+	background-color: #112E51;
 }
 
-.btn-success:hover {
-	background-color: #4aa564;
+.btn-secondary {
+	background-color: #E31C3D;
+	color: #fff;
+}
+
+.btn-secondary:hover {
+	background-color: #CD2026;
+	color: #fff;
+}
+
+.btn-secondary:active {
+	background-color: #981B1E;
+	color: #fff;
 }
 
 // TRANSITIONS //
