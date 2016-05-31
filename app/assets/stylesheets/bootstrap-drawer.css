@@ -142,7 +142,7 @@ body.has-drawer {
   border-radius: 4px;
   position: relative;
   display: block;
-  padding: 18px 20px;
+  padding: 1.55rem 2rem;
 }
 
 .drawer-nav li.active a,
