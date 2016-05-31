@@ -11,12 +11,12 @@ default: &default
 
 development:
   <<: *default
-  database: ca_development
+  database: <%= ENV['PG_DB'] || 'ca_development' %>
 
 test:
   <<: *default
-  database: ca_test
+  database: <%= ENV['PG_DB'] || 'ca_test' %>
 
 production:
   <<: *default
-  database: ca_production
+  database: <%= ENV['PG_DB'] || 'ca_production' %>
