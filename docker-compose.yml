@@ -3,15 +3,16 @@ app:
   command: 'bash -c ''bundle exec puma -e production -C config/puma.rb'''
   container_name: calico_app
   restart: always
-  ports:
-    - "3000:3000"
   environment:
+    PORT: 8080
     RAILS_ENV: production
     PG_HOST: postgresql
     PG_USER: calico
     PG_PASSWORD: calico
     PG_PORT: 5432
     SECRET_KEY_BASE: 'GNeBhAoT81xWAlRls7NJa1zZjZ/BTJ9EMGO+YcMh/8/+Xu9R6jzAWk/uUZIYEDuoIK19vwesRA5SQPVJow6dxQ=='
+  ports:
+    - "8080:8080"
   links:
     - postgresql
 postgresql:
@@ -22,12 +23,3 @@ postgresql:
     POSTGRES_USER: calico
     POSTGRES_DB: ca_production
     POSTGRES_PASSWORD: calico
-nginx:
-  build: .
-  dockerfile: ./docker/Dockerfile.nginx
-  container_name: calico_nginx
-  restart: always
-  ports:
-    - "80:80"
-  links:
-    - app
