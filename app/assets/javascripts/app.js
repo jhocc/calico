@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import rails from 'jquery-ujs'
 import 'vendor/drawer'
 import 'menu'
+import MessagePage from 'components/MessagePage'
 import 'presenter'
 import _ from 'lodash'
 
@@ -20,5 +21,10 @@ function present() {
   $(document).ready(function() {
     window.present($('body'))
   })
+
+  if ($.isReady) {
+    throw new Error('DOM already ready, too late to bind')
+  }
+  bindAndRenderReact('MessagePage:present', MessagePage, ['currentUserId'])
 }
 present()
