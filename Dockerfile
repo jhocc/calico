@@ -5,10 +5,9 @@ RUN \
   apt-get update -y && \
   apt-get upgrade -y && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    build-essential \
-    libpq-dev \
     apt-utils \
-    vim git wget libfreetype6 libfontconfig bzip2 time python-pip postgresql-client time xvfb iceweasel
+    libpq-dev \
+    postgresql-client
 
 
 # gpg keys listed at https://github.com/nodejs/node
@@ -39,12 +38,12 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 RUN mkdir -p /app
 WORKDIR /app
 
-ONBUILD COPY Gemfile /app/
-ONBUILD COPY Gemfile.lock /app/
+COPY Gemfile /app/
+COPY Gemfile.lock /app/
 RUN bundle install
-ONBUILD ENV SECRET_KEY_BASE $(openssl rand -base64 32)
-ONBUILD COPY . /app
-ONBUILD RUN bundle install
-ONBUILD RUN npm install
-ONBUILD RUN npm rebuild node-sass
-ONBUILD RUN bundle exec rake assets:precompile
+ENV ECRET_KEY_BASE $openssl rand -base64 32)
+COPY . /app
+RUN bundle install
+RUN npm install
+RUN npm rebuild node-sass
+RUN RAILS_ENV=production bundle exec rake assets:precompile
