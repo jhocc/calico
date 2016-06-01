@@ -55,6 +55,22 @@ feature 'Resources page' do
     expect(page).to have_content('HOSANNA PATHWAYS')
     expect(page).to have_content('9998 CROW CANYON ROAD, CASTRO VALLEY, CA 94612')
     expect(page).to have_content('(510) 538-8117')
+
+    expect(page).to have_content('AMERICAN INDIAN CHILD RESOURCE CENTER FFA')
+    expect(page).to have_content('522 GRAND AVE., OAKLAND, CA 94612')
+    expect(page).to have_content('(510) 208-1870')
+  end
+
+  scenario "displays no rows when no resources in the user's zip code" do
+    response = {}
+
+    expect_any_instance_of(SODA::Client).to receive(:get).and_return(response)
+
+    login_as user
+    visit resources_path
+
+    expect(page).to have_content("Foster Family Agencies in #{zip_code}")
+    expect(page.all('table tbody tr').count).to eq 0
   end
 
   scenario 'display resource information' do
