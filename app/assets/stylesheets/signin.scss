@@ -1,6 +1,6 @@
 .form-signin {
   max-width: 350px;
-  padding: 10px;
+  padding: 0px;
   margin: 0 auto;
 
   .form-signin-circle {
@@ -31,4 +31,8 @@
   }
 }
 
-
+@media (max-width: 768px) {
+  .form-signin {
+    max-width: 100%;
+  }
+}

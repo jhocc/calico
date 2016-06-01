@@ -1,22 +1,21 @@
+<div class="form-signin">
+
 <h2>Forgot your password?</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div>
     <p>
-      Can't remember your password?
-      No problem, just enter your email and
-      we will send you a new one!
+      Enter your email below and we'll email instructions on how to reset your password.
     </p>
-  </div>
-
-  <div class="field">
-    <%= f.label :email, 'Email Address' %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="field form-group">
+    <%= f.label :email, 'Email Address' %>
+    <em>Required</em>
+    <%= f.email_field :email, autofocus: true, class: 'form-control'%>
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit "Send Password Reset Instructions", class: 'btn btn-lg btn-primary btn-block btn-primary double-margin-bottom' %>
   </div>
 <% end %>
+
+</div>

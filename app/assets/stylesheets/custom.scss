@@ -6,6 +6,15 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
+h2 {
+	margin-top: 0.5rem;
+}
+
+.container {
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+
 // HELPERS //
 
 .padded {
@@ -14,6 +23,18 @@ body {
 
 .half-padded {
 	padding: 10px;
+}
+
+.margin-bottom {
+	margin-bottom: 20px;
+}
+
+.double-margin-bottom {
+	margin-bottom: 40px;
+}
+
+.half-margin-bottom {
+	margin-bottom: 10px;
 }
 
 // NAV //
@@ -29,7 +50,7 @@ body {
 		color: #fff;
 		font-family: 'Yellowtail', cursive;
 		margin: 0;
-		padding: 2.2rem 0px 0px 0px;
+		padding: 2.1rem 0px 0px 0px;
 		float: left;
 		font-size: 4.6rem;
 	}
@@ -51,7 +72,7 @@ body {
 	float: right;
 	display: block;
 	font-size: 40px;
-	margin-top: 6px;
+	margin-top: 3px;
 
 	a {
 		color: #fff;
@@ -60,6 +81,37 @@ body {
 	a:hover {
 		color: #d6d7d9;
 	}
+}
+
+// VALIDATIONS //
+
+#error_explanation {
+	background-color: #f9dede;
+	padding: 1em;
+	margin-bottom:20px;
+	padding-left:7rem;
+}
+
+#error_explanation h2 {
+	font-size:2rem;
+	margin: 0 0 2rem 0;
+	padding:0;
+	line-height: 2.6rem;
+}
+
+#error_explanation:after{
+	content: "\f06a";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    position: absolute;
+    font-size: 3rem;
+    color: #333;
+    top: 50%;
+    left: 50%;
+    margin: -374px 0 0 -141px;
+    z-index: 1;
 }
 
 // FORM //
@@ -98,20 +150,30 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
 }
 
 .btn-primary {
-	background-color: #8ba6ca;
+	background-color: #0071BC;
 }
 
 .btn-primary:hover {
-	background-color: #4773aa;
+	background-color: #205493;
 }
 
-.btn-success {
-	background-color: #94bfa2;
-	border: none;
+.btn-primary:active {
+	background-color: #112E51;
 }
 
-.btn-success:hover {
-	background-color: #4aa564;
+.btn-secondary {
+	background-color: #E31C3D;
+	color: #fff;
+}
+
+.btn-secondary:hover {
+	background-color: #CD2026;
+	color: #fff;
+}
+
+.btn-secondary:active {
+	background-color: #981B1E;
+	color: #fff;
 }
 
 // TRANSITIONS //
