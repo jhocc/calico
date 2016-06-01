@@ -17,7 +17,7 @@
 	}
 
 	ul.channels li  {
-		border-bottom: 0.2rem solid #ddd;
+		border-bottom: 0.1rem solid #ddd;
 		padding: 1rem;
 		list-style-type: none;
 		background-color: #fff;
@@ -37,6 +37,9 @@
 
 	.message-window {
 		margin-bottom: 2rem;
+		height: 50rem;
+		overflow-y: scroll;
+		display: block;
 	}
 
 	.message {
@@ -89,18 +92,27 @@
 
 		.profile-picture {
 
-			float: left;
+			
 
 			img {
 				height: 7.5rem;
 				width: 7.5rem;
 				margin-right: 2rem;
+				float: left;
 			}
 		}
 
-		textarea {
-			border: none;
-			min-height: 7.5rem;
+		.message-body {
+
+			width: 100%;
+			padding-left: 95px;
+
+			textarea {
+				border: none;
+				min-height: 7.5rem;
+				float: left;
+				width: 100%;
+			}
 		}
 	}
 
