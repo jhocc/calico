@@ -3,7 +3,7 @@ default: &default
   username: <%= ENV['PG_USER'] || 'calico' %>
   host: <%= ENV['PG_HOST'] || 'localhost' %>
   port: <%= ENV['PG_PORT'] || 5432 %>
-  password:
+  password: <%= ENV['PG_PASSWORD'] %>
   encoding: utf8
   prepared_statements: false
   pool: 5
