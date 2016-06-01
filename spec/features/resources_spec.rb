@@ -49,15 +49,15 @@ feature 'Resources page' do
     expect(page).to have_content("Foster Family Agencies in #{zip_code}")
 
     expect(page).to have_content('FAMILYPATHS, INC')
-    expect(page).to have_content('1727 MARTIN LUTHER KING WY#109, OAKLAND, CA 94612')
+    expect(page).to have_content('1727 Martin Luther King Wy#109, Oakland, CA 94612')
     expect(page).to have_content('(510) 893-9230')
 
     expect(page).to have_content('HOSANNA PATHWAYS')
-    expect(page).to have_content('9998 CROW CANYON ROAD, CASTRO VALLEY, CA 94612')
+    expect(page).to have_content('9998 Crow Canyon Road, Castro Valley, CA 94612')
     expect(page).to have_content('(510) 538-8117')
 
     expect(page).to have_content('AMERICAN INDIAN CHILD RESOURCE CENTER FFA')
-    expect(page).to have_content('522 GRAND AVE., OAKLAND, CA 94612')
+    expect(page).to have_content('522 Grand Ave., Oakland, CA 94612')
     expect(page).to have_content('(510) 208-1870')
   end
 
@@ -100,7 +100,7 @@ feature 'Resources page' do
     click_link 'FAMILYPATHS, INC'
 
     expect(page).to have_content('FAMILYPATHS, INC')
-    expect(page).to have_content('1727 MARTIN LUTHER KING WY#109, OAKLAND, CA 94612')
+    expect(page).to have_content('1727 Martin Luther King Wy#109, Oakland, CA 94612')
     expect(page).to have_content('(510) 893-9230')
     expect(page).to have_content('Capacity: 10')
     expect(page).to have_content('Administrator: Marcella Reeves')

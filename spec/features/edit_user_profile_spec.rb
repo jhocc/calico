@@ -39,9 +39,9 @@ feature 'Edit user profile' do
     click_link 'Edit My Profile'
     expect(page).to have_button 'Update'
 
-    fill_in 'Password', with: '654321'
-    fill_in 'Password Confirmation', with: '654321'
-    fill_in 'Current Password', with: '123456'
+    fill_in 'user_password', with: '654321'
+    fill_in 'user_password_confirmation', with: '654321'
+    fill_in 'user_current_password', with: '123456'
 
     click_button 'Update'
 

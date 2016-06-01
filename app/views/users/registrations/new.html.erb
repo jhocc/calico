@@ -2,14 +2,12 @@
   <%= devise_error_messages! %>
 
   <div class="field form-group">
-      <%= f.label :first_name, 'First Name' %>
-      <em>Required</em>
-      <%= f.text_field :first_name, autofocus: true, class: 'form-control'%>
+    <%= f.label :first_name, 'First Name' %>
+    <%= f.text_field :first_name, autofocus: true, class: 'form-control'%>
   </div>
   <div class="field form-group">
-      <%= f.label :last_name, 'Last Name' %>
-      <em>Required</em>
-      <%= f.text_field :last_name, class: 'form-control'%>
+    <%= f.label :last_name, 'Last Name' %>
+    <%= f.text_field :last_name, class: 'form-control'%>
   </div>
 
   <div class="field form-group">
@@ -19,6 +17,7 @@
 
   <div class="field form-group">
     <%= f.label :email, 'Email Address' %>
+    <em>Required</em>
     <%= f.email_field :email, class: 'form-control'%>
   </div>
 
@@ -48,10 +47,8 @@
 
   <div class="field form-group">
     <%= f.label :password %>
-    <% if @minimum_password_length %>
-    (<%= @minimum_password_length %> characters minimum)<em>Required</em>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '6 characters minimum' %>
+    <em>Required</em>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: minimum_password_message %>
   </div>
 
   <div class="field form-group">
@@ -65,4 +62,3 @@
     <%= f.submit "Save", class: 'btn btn-lg btn-primary btn-block btn-primary double-margin-bottom' %>
   </div>
 <% end %>
-

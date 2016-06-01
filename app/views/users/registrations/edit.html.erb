@@ -2,17 +2,14 @@
   <%= devise_error_messages! %>
 
   <div class="field form-group">
-      <%= f.label :first_name, 'First Name' %>
-      <em>Required</em>
-      <%= f.text_field :first_name, autofocus: true, class: 'form-control'%>
+    <%= f.label :first_name, 'First Name' %>
+    <%= f.text_field :first_name, autofocus: true, class: 'form-control'%>
   </div>
 
   <div class="field form-group">
-      <%= f.label :last_name, 'Last Name' %>
-      <em>Required</em>
-      <%= f.text_field :last_name, class: 'form-control'%>
+    <%= f.label :last_name, 'Last Name' %>
+    <%= f.text_field :last_name, class: 'form-control'%>
   </div>
-
 
   <div class="field form-group">
     <%= f.label :phone %>
@@ -21,7 +18,8 @@
 
   <div class="field form-group">
     <%= f.label :email, 'Email Address' %>
-    <%= f.email_field :email, class: 'form-control'%>
+    <em>Required</em>
+    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
   </div>
 
   <%= f.fields_for :addresses, f.object.addresses do |addresses_form| %>
@@ -33,7 +31,7 @@
     <div class="field form-group row">
       <div class="col-xs-6">
         <%= addresses_form.label :city %>
-        <%= addresses_form.text_field :city, class: 'form-control'%>
+        <%= addresses_form.text_field :city, class: 'form-control' %>
       </div>
       <div class="col-xs-6">
         <%= addresses_form.label :state %>
@@ -42,23 +40,20 @@
     </div>
 
     <div class="field form-group">
-      <em>Required</em>
       <%= addresses_form.label :zip_code, 'Zip Code' %>
-      <%= addresses_form.number_field :zip_code, class: 'form-control'%>
+      <em>Required</em>
+      <%= addresses_form.number_field :zip_code, class: 'form-control' %>
     </div>
   <% end %>
 
   <div class="field form-group">
     <%= f.label :current_password, 'Current Password' %>
-    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: '6 characters minimum'%>
+    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
   </div>
 
   <div class="field form-group">
-    <%= f.label :new_password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control'%>
+    <%= f.label :new_password, 'New Password'%>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: minimum_password_message %>
   </div>
 
   <div class="field form-group">
@@ -71,4 +66,3 @@
     <%= f.submit "Update Profile", class: 'btn btn-lg btn-primary btn-block btn-primary double-margin-bottom' %>
   </div>
 <% end %>
-
