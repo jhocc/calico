@@ -42,7 +42,7 @@ WORKDIR /app
 ONBUILD COPY Gemfile /app/
 ONBUILD COPY Gemfile.lock /app/
 ONBUILD RUN bundle install
-
+ONBUILD ENV SECRET_KEY_BASE $(openssl rand -base64 32)
 COPY . /app
 RUN bundle install
 RUN npm install
