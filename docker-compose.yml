@@ -1,5 +1,6 @@
 app:
-  image: casecommons/calico_app
+  build: .
+  command: 'bash -c ''bundle exec puma -e production -C config/puma.rb'''
   container_name: calico_app
   restart: always
   ports:
@@ -10,6 +11,7 @@ app:
     PG_USER: calico
     PG_PASSWORD: calico
     PG_PORT: 5432
+    SECRET_KEY_BASE: 'GNeBhAoT81xWAlRls7NJa1zZjZ/BTJ9EMGO+YcMh/8/+Xu9R6jzAWk/uUZIYEDuoIK19vwesRA5SQPVJow6dxQ=='
   links:
     - postgresql
 postgresql:
@@ -21,7 +23,8 @@ postgresql:
     POSTGRES_DB: ca_production
     POSTGRES_PASSWORD: calico
 nginx:
-  image: casecommons/calico_nginx
+  build: .
+  dockerfile: ./docker/Dockerfile.nginx
   container_name: calico_nginx
   restart: always
   ports:
