@@ -1,0 +1,35 @@
+.dashboard {
+
+	h2 {
+		margin-top: -0.6rem;
+	}
+
+	ul {
+		padding: 0;
+
+		img {
+			background-color: pink;
+			height: 5rem;
+			width: 5rem;
+			margin-right: 0.8rem;
+			
+		}
+
+	}
+
+	ul.channels li  {
+		border-bottom: 2px solid #ddd;
+		padding: 1rem;
+		list-style-type: none;
+		background-color: #fff;
+	}
+
+	ul.channels li:last-child  {
+		border-bottom: none;
+	}
+
+	ul.channels li:hover  {
+		background-color: #dce4ee;
+	}
+
+}

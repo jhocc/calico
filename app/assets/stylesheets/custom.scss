@@ -60,6 +60,11 @@ h2 {
     }
 }
 
+.transparent {
+	background-color: #f1f1f1;
+	height: 5rem;
+}
+
 // NAV //
 
 .navbar-header {
@@ -210,7 +215,7 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
 
 // TRANSITIONS //
 
-a, .btn, .drawer, .drawer-right {
+a, li, .btn, .drawer, .drawer-right {
   -o-transition:.3s;
   -ms-transition:.3s;
   -moz-transition:.3s;
