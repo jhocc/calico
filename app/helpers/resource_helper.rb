@@ -1,9 +1,11 @@
 module ResourceHelper
   def address(resource)
-    [
-      resource.facility_address,
-      resource.facility_city,
+    address_part = [
+      resource.facility_address.titleize,
+      resource.facility_city.titleize,
       resource.facility_state
-    ].join(', ') + ' ' + resource.facility_zip
+    ].join(', ')
+
+    "#{address_part} #{resource.facility_zip}"
   end
 end
