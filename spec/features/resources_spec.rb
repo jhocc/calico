@@ -4,38 +4,38 @@ feature 'Resources page' do
   let(:user) { FactoryGirl.create(:user_with_addresses) }
   let(:zip_code) { user.primary_address.zip_code }
 
-  scenario 'include only resources for the user zip code' do
+  scenario "display resources in the user's zip code" do
     response = [
       {
-        "facility_address" => "1727 MARTIN LUTHER KING WY#109",
-        "facility_name" => "FAMILYPATHS, INC.",
-        "facility_number" => "10707644",
-        "facility_state" => "CA",
-        "facility_city" => "OAKLAND",
-        "facility_status" => "LICENSED",
-        "facility_telephone_number" => "(510) 893-9230",
-        "facility_type" => "FOSTER FAMILY AGENCY",
-        "facility_zip" => "94612",
+        'facility_address' => '1727 MARTIN LUTHER KING WY#109',
+        'facility_name' => 'FAMILYPATHS, INC.',
+        'facility_number' => '10707644',
+        'facility_state' => 'CA',
+        'facility_city' => 'OAKLAND',
+        'facility_status' => 'LICENSED',
+        'facility_telephone_number' => '(510) 893-9230',
+        'facility_type' => 'FOSTER FAMILY AGENCY',
+        'facility_zip' => '94612',
       }, {
-        "facility_address" => "9998 CROW CANYON ROAD",
-        "facility_name" => "HOSANNA PATHWAYS",
-        "facility_number" => "10707645",
-        "facility_state" => "CA",
-        "facility_city" => "CASTRO VALLEY",
-        "facility_status" => "LICENSED",
-        "facility_telephone_number" => "(510) 538-8117",
-        "facility_type" => "FOSTER FAMILY AGENCY SUB",
-        "facility_zip" => "94612",
+        'facility_address' => '9998 CROW CANYON ROAD',
+        'facility_name' => 'HOSANNA PATHWAYS',
+        'facility_number' => '10707645',
+        'facility_state' => 'CA',
+        'facility_city' => 'CASTRO VALLEY',
+        'facility_status' => 'LICENSED',
+        'facility_telephone_number' => '(510) 538-8117',
+        'facility_type' => 'FOSTER FAMILY AGENCY SUB',
+        'facility_zip' => '94612',
       }, {
-        "facility_address" => "522 GRAND AVE.",
-        "facility_name" => "AMERICAN INDIAN CHILD RESOURCE CENTER FFA",
-        "facility_number" => "10707646",
-        "facility_state" => "CA",
-        "facility_city" => "OAKLAND",
-        "facility_status" => "LICENSED",
-        "facility_telephone_number" => "(510) 208-1870",
-        "facility_type" => "FOSTER FAMILY AGENCY",
-        "facility_zip" => "94612",
+        'facility_address' => '522 GRAND AVE.',
+        'facility_name' => 'AMERICAN INDIAN CHILD RESOURCE CENTER FFA',
+        'facility_number' => '10707646',
+        'facility_state' => 'CA',
+        'facility_city' => 'OAKLAND',
+        'facility_status' => 'LICENSED',
+        'facility_telephone_number' => '(510) 208-1870',
+        'facility_type' => 'FOSTER FAMILY AGENCY',
+        'facility_zip' => '94612',
       }
     ].map do |hash|
       Hashie::Mash.new(hash)
@@ -60,17 +60,17 @@ feature 'Resources page' do
   scenario 'display resource information' do
     response = [
       Hashie::Mash.new({
-        "facility_address" => "1727 MARTIN LUTHER KING WY#109",
-        "facility_administrator" => "MARCELLA REEVES",
-        "facility_capacity" => "10",
-        "facility_name" => "FAMILYPATHS, INC.",
-        "facility_number" => "10707644",
-        "facility_state" => "CA",
-        "facility_city" => "OAKLAND",
-        "facility_status" => "LICENSED",
-        "facility_telephone_number" => "(510) 893-9230",
-        "facility_type" => "FOSTER FAMILY AGENCY",
-        "facility_zip" => "94612",
+        'facility_address' => '1727 MARTIN LUTHER KING WY#109',
+        'facility_administrator' => 'MARCELLA REEVES',
+        'facility_capacity' => '10',
+        'facility_name' => 'FAMILYPATHS, INC.',
+        'facility_number' => '10707644',
+        'facility_state' => 'CA',
+        'facility_city' => 'OAKLAND',
+        'facility_status' => 'LICENSED',
+        'facility_telephone_number' => '(510) 893-9230',
+        'facility_type' => 'FOSTER FAMILY AGENCY',
+        'facility_zip' => '94612',
       })
     ]
 

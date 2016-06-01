@@ -1,9 +1,6 @@
 <div>
   <div> <%= @resource.facility_name %> </div>
-  <div>
-    <%= [@resource.facility_address, @resource.facility_city, @resource.facility_state].join(', ') %>
-    <%= @resource.facility_zip %>
-  </div>
+  <div> <%= address(@resource) %> </div>
   <div> <%= @resource.facility_telephone_number %> </div>
   <div> Capacity: <%= @resource.facility_capacity %> </div>
   <div> Administrator: <%= @resource.facility_administrator.titleize %> </div>
