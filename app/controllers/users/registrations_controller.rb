@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def update_resource(resource, update_account_params)
-    if update_account_params[:current_password].present?
+    if updating_password?(update_account_params)
       resource.update_with_password(update_account_params)
     else
       resource.update_attributes(update_account_params)
@@ -39,7 +39,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       ]
     ])
 
-    if params[:user][:password].blank?
+    # devise allow current_password, password params as default
+    if !updating_password?(params[:user])
       except_keys = [
         :current_password,
         :password,
@@ -47,5 +48,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       ]
       devise_parameter_sanitizer.permit(:account_update, except: except_keys)
     end
+  end
+
+  def updating_password?(update_account_params)
+    update_account_params[:current_password].present? ||
+      update_account_params[:password].present?
   end
 end
