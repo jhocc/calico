@@ -5,13 +5,13 @@ feature 'Forgot password' do
     user = FactoryGirl.create(:user, email: 'test@casecommons.org')
     visit root_path
     click_link 'Forgot your password?'
-    expect(page).to have_content "Can't remember your password?  No problem, just enter your email and we will send you a new one!"
+    expect(page).to have_content "Forgot your password? Enter your email below and we'll email instructions on how to reset your password."
     expect(page).to have_field 'Email Address'
-    expect(page).to have_button 'Send me reset password instructions'
+    expect(page).to have_button 'Send Password Reset Instructions'
 
 
     fill_in 'Email Address', with: user.email
-    click_button 'Send me reset password instructions'
+    click_button 'Send Password Reset Instructions'
 
     mail = ActionMailer::Base.deliveries.first.body
     expect(mail).to include(user.email)
@@ -19,6 +19,6 @@ feature 'Forgot password' do
 
     visit edit_user_password_path(user, reset_password_token: user.reload.reset_password_token)
 
-    expect(page).to have_content('Change your password')
+    expect(page).to have_content('Reset your password')
   end
 end
