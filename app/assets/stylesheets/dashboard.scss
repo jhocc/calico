@@ -2,6 +2,7 @@
 
 	h2 {
 		margin-top: -0.6rem;
+		margin-bottom: 0.5em;
 	}
 
 	ul {
@@ -16,7 +17,7 @@
 	}
 
 	ul.channels li  {
-		border-bottom: 2px solid #ddd;
+		border-bottom: 0.2rem solid #ddd;
 		padding: 1rem;
 		list-style-type: none;
 		background-color: #fff;
@@ -35,24 +36,79 @@
 	}
 
 	.message-window {
-		padding: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.message {
+		padding: 2rem;
 		background-color: #fff;
+		clear: both;
+		overflow: hidden;
+
+		.profile-picture {
+
+			float: left;
+
+			img {
+				height: 7.5rem;
+				width: 7.5rem;
+				margin-right: 2rem;
+			}
+		}
+
+		.message-body {
+
+			.username {
+				color: #5d616b;
+				float:left;
+				font-weight: 600;
+				margin-top: -0.3em;
+			}
+
+			.date {
+				color: #b8b8b8;
+				font-style: italic;
+				float: right;
+				margin-top: -0.3em;
+			}
+
+			p {
+				display: block;
+    			overflow: hidden;
+			}
+		}
 	}
 
 	.message-input {
+		padding: 2rem;
+		background-color: #fff;
+		clear: both;
+		display: block;
+		overflow: hidden;
+		margin-bottom: 2rem;
+
+		.profile-picture {
+
+			float: left;
+
+			img {
+				height: 7.5rem;
+				width: 7.5rem;
+				margin-right: 2rem;
+			}
+		}
 
 		textarea {
-			padding: 10px;
-			width: 100%;
 			border: none;
-			min-height: 8rem;
+			min-height: 7.5rem;
 		}
 	}
 
 	.actions {
 		.btn {
-		   float: right;
+		    float: right;
     		width: 14rem;
+    		margin-bottom: 4rem;
     	}
 	}
 }
