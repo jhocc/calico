@@ -1,4 +1,4 @@
-app:
+web:
   build: .
   command: 'bash -c ''bundle exec puma -e production -C config/puma.rb'''
   container_name: calico_app

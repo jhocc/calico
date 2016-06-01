@@ -1,4 +1,4 @@
-app:
+web:
   build: .
   command: 'bash -c ''bundle exec puma -e development -C config/puma.rb'''
   container_name: calico_app
@@ -31,4 +31,4 @@ nginx:
   ports:
     - "80:80"
   links:
-    - app
+    - web
