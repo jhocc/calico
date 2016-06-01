@@ -6,8 +6,9 @@ gem 'foreman', require: false
 
 gem 'devise', '4.1.1'
 gem 'puma'
-
 gem 'soda-ruby', :require => 'soda'
+
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'factory_girl_rails', require: false
