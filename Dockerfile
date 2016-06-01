@@ -41,11 +41,10 @@ WORKDIR /app
 
 ONBUILD COPY Gemfile /app/
 ONBUILD COPY Gemfile.lock /app/
-ONBUILD RUN bundle install
-ONBUILD ENV SECRET_KEY_BASE $(openssl rand -base64 32)
-COPY . /app
 RUN bundle install
-RUN npm install
-RUN npm rebuild node-sass
-
-CMD foreman start -f Procfile-dev
+ONBUILD ENV SECRET_KEY_BASE $(openssl rand -base64 32)
+ONBUILD COPY . /app
+ONBUILD RUN bundle install
+ONBUILD RUN npm install
+ONBUILD RUN npm rebuild node-sass
+ONBUILD RUN bundle exec rake assets:precompile
