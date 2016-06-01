@@ -1,6 +1,6 @@
 app:
   image: casecommons/calico_app
-  container_name: calico
+  container_name: calico_app
   restart: always
   environment:
     PG_HOST: postgresql
@@ -10,13 +10,13 @@ app:
     - postgresql
 postgresql:
   image: postgres:9.5.3
-  container_name: postgres
+  container_name: calico_db
   restart: always
   environment:
     POSTGRES_USER: calico
 nginx:
   image: casecommons/calico_nginx
-  container_name: webserver
+  container_name: calico_nginx
   restart: always
   ports:
     - "80:80"
