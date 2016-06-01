@@ -11,7 +11,7 @@ RSpec.describe ResourcesController, type: :controller do
   end
 
   describe '#index' do
-    let(:resources) { [double(:resource), double(:resource) ]}
+    let(:resources) { [double(:resource), double(:resource)]}
     it 'loads the resources from api endpoint' do
       expect(client).to receive(:get)
         .with(described_class::DATA_SET_URL, anything)
