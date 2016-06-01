@@ -1,0 +1,6 @@
+{
+  "name": "calico",
+  "description": "Working Prototype for California",
+  "image": "ruby:2.1.5"
+}
+
