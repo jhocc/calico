@@ -8,11 +8,9 @@
 		padding: 0;
 
 		img {
-			background-color: pink;
 			height: 5rem;
 			width: 5rem;
 			margin-right: 0.8rem;
-			
 		}
 
 	}
@@ -24,6 +22,10 @@
 		background-color: #fff;
 	}
 
+	ul.channels li:active  {
+		background-color: #dce4ee;
+	}
+
 	ul.channels li:last-child  {
 		border-bottom: none;
 	}
@@ -32,4 +34,25 @@
 		background-color: #dce4ee;
 	}
 
+	.message-window {
+		padding: 1rem;
+		background-color: #fff;
+	}
+
+	.message-input {
+
+		textarea {
+			padding: 10px;
+			width: 100%;
+			border: none;
+			min-height: 8rem;
+		}
+	}
+
+	.actions {
+		.btn {
+		   float: right;
+    		width: 14rem;
+    	}
+	}
 }
