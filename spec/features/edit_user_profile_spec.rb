@@ -17,7 +17,9 @@ feature 'Edit user profile' do
     login_as user
 
     visit root_path
-    click_link 'Edit My Profile'
+
+    click_menu_link 'My Profile'
+
     expect(page).to have_button 'Update'
 
     fill_in 'First Name', with: 'Johnny'
@@ -26,17 +28,19 @@ feature 'Edit user profile' do
 
     click_button 'Update'
 
-    click_link 'My Profile'
+    click_menu_link 'My Profile'
 
-    expect(page).to have_content 'Johnny'
-    expect(page).to have_content 'Localhost 34th street'
+    expect(find_field('First Name').value).to eq 'Johnny'
+    expect(find_field('Street Address').value).to eq 'Localhost 34th street'
   end
 
   scenario 'User can update password' do
     login_as user
 
     visit root_path
-    click_link 'Edit My Profile'
+
+    click_menu_link 'My Profile'
+
     expect(page).to have_button 'Update'
 
     fill_in 'user_password', with: '654321'
@@ -45,9 +49,9 @@ feature 'Edit user profile' do
 
     click_button 'Update'
 
-    click_link 'My Profile'
+    click_menu_link 'My Profile'
 
-    expect(page).to have_content user.first_name
-    expect(page).to have_content user.last_name
+    expect(find_field('First Name').value).to eq 'john'
+    expect(find_field('Last Name').value).to eq 'doe'
   end
 end
