@@ -5,8 +5,7 @@ feature 'my messages' do
     user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
     login_as user_myself
 
-    visit root_path
-    click_link 'My Messages'
+    visit messages_path
 
     expect(page).to have_content 'Help User'
     expect(page).to_not have_content 'Me And Myself'
@@ -25,8 +24,7 @@ feature 'my messages' do
       FactoryGirl.create(:channel, users: [other_user, user_myself])
     end
 
-    visit root_path
-    click_link 'My Messages'
+    visit messages_path
 
     expect(page).to have_content 'Help User'
     expect(page).to have_content 'Phillip Fry'
