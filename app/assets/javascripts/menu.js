@@ -1,4 +1,4 @@
-$.ready(() => {
+$(() => {
   $('html').click(function() {
     $('.drawer').removeClass('open')
   });
