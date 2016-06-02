@@ -1,0 +1,125 @@
+.dashboard {
+  h2 {
+    margin-top: -0.6rem;
+    margin-bottom: 0.5em;
+  }
+
+  ul {
+    padding: 0;
+
+    img {
+      height: 5rem;
+      width: 5rem;
+      margin-right: 0.8rem;
+    }
+
+  }
+
+  ul.channels li  {
+    border-bottom: 0.1rem solid #ddd;
+    padding: 1rem;
+    list-style-type: none;
+    background-color: #fff;
+  }
+
+  ul.channels li:active  {
+    background-color: #dce4ee;
+  }
+
+  ul.channels li:last-child  {
+    border-bottom: none;
+  }
+
+  ul.channels li:hover  {
+    background-color: #dce4ee;
+  }
+
+  .message-window {
+    margin-bottom: 2rem;
+    height: 50rem;
+    overflow-y: scroll;
+    display: block;
+  }
+
+  .message {
+    padding: 2rem;
+    background-color: #fff;
+    clear: both;
+    overflow: hidden;
+
+    .profile-picture {
+
+      float: left;
+
+      img {
+        height: 7.5rem;
+        width: 7.5rem;
+        margin-right: 2rem;
+      }
+    }
+
+    .message-body {
+
+      .username {
+        color: #5d616b;
+        float:left;
+        font-weight: 600;
+        margin-top: -0.3em;
+      }
+
+      .date {
+        color: #b8b8b8;
+        font-style: italic;
+        float: right;
+        margin-top: -0.3em;
+      }
+
+      p {
+        display: block;
+          overflow: hidden;
+      }
+    }
+  }
+
+  .message-input {
+    padding: 2rem;
+    background-color: #fff;
+    clear: both;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 2rem;
+
+    .profile-picture {
+
+
+
+      img {
+        height: 7.5rem;
+        width: 7.5rem;
+        margin-right: 2rem;
+        float: left;
+      }
+    }
+
+    .message-body {
+
+      width: 100%;
+      padding-left: 95px;
+
+      textarea {
+        border: none;
+        min-height: 7.5rem;
+        float: left;
+        width: 100%;
+      }
+    }
+  }
+
+  .actions {
+    .btn {
+        float: right;
+        width: 14rem;
+        margin-bottom: 4rem;
+      }
+  }
+}

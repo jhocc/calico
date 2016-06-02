@@ -8,6 +8,13 @@ feature 'drawer' do
       login_as user
     end
 
+    scenario 'go to My Messages' do
+      visit edit_user_registration_path
+      click_menu_link 'My Messages'
+
+      expect(current_path).to eq root_path
+    end
+
     scenario 'go to Resource Finder' do
       visit root_path
       click_menu_link 'Resource Finder'
