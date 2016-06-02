@@ -19,7 +19,7 @@ feature 'drawer' do
       visit root_path
       click_menu_link 'Resource Finder'
 
-      expect(current_path).to eq resources_path
+      expect(current_path).to eq foster_family_agencies_path
     end
 
     scenario 'go to My Profile' do

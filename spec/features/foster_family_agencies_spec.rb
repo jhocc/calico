@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'Resources page' do
+feature 'Foster Family Agencies page' do
   let(:user) { FactoryGirl.create(:user_with_addresses) }
   let(:zip_code) { user.primary_address.zip_code }
 
-  scenario "display resources in the user's zip code" do
+  scenario "display foster_family_agencies in the user's zip code" do
     response = [
       {
         'facility_address' => '1727 MARTIN LUTHER KING WY#109',
@@ -44,7 +44,7 @@ feature 'Resources page' do
     expect_any_instance_of(SODA::Client).to receive(:get).and_return(response)
 
     login_as user
-    visit resources_path
+    visit foster_family_agencies_path
 
     expect(page).to have_content("Foster Family Agencies in #{zip_code}")
 
@@ -61,19 +61,19 @@ feature 'Resources page' do
     expect(page).to have_content('(510) 208-1870')
   end
 
-  scenario "displays no rows when no resources in the user's zip code" do
+  scenario "displays no rows when no foster_family_agencies in the user's zip code" do
     response = {}
 
     expect_any_instance_of(SODA::Client).to receive(:get).and_return(response)
 
     login_as user
-    visit resources_path
+    visit foster_family_agencies_path
 
     expect(page).to have_content("Foster Family Agencies in #{zip_code}")
     expect(page.all('table tbody tr').count).to eq 0
   end
 
-  scenario 'display resource information' do
+  scenario 'display foster family agency information' do
     response = [
       Hashie::Mash.new({
         'facility_address' => '1727 MARTIN LUTHER KING WY#109',
@@ -93,7 +93,7 @@ feature 'Resources page' do
     allow_any_instance_of(SODA::Client).to receive(:get).and_return(response)
 
     login_as user
-    visit resources_path
+    visit foster_family_agencies_path
 
     expect(page).to have_content('FAMILYPATHS, INC')
 

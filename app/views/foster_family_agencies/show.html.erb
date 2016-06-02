@@ -1,0 +1,8 @@
+<div class="form-foster-family-agency">
+  <h3 class="title"> <%= @foster_family_agency.facility_name %> </h3>
+  <div><i class="fa fa-phone" aria-hidden="true"></i> <%= @foster_family_agency.facility_telephone_number %> </div>
+  <div><i class="fa fa-map-marker" aria-hidden="true"></i> <%= address(@foster_family_agency) %> </div>
+  <div><strong> Capacity: </strong><%= @foster_family_agency.facility_capacity %> </div>
+  <div><strong> Administrator: </strong><%= @foster_family_agency.facility_administrator.titleize %> </div>
+  <div><strong> Associated Case Workers: </strong></div>
+</div>
