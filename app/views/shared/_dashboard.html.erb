@@ -1,0 +1,13 @@
+Dashboard
+<br/>
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+<br/>
+<%= link_to "Resources Finder", resources_path %>
+<br/>
+<%= link_to "My Profile", user_path(current_user) %>
+<br/>
+<%= link_to "Edit My Profile", edit_registration_path(current_user) %>
+<br/>
+<%= link_to "My Messages", messages_path %>
+<br/>
+
