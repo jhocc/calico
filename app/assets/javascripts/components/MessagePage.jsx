@@ -10,6 +10,7 @@ export default class MessagePage extends Component {
       channels: Immutable.List(),
       activeChannel: 0,
     }
+    this.setActiveChannel = this.setActiveChannel.bind(this)
   }
 
   componentDidMount() {
@@ -41,12 +42,18 @@ export default class MessagePage extends Component {
     }
   }
 
+  setActiveChannel(index) {
+    this.setState({
+      activeChannel: index
+    })
+  }
+
   render() {
     const currentChannelUser = this.state.channels.get(this.state.activeChannel)
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
-          <ChannelNav data={this.state.channels}/>
+          <ChannelNav data={this.state.channels} onChannelSelect={this.setActiveChannel}/>
         </div>
         <div className='col-md-9'>{this.conversationHeader(currentChannelUser)}</div>
       </div>
