@@ -9,6 +9,38 @@ RSpec.describe Users::RegistrationsController, type: :controller do
     allow(controller).to receive(:current_user).and_return(current_user)
   end
 
+  describe '#create' do
+    it 'generates signup message with the calicao feedback user on success' do
+      sign_out current_user
+      post :create, {
+        user: {
+          first_name: 'John',
+          last_name: 'Doe',
+          phone: '234-123-123',
+          email: 'test@example.com',
+          password: 'password',
+          password_confirmation: 'password'
+        }
+      }
+      expect(response.status).to eq 302
+      expect(current_user.reload.channels.count).to eq 1
+      expect(current_user.reload.channels.first.users.count).to eq 2
+    end
+
+    it 'does NOT generate signup message with the calicao feedback user on failure' do
+      sign_out current_user
+      expect {
+        put :create, {
+          user: {
+            first_name: 'John',
+            last_name: 'Doe',
+            phone: '234-123-123',
+          }
+        }
+      }.to change(ChannelsUser, :count)
+    end
+  end
+
   describe '#update' do
     render_views
 

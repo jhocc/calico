@@ -5,7 +5,6 @@ RSpec.describe MessagesController, type: :controller do
     let(:current_user) { FactoryGirl.create(:user, first_name: 'Current', last_name: 'User') }
 
     before do
-      current_user.channels.destroy_all
       sign_in current_user
       allow(controller).to receive(:current_user).and_return(current_user)
     end

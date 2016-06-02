@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  after_action :generate_signup_message, only: [:create]
 
   def edit
     set_minimum_password_length
@@ -58,5 +59,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def updating_password?(update_account_params)
     update_account_params[:current_password].present? ||
       update_account_params[:password].present?
+  end
+
+  def generate_signup_message
+    calico_feedback_user = User.find_or_initialize_by(email: 'calico_feedback_user@casecommons.org') do |user|
+      user.first_name = 'Calico Feedback'
+      user.last_name = 'User'
+      user.password = SecureRandom.uuid
+    end
+    current_user.channels.build(users: [calico_feedback_user, current_user]).save!
   end
 end
