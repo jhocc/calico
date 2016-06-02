@@ -2,7 +2,9 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @channels = current_user.channels.includes(channels_users: :user)
+    @channels = current_user.channels.includes(channels_users: :user).order(
+      Channel.arel_table[:created_at].asc,
+    )
 
     respond_to do |format|
       format.html

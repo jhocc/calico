@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 feature 'my messages' do
+  scenario 'user can see a channel open with the help user' do
+    user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
+    login_as user_myself
+
+    visit root_path
+    click_link 'My Messages'
+
+    expect(page).to have_content 'Help User'
+    expect(page).to_not have_content 'Me And Myself'
+  end
+
   scenario 'user can see a list of other users who have messaged them' do
     user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
 
@@ -17,6 +28,7 @@ feature 'my messages' do
     visit root_path
     click_link 'My Messages'
 
+    expect(page).to have_content 'Help User'
     expect(page).to have_content 'Phillip Fry'
     expect(page).to have_content 'Turanga Leela'
     expect(page).to have_content 'Bender Rodriguez'

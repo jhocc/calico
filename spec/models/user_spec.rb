@@ -21,4 +21,11 @@ describe User do
     expect(user.primary_address).to be_nil
    end
   end
+
+  describe 'after_create' do
+    it 'creates a new channel with the current user and another user' do
+      user = FactoryGirl.build(:user)
+      expect { user.save! }.to change(ChannelsUser, :count).by(2)
+    end
+  end
 end
