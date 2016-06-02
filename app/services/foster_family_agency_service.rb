@@ -7,6 +7,15 @@ class FosterFamilyAgencyService
     @client = client
   end
 
+  def all
+    query = <<-QUERY
+      facility_status = 'LICENSED' AND
+      (facility_type = 'FOSTER FAMILY AGENCY' OR facility_type = 'FOSTER FAMILY AGENCY SUB')
+    QUERY
+
+    client.get(DATA_SET_URL, '$where' => query)
+  end
+
   def find_by_zip_code(zip_code)
     query = <<-QUERY
       facility_status = 'LICENSED' AND
