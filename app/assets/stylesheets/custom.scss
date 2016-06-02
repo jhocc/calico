@@ -1,134 +1,134 @@
 // GENERAL //
 
 body {
-	font-size: 1.7rem;
-	background-color: #f1f1f1;
-	font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.7rem;
+  background-color: #f1f1f1;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 h2 {
-	margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .container {
-	padding-left: 2rem;
-	padding-right: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 // HELPERS //
 
 .padded {
-	padding: 2rem;
+  padding: 2rem;
 }
 
 .half-padded {
-	padding: 1rem;
+  padding: 1rem;
 }
 
 .margin-bottom {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .double-margin-bottom {
-	margin-bottom: 4rem;
+  margin-bottom: 4rem;
 }
 
 .half-margin-bottom {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 // TABLES //
 
 .table {
-  	background-color: #fff;
+    background-color: #fff;
 
-  	thead {
-  		tr {
-  			th {
-  				padding: 2rem;
-  				border-bottom: 1px solid #ddd;
-  			}
-  		}
-  	}
+    thead {
+      tr {
+        th {
+          padding: 2rem;
+          border-bottom: 1px solid #ddd;
+        }
+      }
+    }
 
-  	tbody {
-  		tr {
-  			td {
-  				padding: 1em;
-  			}
-  		}
-  	}
+    tbody {
+      tr {
+        td {
+          padding: 1em;
+        }
+      }
+    }
 }
 
 // NAV //
 
 .navbar {
-	border-radius: 0;
+  border-radius: 0;
 }
 
 .navbar-inverse {
-	background-color: #112E51;
+  background-color: #112E51;
 
-	.navbar-brand {
-		color: #fff;
-		font-family: 'Yellowtail', cursive;
-		margin: 0;
-		padding: 2.1rem 0 0 0;
-		float: left;
-		font-size: 4.6rem;
-	}
+  .navbar-brand {
+    color: #fff;
+    font-family: 'Yellowtail', cursive;
+    margin: 0;
+    padding: 2.1rem 0 0 0;
+    float: left;
+    font-size: 4.6rem;
+  }
 }
 
 .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
-	margin:0;
+  margin:0;
 }
 
 @media (min-width: 768px) {
 
 .navbar > .container .navbar-brand {
-	margin-left: 0rem;
+  margin-left: 0rem;
 }
 
 .container > .navbar-header {
-	float: none;
-	margin-left: 0;
-	margin-right: 0;
+  float: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 }
 
 .menu-icon {
-	float: right;
-	display: block;
-	font-size: 4rem;
-	margin-top: 0.3rem;
+  float: right;
+  display: block;
+  font-size: 4rem;
+  margin-top: 0.3rem;
 
-	a {
-		color: #fff;
-	}
+  a {
+    color: #fff;
+  }
 
-	a:hover {
-		color: #d6d7d9;
-	}
+  a:hover {
+    color: #d6d7d9;
+  }
 }
 
 // VALIDATIONS //
 
 #error_explanation {
-	background-color: #f9dede;
-	padding: 1em;
-	margin-bottom: 2rem;
-	padding-left:7rem;
+  background-color: #f9dede;
+  padding: 1em;
+  margin-bottom: 2rem;
+  padding-left:7rem;
 }
 
 #error_explanation h2 {
-	font-size:2rem;
-	margin: 0 0 2rem 0;
-	padding:0;
-	line-height: 2.6rem;
+  font-size:2rem;
+  margin: 0 0 2rem 0;
+  padding:0;
+  line-height: 2.6rem;
 }
 
 #error_explanation:after{
-	content: "\f06a";
+  content: "\f06a";
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
@@ -145,19 +145,19 @@ h2 {
 // FORM //
 
 .form-control {
-	border-radius: 0;
-	box-shadow: none;
-	border: 0.1rem solid #5b616b;
+  border-radius: 0;
+  box-shadow: none;
+  border: 0.1rem solid #5b616b;
     box-sizing: border-box;
     color: #212121;
 }
 
 .form-group em {
-	float: right;
+  float: right;
 }
 
 .form-group {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 select {
@@ -171,37 +171,37 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
 }
 
 .btn {
-	font-size: 1.9rem;
-	padding: 1.5rem 3rem 1.5rem 3rem;
-	border: none;
-	border-radius: 0.3rem;
+  font-size: 1.9rem;
+  padding: 1.5rem 3rem 1.5rem 3rem;
+  border: none;
+  border-radius: 0.3rem;
 }
 
 .btn-primary {
-	background-color: #0071BC;
+  background-color: #0071BC;
 }
 
 .btn-primary:hover {
-	background-color: #205493;
+  background-color: #205493;
 }
 
 .btn-primary:active {
-	background-color: #112E51;
+  background-color: #112E51;
 }
 
 .btn-secondary {
-	background-color: #E31C3D;
-	color: #fff;
+  background-color: #E31C3D;
+  color: #fff;
 }
 
 .btn-secondary:hover {
-	background-color: #CD2026;
-	color: #fff;
+  background-color: #CD2026;
+  color: #fff;
 }
 
 .btn-secondary:active {
-	background-color: #981B1E;
-	color: #fff;
+  background-color: #981B1E;
+  color: #fff;
 }
 
 // TRANSITIONS //
