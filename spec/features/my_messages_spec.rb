@@ -32,4 +32,18 @@ feature 'my messages' do
     expect(page).to have_content 'Bender Rodriguez'
     expect(page).to_not have_content 'Me And Myself'
   end
+
+  scenario 'user can see a conversation header' do
+    user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
+    finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
+    FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
+
+    login_as user_myself
+
+    visit messages_path
+    expect(page).to have_content 'Conversation with Help User'
+
+    click_on('Finn Mertens')
+    expect(page).to have_content 'Conversation with Finn Mertens'
+  end
 end

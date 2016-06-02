@@ -22,74 +22,95 @@ describe('MessagePage', () => {
     })
   })
 
-  describe('render', () => {
+  describe('filterUserChannelsOfCurrent', () => {
+    var currentUserId
+    var channels
     var view
-    describe('when there are channels present', () => {
-      beforeEach(() => {
-        const currentUserId = 1
-        view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} />)
-        const channel_one = {
-          id: 7,
-          channels_users: [{
-            id: 11,
-            user_id: 5,
-            user: {
-              first_name: 'Phillip',
-              last_name: 'Fry',
-            },
-            channel_id: 7,
-          }, {
-            id: 12,
-            user_id: currentUserId,
-            user: {
-              first_name: 'Me',
-              last_name: '& Myself',
-            },
-            channel_id: 7,
-          }]
-        }
-        const channel_two = {
-          id: 8,
-          channels_users: [{
-            id: 13,
-            user_id: 6,
-            user: {
-              first_name: 'Turunga',
-              last_name: 'Leela',
-            },
-            channel_id: 8,
-          }, {
-            id: 14,
-            user_id: currentUserId,
-            user: {
-              first_name: 'Me',
-              last_name: '& Myself',
-            },
-            channel_id: 8,
-          }]
-        }
-        view.setState({ channels: Immutable.fromJS([ channel_one, channel_two ]) })
-      })
 
-      it('renders the channel nav with non current user labels', () => {
-        const channelView = TestUtils.findRenderedComponentWithType(view, ChannelNav)
-        expect(channelView.props.data.toJS()).toEqual([{
-          id: 11,
+    beforeEach(() => {
+      currentUserId = 1
+      const channel_one = {
+        channels_users: [{
           user_id: 5,
           user: {
             first_name: 'Phillip',
             last_name: 'Fry',
           },
-          channel_id: 7,
         }, {
-          id: 13,
+          user_id: currentUserId,
+          user: {
+            first_name: 'Me',
+            last_name: '& Myself',
+          },
+        }]
+      }
+      const channel_two = {
+        channels_users: [{
           user_id: 6,
           user: {
             first_name: 'Turunga',
             last_name: 'Leela',
           },
-          channel_id: 8,
+        }, {
+          user_id: currentUserId,
+          user: {
+            first_name: 'Me',
+            last_name: '& Myself',
+          },
+        }]
+      }
+      channels = Immutable.fromJS([ channel_one, channel_two ])
+      view = TestUtils.renderIntoDocument(<MessagePage />)
+    })
+
+    it('filters out channel users who match current user id', () => {
+      const filteredChannels = view.filterUserChannelsOfCurrent(channels, currentUserId)
+      expect(filteredChannels.toJS()).toEqual([{
+        user_id: 5,
+        user: {
+          first_name: 'Phillip',
+          last_name: 'Fry',
+        },
+      }, {
+        user_id: 6,
+        user: {
+          first_name: 'Turunga',
+          last_name: 'Leela',
+        },
+      }])
+    })
+  })
+
+  describe('render', () => {
+    var view
+    describe('when there are channels present', () => {
+      beforeEach(() => {
+        const currentUserId = 1
+        const channel_one = {
+          user_id: 5,
+          user: {
+            first_name: 'Phillip',
+            last_name: 'Fry',
+          },
+        }
+        view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} />)
+        view.setState({ channels: Immutable.fromJS([channel_one]) })
+      })
+
+      it('renders the channel nav with non current user labels', () => {
+        const channelView = TestUtils.findRenderedComponentWithType(view, ChannelNav)
+        expect(channelView.props.data.toJS()).toEqual([{
+          user_id: 5,
+          user: {
+            first_name: 'Phillip',
+            last_name: 'Fry',
+          },
         }])
+      })
+
+      it('renders the conversation header with selected channel', () => {
+        const channelView = TestUtils.findRenderedDOMComponentWithClass(view, 'conversation-header')
+        expect(channelView.textContent).toContain('Phillip Fry')
       })
     })
 

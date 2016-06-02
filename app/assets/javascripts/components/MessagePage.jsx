@@ -8,26 +8,54 @@ export default class MessagePage extends Component {
     super(...arguments)
     this.state = {
       channels: Immutable.List(),
+      activeChannel: 0,
     }
+    this.setActiveChannel = this.setActiveChannel.bind(this)
   }
 
   componentDidMount() {
     const xhr = Util.request('GET', '/messages.json', null)
     xhr.done((response) => {
-      this.setState({ channels: Immutable.fromJS(response) })
+      this.setState({
+        channels: this.filterUserChannelsOfCurrent(Immutable.fromJS(response), this.props.currentUserId)
+      })
+    })
+  }
+
+  filterUserChannelsOfCurrent(channels, currentUserId) {
+    const channelUsers = channels.map((channel) => (channel.get('channels_users'))).flatten(1)
+    const otherChannelUsers = channelUsers.filter((channelUser) => (
+      channelUser.get('user_id') !== currentUserId
+    ))
+    return otherChannelUsers
+  }
+
+  conversationHeader(currentChannelUser) {
+    if (currentChannelUser) {
+      const firstName = currentChannelUser.getIn(['user','first_name'])
+      const lastName = currentChannelUser.getIn(['user','last_name'])
+      return (
+        <h2 className='conversation-header'>
+          Conversation with <strong>{firstName} {lastName}</strong>
+        </h2>
+      )
+    }
+  }
+
+  setActiveChannel(index) {
+    this.setState({
+      activeChannel: index
     })
   }
 
   render() {
-    const channelUsers = this.state.channels.map((channel) => (channel.get('channels_users'))).flatten(1)
-    const otherChannelUsers = channelUsers.filter((channelUser) => (
-      channelUser.get('user_id') !== this.props.currentUserId
-    ))
+    const currentChannelUser = this.state.channels.get(this.state.activeChannel)
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
-          <ChannelNav data={otherChannelUsers}/>
+          <ChannelNav data={this.state.channels} onChannelSelect={this.setActiveChannel}/>
         </div>
+        <div className='col-md-9'>{this.conversationHeader(currentChannelUser)}</div>
       </div>
     )
   }
