@@ -24,8 +24,8 @@ export default class MessagePage extends Component {
       channelUser.get('user_id') !== this.props.currentUserId
     ))
     return (
-      <div className='row'>
-        <div className='col-xs-3'>
+      <div className='row dashboard'>
+        <div className='col-md-3'>
           <ChannelNav data={otherChannelUsers}/>
         </div>
       </div>

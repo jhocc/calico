@@ -5,20 +5,16 @@ export default class ChannelNav extends Component {
   render() {
     var divStyle = { background: 'white' }
     return (
-      <ul className='nav media-list' style={divStyle}>
+      <ul className='channels' style={divStyle}>
         {
           this.props.data.map((user) => {
             const firstName = user.getIn(['user','first_name'])
             const lastName = user.getIn(['user','last_name'])
             return (
-              <li className='media'>
+              <li>
                 <a href='#'>
-                  <div className='media-left'>
-                    <img className='media-object' src='' alt='' />
-                  </div>
-                  <div className='media-body'>
-                    <div className='media-heading'>{firstName} {lastName}</div>
-                  </div>
+                  <img src='' alt='' />
+                  <span>{firstName} {lastName}</span>
                 </a>
               </li>
               )
