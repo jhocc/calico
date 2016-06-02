@@ -7,7 +7,7 @@ feature 'Sign in' do
     fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: 'Password123'
     click_button 'Sign In'
-    expect(page).to have_content 'Dashboard'
+    expect(current_path).to eq root_path
   end
 
   scenario 'user sign outs' do
