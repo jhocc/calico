@@ -20,5 +20,9 @@ FactoryGirl.define do
         create_list(:address, evaluator.posts_count, user: user)
       end
     end
+
+    factory :case_worker do
+      role Role::CASE_WORKER
+    end
   end
 end
