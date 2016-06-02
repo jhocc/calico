@@ -107,6 +107,11 @@ describe('MessagePage', () => {
           },
         }])
       })
+
+      it('renders the conversation header with selected channel', () => {
+        const channelView = TestUtils.findRenderedDOMComponentWithClass(view, 'conversation-header')
+        expect(channelView.textContent).toContain('Phillip Fry')
+      })
     })
 
     describe('when there are no channels present', () => {
