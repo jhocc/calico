@@ -11,22 +11,28 @@ export default class MessagePage extends Component {
     }
   }
 
+  filterUserChannelsOfCurrent(channels, currentUserId) {
+    const channelUsers = channels.map((channel) => (channel.get('channels_users'))).flatten(1)
+    const otherChannelUsers = channelUsers.filter((channelUser) => (
+      channelUser.get('user_id') !== currentUserId
+    ))
+    return otherChannelUsers
+  }
+
   componentDidMount() {
     const xhr = Util.request('GET', '/messages.json', null)
     xhr.done((response) => {
-      this.setState({ channels: Immutable.fromJS(response) })
+      this.setState({
+        channels: this.filterUserChannelsOfCurrent(Immutable.fromJS(response), this.props.currentUserId)
+      })
     })
   }
 
   render() {
-    const channelUsers = this.state.channels.map((channel) => (channel.get('channels_users'))).flatten(1)
-    const otherChannelUsers = channelUsers.filter((channelUser) => (
-      channelUser.get('user_id') !== this.props.currentUserId
-    ))
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
-          <ChannelNav data={otherChannelUsers}/>
+          <ChannelNav data={this.state.channels}/>
         </div>
       </div>
     )
