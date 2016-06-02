@@ -4,6 +4,10 @@ $(() => {
   });
 
   $('.drawer').click(function(event){
-    event.stopPropagation();
+    if ($(event.target).is('a[data-method]')) {
+      return true;
+    } else {
+      event.stopPropagation();
+    }
   });
 })

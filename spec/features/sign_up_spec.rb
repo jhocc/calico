@@ -26,12 +26,11 @@ feature 'Sign up' do
     fill_in 'Password Confirmation', with: 'Password123'
     click_button 'Save'
 
-    expect(page).to have_content 'Dashboard'
-    expect(page).to have_content 'Sign Out'
+    click_menu_link 'My Profile'
 
-    click_link 'My Profile'
-    expect(page).to have_content 'foo baz'
-    expect(page).to have_content '14 main st'
-    expect(page).to have_content '9177187777'
+    expect(find_field('First Name').value).to eq 'foo'
+    expect(find_field('Last Name').value).to eq 'baz'
+    expect(find_field('Street Address').value).to eq '14 main st'
+    expect(find_field('Phone').value).to eq '9177187777'
   end
 end
