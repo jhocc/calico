@@ -1,4 +1,4 @@
-FROM ruby:2.1.5
+FROM ruby:2.2.5
 MAINTAINER pema@casecommons.org
 
 RUN \
