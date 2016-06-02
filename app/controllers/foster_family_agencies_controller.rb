@@ -7,6 +7,7 @@ class FosterFamilyAgenciesController < ApplicationController
 
   def show
     @foster_family_agency = service.find(params[:id])
+    @associated_case_workers = User.case_workers.where(foster_family_agency_number: params[:id])
   end
 
   def service

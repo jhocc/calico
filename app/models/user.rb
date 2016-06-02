@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :addresses
   accepts_nested_attributes_for :addresses
 
+  scope :case_workers, -> { where(role: 'case_worker') }
+
   def primary_address
     addresses.order(created_at: :desc).first
   end

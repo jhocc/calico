@@ -25,8 +25,13 @@ RSpec.describe FosterFamilyAgenciesController, type: :controller do
   end
 
   describe '#show' do
-    it 'loads the foster_family_agency' do
+    it 'loads the foster family agency and associated case workers' do
       foster_family_agency = double(:foster_family_agency)
+      case_worker = double(:case_worker)
+      expect(User).to receive_message_chain(:case_workers, :where)
+        .with(foster_family_agency_number: '10010010')
+        .and_return([case_worker])
+
       expect(service).to receive(:find)
         .with('10010010')
         .and_return(foster_family_agency)
@@ -34,6 +39,7 @@ RSpec.describe FosterFamilyAgenciesController, type: :controller do
       get :show, id: '10010010'
 
       expect(assigns(:foster_family_agency)).to eq foster_family_agency
+      expect(assigns(:associated_case_workers)).to eq [case_worker]
     end
   end
 end

@@ -5,4 +5,10 @@
   <div><strong> Capacity: </strong><%= @foster_family_agency.facility_capacity %> </div>
   <div><strong> Administrator: </strong><%= @foster_family_agency.facility_administrator.titleize %> </div>
   <div><strong> Associated Case Workers: </strong></div>
+  <% @associated_case_workers.each do |worker| %>
+    <ul>
+      <li><%= "#{worker.first_name} #{worker.last_name}" %></li>
+    </ul>
+    <a href="#" class="btn btn-block btn-primary">Message <%= worker.first_name %></a>
+  <% end %>
 </div>
