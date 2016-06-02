@@ -67,6 +67,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       user.last_name = 'User'
       user.password = SecureRandom.uuid
     end
-    current_user.channels.build(users: [calico_feedback_user, current_user]).save!
+    feedback_channel = current_user.channels.build(users: [calico_feedback_user, current_user])
+    feedback_channel.messages.build(content: 'Hi there!', user: calico_feedback_user)
+    feedback_channel.save!
   end
 end
