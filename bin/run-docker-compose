@@ -5,4 +5,5 @@ set -x
 ROOT="$(dirname "$0")/.."
 cd "$ROOT"
 eval $(docker-machine env)
-docker-compose -f docker-compose.dev.yml up webserver
+docker-compose --file docker-compose.dev.yml --project-name dev_calico up -d webserver
+echo "Access app at http://$(docker-machine ip default)"
