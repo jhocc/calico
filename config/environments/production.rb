@@ -24,6 +24,18 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.action_mailer.smtp_settings = {
+    address:         'smtp.sendgrid.net',
+    port:            '587',
+    authentication:  :plain,
+    user_name:       ENV['SENDGRID_USERNAME'],
+    password:        ENV['SENDGRID_PASSWORD'],
+    domain:          'beta-calico.heroku.com',
+    enable_starttls_auto: true
+  }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_options = { from: 'no-reply@beta-calico.heroku.com' }
+  config.action_mailer.raise_delivery_errors = false
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
