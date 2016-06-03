@@ -35,7 +35,10 @@ Rails.application.configure do
   }
   config.action_mailer.default_url_options = { :host => 'beta-calico.heroku.com' }
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_options = { from: 'no-reply@beta-calico.heroku.com' }
+  config.action_mailer.default_options = {
+    from: 'no-reply@beta-calico.heroku.com',
+    reply_to: 'no-reply@beta-calico.heroku.com'
+  }
   config.action_mailer.raise_delivery_errors = false
 
   # Specifies the header that your server uses for sending files.
