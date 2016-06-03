@@ -214,3 +214,21 @@ a, li, .container, .btn, .drawer, .drawer-right, .form-signin {
 
 // MOBILE //
 
+@media (max-width: 768px) {
+  body {
+    margin-top: 5em;
+  }
+
+  .drawer {
+    margin-top: 0em;
+    z-index: 9999;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    z-index: 9998;
+    width: 100%;
+
+  }
+}
