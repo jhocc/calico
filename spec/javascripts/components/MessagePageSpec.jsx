@@ -91,6 +91,15 @@ describe('MessagePage', () => {
       beforeEach(() => {
         const currentUserId = 1
         const channel_one = {
+          messages: [{
+            id: 1,
+            user: {
+              first_name: 'Phillip',
+              last_name: 'Fry',
+            },
+            created_at: '2016-06-02T22:31:40.163Z',
+            content: 'Hi there!'
+          }],
           channels_users: [{
             user_id: 5,
             user: {
@@ -106,6 +115,15 @@ describe('MessagePage', () => {
       it('renders the channel nav with non current user labels', () => {
         const channelView = TestUtils.findRenderedComponentWithType(view, ChannelNav)
         expect(channelView.props.data.toJS()).toEqual([{
+          messages: [{
+            id: 1,
+            user: {
+              first_name: 'Phillip',
+              last_name: 'Fry',
+            },
+            created_at: '2016-06-02T22:31:40.163Z',
+            content: 'Hi there!'
+          }],
           channels_users: [{
             user_id: 5,
             user: {
@@ -119,6 +137,13 @@ describe('MessagePage', () => {
       it('renders the conversation header with selected channel', () => {
         const channelView = TestUtils.findRenderedDOMComponentWithClass(view, 'conversation-header')
         expect(channelView.textContent).toContain('Phillip Fry')
+      })
+
+      it('renders the current channels messages', () => {
+        const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
+        expect(messageView.textContent).toContain('Hi there!')
+        expect(messageView.textContent).toContain('Phillip Fry')
+        expect(messageView.textContent).toContain('6/2, 6:31 pm')
       })
     })
 

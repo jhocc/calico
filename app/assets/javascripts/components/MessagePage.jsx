@@ -2,6 +2,7 @@ import * as Util from 'util/http'
 import ChannelNav from 'components/ChannelNav'
 import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
+import moment from 'moment'
 
 export default class MessagePage extends Component {
   constructor() {
@@ -52,12 +53,36 @@ export default class MessagePage extends Component {
 
   render() {
     const currentChannel = this.state.channels.get(this.state.activeChannel)
+    let messages
+    if (currentChannel) {
+      messages = currentChannel.get('messages').map((msg) => {
+        const fullName = `${msg.getIn(['user', 'first_name'])} ${msg.getIn(['user', 'last_name'])}`
+        const createdAt = moment(msg.get('created_at')).format('M/D, h:mm a')
+        return (
+          <div className='message'>
+            <div className='profile-picture'>
+              <img src=''/>
+            </div>
+            <div className='message-body'>
+              <span className='username'>{fullName}</span>
+              <span className='date'>{createdAt}</span><br/>
+              <p>{msg.get('content')}</p>
+            </div>
+          </div>
+        )
+      })
+    }
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
           <ChannelNav data={this.state.channels} onChannelSelect={this.setActiveChannel}/>
         </div>
-        <div className='col-md-9'>{this.conversationHeader(currentChannel)}</div>
+        <div className='col-md-9'>
+          {this.conversationHeader(currentChannel)}
+          <div className='message-window' style={{background: 'white'}}>
+            {messages}
+          </div>
+        </div>
       </div>
     )
   }

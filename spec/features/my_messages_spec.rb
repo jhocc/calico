@@ -20,7 +20,11 @@ feature 'my messages' do
 
     expect(page).to have_content 'Calico Feedback User'
     expect(page).to_not have_content 'Me And Myself'
-    expect(page).to have_content 'Hi there!'
+
+    within '.message-window' do
+      expect(page).to have_content 'Hi there!'
+      expect(page).to have_content 'Calico Feedback User'
+    end
   end
 
   scenario 'user can see a list of other users who have messaged them' do

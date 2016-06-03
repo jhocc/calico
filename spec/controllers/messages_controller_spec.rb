@@ -21,6 +21,8 @@ RSpec.describe MessagesController, type: :controller do
 
       expect(json[0]['id']).to eq(channel_one.id)
       expect(json[0]['messages'][0]['content']).to eq('Hi there!')
+      expect(json[0]['messages'][0]['user']['first_name']).to eq('Phillip')
+      expect(json[0]['messages'][0]['user']['last_name']).to eq('Fry')
       channel_user = json[0]['channels_users'].find { |user| user['user_id'] == phillip_fry.id }['user']
       expect(channel_user['id']).to eq(phillip_fry.id)
       expect(channel_user['first_name']).to eq('Phillip')
