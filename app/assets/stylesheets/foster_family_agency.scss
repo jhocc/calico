@@ -8,6 +8,10 @@
     margin-top: 0;
     font-weight: 600;
   }
+
+  i {
+    width: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -15,7 +19,6 @@
     max-width: 100%;
   }
 }
-
 
 .resource-table {
   h2 {
