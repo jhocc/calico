@@ -23,17 +23,19 @@ export default class MessagePage extends Component {
   }
 
   filterUserChannelsOfCurrent(channels, currentUserId) {
-    const channelUsers = channels.map((channel) => (channel.get('channels_users'))).flatten(1)
-    const otherChannelUsers = channelUsers.filter((channelUser) => (
-      channelUser.get('user_id') !== currentUserId
-    ))
-    return otherChannelUsers
+    return channels.map((channel) => {
+      const otherChannelUsers = channel.get('channels_users').filter((channelUser) => (
+        channelUser.get('user_id') !== currentUserId
+      ))
+      return channel.set('channels_users', otherChannelUsers)
+    })
   }
 
-  conversationHeader(currentChannelUser) {
-    if (currentChannelUser) {
-      const firstName = currentChannelUser.getIn(['user','first_name'])
-      const lastName = currentChannelUser.getIn(['user','last_name'])
+  conversationHeader(currentChannel) {
+    if (currentChannel) {
+      const user = currentChannel.getIn(['channels_users', 0, 'user'])
+      const firstName = user.get('first_name')
+      const lastName = user.get('last_name')
       return (
         <h2 className='conversation-header'>
           Conversation with <strong>{firstName} {lastName}</strong>
@@ -49,13 +51,13 @@ export default class MessagePage extends Component {
   }
 
   render() {
-    const currentChannelUser = this.state.channels.get(this.state.activeChannel)
+    const currentChannel = this.state.channels.get(this.state.activeChannel)
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
           <ChannelNav data={this.state.channels} onChannelSelect={this.setActiveChannel}/>
         </div>
-        <div className='col-md-9'>{this.conversationHeader(currentChannelUser)}</div>
+        <div className='col-md-9'>{this.conversationHeader(currentChannel)}</div>
       </div>
     )
   }

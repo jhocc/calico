@@ -66,17 +66,21 @@ describe('MessagePage', () => {
     it('filters out channel users who match current user id', () => {
       const filteredChannels = view.filterUserChannelsOfCurrent(channels, currentUserId)
       expect(filteredChannels.toJS()).toEqual([{
-        user_id: 5,
-        user: {
-          first_name: 'Phillip',
-          last_name: 'Fry',
-        },
+        channels_users: [{
+          user_id: 5,
+          user: {
+            first_name: 'Phillip',
+            last_name: 'Fry',
+          },
+        }],
       }, {
-        user_id: 6,
-        user: {
-          first_name: 'Turunga',
-          last_name: 'Leela',
-        },
+        channels_users: [{
+          user_id: 6,
+          user: {
+            first_name: 'Turunga',
+            last_name: 'Leela',
+          },
+        }]
       }])
     })
   })
@@ -87,11 +91,13 @@ describe('MessagePage', () => {
       beforeEach(() => {
         const currentUserId = 1
         const channel_one = {
-          user_id: 5,
-          user: {
-            first_name: 'Phillip',
-            last_name: 'Fry',
-          },
+          channels_users: [{
+            user_id: 5,
+            user: {
+              first_name: 'Phillip',
+              last_name: 'Fry',
+            },
+          }],
         }
         view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} />)
         view.setState({ channels: Immutable.fromJS([channel_one]) })
@@ -100,11 +106,13 @@ describe('MessagePage', () => {
       it('renders the channel nav with non current user labels', () => {
         const channelView = TestUtils.findRenderedComponentWithType(view, ChannelNav)
         expect(channelView.props.data.toJS()).toEqual([{
-          user_id: 5,
-          user: {
-            first_name: 'Phillip',
-            last_name: 'Fry',
-          },
+          channels_users: [{
+            user_id: 5,
+            user: {
+              first_name: 'Phillip',
+              last_name: 'Fry',
+            },
+          }],
         }])
       })
 

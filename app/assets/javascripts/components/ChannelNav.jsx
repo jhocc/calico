@@ -7,9 +7,10 @@ export default class ChannelNav extends Component {
     return (
       <ul className='channels' style={divStyle}>
         {
-          this.props.data.map((user, index) => {
-            const firstName = user.getIn(['user','first_name'])
-            const lastName = user.getIn(['user','last_name'])
+          this.props.data.map((channel, index) => {
+            const user = channel.getIn(['channels_users', 0, 'user'])
+            const firstName = user.get('first_name')
+            const lastName = user.get('last_name')
             const onChannelSelect = () => { this.props.onChannelSelect(index) }
             return (
               <li>
