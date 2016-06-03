@@ -33,6 +33,7 @@ Rails.application.configure do
     domain:          'beta-calico.heroku.com',
     enable_starttls_auto: true
   }
+  config.action_mailer.default_url_options = { :host => 'beta-calico.heroku.com' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_options = { from: 'no-reply@beta-calico.heroku.com' }
   config.action_mailer.raise_delivery_errors = false
