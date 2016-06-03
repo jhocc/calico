@@ -59,4 +59,36 @@ feature 'my messages' do
     click_on('Princess Bubblegum')
     expect(page).to have_content 'Conversation with Princess Bubblegum'
   end
+
+  scenario 'user can see a list of messages in a selected channel' do
+    user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
+    finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
+    princess_bubblegum = FactoryGirl.create(:user, first_name: 'Princess', last_name: 'Bubblegum')
+    message_from_finn = FactoryGirl.build(:message, content: 'Is that Jake?', user: finn_the_human)
+    message_from_bubblegum = FactoryGirl.build(
+      :message,
+      content: 'Get outta here varmints',
+      user: princess_bubblegum
+    )
+
+    FactoryGirl.create(
+      :channel,
+      messages: [message_from_finn],
+      users: [finn_the_human, user_myself]
+    )
+    FactoryGirl.create(
+      :channel,
+      messages: [message_from_bubblegum],
+      users: [princess_bubblegum, user_myself]
+    )
+
+    login_as user_myself
+    visit messages_path
+
+    click_on 'Finn Mertens'
+    expect(page).to have_content 'Is that Jake?'
+
+    click_on 'Princess Bubblegum'
+    expect(page).to have_content 'Get outta here varmints'
+  end
 end
