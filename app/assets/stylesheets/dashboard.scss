@@ -146,3 +146,20 @@
       }
   }
 }
+
+// MOBILE VIEW //
+
+@media (max-width: 768px) {
+  .dashboard {
+    h2 {
+      display: none;
+    }
+    ul {
+      margin-bottom: 2rem;
+    }
+    .message-window {
+      height: auto;
+      overflow: visible;
+    }
+  } 
+}
