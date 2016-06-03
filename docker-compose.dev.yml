@@ -1,13 +1,13 @@
 web:
   build: .
-  command: 'bash -c ''bundle exec puma -e development -C config/puma.rb'''
-  container_name: calico_app
+  dockerfile: Dockerfile.dev
+  working_dir: /app/user
+  command: 'bash -c ''bundle exec foreman start -f Procfile-dev'''
+  container_name: dev_calico_app
   restart: always
   environment:
     RAILS_ENV: development
-    PG_HOST: postgresql
-    PG_USER: calico
-    PG_PASSWORD: calico
+    DATABASE_URL: 'postgres://calico:calico@postgresql:5432/ca_development'
     PG_PORT: 5432
     PORT: 3000
   ports:
@@ -15,9 +15,25 @@ web:
     - "4857:4857"
   links:
     - postgresql
+shell:
+  build: .
+  dockerfile: Dockerfile.dev
+  working_dir: /app/user
+  command: bash
+  environment:
+    PORT: 8080
+    RAILS_ENV: development
+    SECRET_KEY_BASE: 'GNeBhAoT81xWAlRls7NJa1zZjZ/BTJ9EMGO+YcMh/8/+Xu9R6jzAWk/uUZIYEDuoIK19vwesRA5SQPVJow6dxQ=='
+    DATABASE_URL: 'postgres://calico:calico@postgresql:5432/ca_development'
+  ports:
+    - '8080:8080'
+  links:
+    - postgresql
+  volumes:
+    - '.:/app/user'
 postgresql:
   image: postgres:9.5.3
-  container_name: calico_db
+  container_name: dev_calico_db
   restart: always
   environment:
     POSTGRES_USER: calico
@@ -26,7 +42,7 @@ postgresql:
 nginx:
   build: .
   dockerfile: ./docker/Dockerfile.nginx
-  container_name: calico_nginx
+  container_name: dev_calico_nginx
   restart: always
   ports:
     - "80:80"
