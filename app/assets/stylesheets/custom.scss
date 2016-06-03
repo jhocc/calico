@@ -169,7 +169,7 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
 
 .btn {
   font-size: 1.9rem;
-  padding: 1.5rem 3rem 1.5rem 3rem;
+  padding: 1.2rem 2rem 1.2rem 2rem;
   border: none;
   border-radius: 0.3rem;
 }
@@ -182,7 +182,7 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
   background-color: #205493;
 }
 
-.btn-primary:active {
+.btn-primary:active, .btn-primary:focus {
   background-color: #112E51;
 }
 
@@ -196,7 +196,7 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
   color: #fff;
 }
 
-.btn-secondary:active {
+.btn-secondary:active, .btn-secondary:focus {
   background-color: #981B1E;
   color: #fff;
 }
