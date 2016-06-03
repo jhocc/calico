@@ -6,8 +6,4 @@ ROOT="$(dirname "$0")/.."
 cd "$ROOT"
 eval $(docker-machine env)
 
-containers=(calico_app calico_nginx calico_db)
-for name in "${containers[@]}"
-do
-  docker rm $name
-done
+docker rm --force $(docker ps --all --quiet)
