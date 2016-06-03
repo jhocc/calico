@@ -1,9 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe MessagesController, type: :controller do
-  describe '#index' do
-    let(:current_user) { FactoryGirl.create(:user, first_name: 'Current', last_name: 'User') }
+  let(:current_user) { FactoryGirl.create(:user, first_name: 'Current', last_name: 'User') }
 
+  describe '#create' do
+    before do
+      sign_in current_user
+    end
+
+    it 'creates a channel with the current user and the user passed' do
+      other_user = FactoryGirl.create(:user)
+      expect {
+        post :create, { user_id: other_user }
+      }.to change(Channel, :count).by(1)
+    end
+  end
+
+  describe '#index' do
     before do
       sign_in current_user
       allow(controller).to receive(:current_user).and_return(current_user)

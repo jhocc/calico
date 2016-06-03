@@ -9,6 +9,6 @@
     <ul>
       <li><%= "#{worker.first_name} #{worker.last_name}" %></li>
     </ul>
-    <a href="#" class="btn btn-block btn-primary">Message <%= worker.first_name %></a>
+    <%= link_to "Message #{worker.first_name}", messages_path(user_id: worker.id), method: :post, class: 'btn btn-block btn-primary' %>
   <% end %>
 </div>
