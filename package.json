@@ -8,6 +8,7 @@
     "jquery": "2.1.4",
     "jquery-ujs": "^1.2.1",
     "lodash": "3.9.3",
+    "moment": "^2.13.0",
     "node-uuid": "1.4.7",
     "react": "15.0.2",
     "react-addons-css-transition-group": "15.0.2",

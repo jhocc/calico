@@ -12,9 +12,9 @@ describe('ChannelNav', () => {
     describe('when there is no data present', () => {
       beforeEach(() => {
         const data = Immutable.fromJS([
-          { user: { first_name: 'Phillip', last_name: 'Fry' }},
-          { user: { first_name: 'Turanga', last_name: 'Leela'}},
-          { user: { first_name: 'Bender', last_name: 'Rodriguez'}},
+          { channels_users: [{ user: { first_name: 'Phillip', last_name: 'Fry' }}] },
+          { channels_users: [{ user: { first_name: 'Turanga', last_name: 'Leela'}}] },
+          { channels_users: [{ user: { first_name: 'Bender', last_name: 'Rodriguez'}}] },
         ])
         onChannelSelectSpy = jasmine.createSpy('onChannelSelectSpy')
         view = TestUtils.renderIntoDocument(<ChannelNav data={data} onChannelSelect={onChannelSelectSpy}/>)

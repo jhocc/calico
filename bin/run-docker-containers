@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+set -x
+
+ROOT="$(dirname "$0")/.."
+cd "$ROOT"
+eval $(docker-machine env)
+docker run --name calico_db --env "POSTGRES_DB=ca_development" --env "POSTGRES_USER=calico" \
+--env "POSTGRES_PASSWORD=calico" --detach postgres:9.5.3
+
+
+docker run --name calico_app --publish 3000:3000 --publish 4857:4857 \
+--env "PG_HOST=postgresql" --env "PG_USER=calico" --env "PG_PORT=5432" --env "RAILS_ENV=development" \
+--env "POSTGRES_PASSWORD=calico" --link calico_db:postgresql --detach casecommons/calico_app
+
+docker run --name calico_nginx --publish 80:80 --link calico_app:app --detach casecommons/calico_nginx

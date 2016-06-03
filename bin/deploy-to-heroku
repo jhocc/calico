@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+set -x
+
+ROOT="$(dirname "$0")/.."
+cd "$ROOT"
+eval $(docker-machine env)
+
+docker-compose build web
+echo "Assuming that you have logged into heroku"
+heroku docker:release --app beta-calico

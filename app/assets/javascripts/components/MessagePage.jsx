@@ -1,5 +1,7 @@
 import * as Util from 'util/http'
 import ChannelNav from 'components/ChannelNav'
+import ConversationHeader from 'components/ConversationHeader'
+import ConversationHistory from 'components/ConversationHistory'
 import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
 
@@ -23,23 +25,12 @@ export default class MessagePage extends Component {
   }
 
   filterUserChannelsOfCurrent(channels, currentUserId) {
-    const channelUsers = channels.map((channel) => (channel.get('channels_users'))).flatten(1)
-    const otherChannelUsers = channelUsers.filter((channelUser) => (
-      channelUser.get('user_id') !== currentUserId
-    ))
-    return otherChannelUsers
-  }
-
-  conversationHeader(currentChannelUser) {
-    if (currentChannelUser) {
-      const firstName = currentChannelUser.getIn(['user','first_name'])
-      const lastName = currentChannelUser.getIn(['user','last_name'])
-      return (
-        <h2 className='conversation-header'>
-          Conversation with <strong>{firstName} {lastName}</strong>
-        </h2>
-      )
-    }
+    return channels.map((channel) => {
+      const otherChannelUsers = channel.get('channels_users').filter((channelUser) => (
+        channelUser.get('user_id') !== currentUserId
+      ))
+      return channel.set('channels_users', otherChannelUsers)
+    })
   }
 
   setActiveChannel(index) {
@@ -49,13 +40,27 @@ export default class MessagePage extends Component {
   }
 
   render() {
-    const currentChannelUser = this.state.channels.get(this.state.activeChannel)
+    const currentChannel = this.state.channels.get(this.state.activeChannel)
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
           <ChannelNav data={this.state.channels} onChannelSelect={this.setActiveChannel}/>
         </div>
-        <div className='col-md-9'>{this.conversationHeader(currentChannelUser)}</div>
+        <div className='col-md-9'>
+          <ConversationHeader channel={currentChannel} />
+          <ConversationHistory channel={currentChannel} />
+          <div className='message-input'>
+            <div className='profile-picture'>
+              <img src=''/>
+            </div>
+            <div className='message-body'>
+              <textarea placeholder='Type your message here...'></textarea>
+            </div>
+          </div>
+          <div className='actions'>
+            <input type='submit' value='Send' className='btn btn-lg btn-primary btn-block btn-success'/>
+          </div>
+        </div>
       </div>
     )
   }

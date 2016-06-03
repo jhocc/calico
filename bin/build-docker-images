@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+set -x
+
+ROOT="$(dirname "$0")/.."
+cd "$ROOT"
+eval $(docker-machine env)
+docker build -t casecommons/calico_app -f Dockerfile.dev .
+docker build -t casecommons/calico_nginx -f docker/Dockerfile.nginx .
+docker images
