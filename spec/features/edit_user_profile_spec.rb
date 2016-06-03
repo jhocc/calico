@@ -44,19 +44,10 @@ feature 'Edit user profile' do
     fill_in 'First Name', with: ''
     fill_in 'Last Name', with: ''
 
-    click_button 'Update'
+    click_button 'Update Profile'
 
-    expect(page).to have_content('errors')
-
-    fill_in 'First Name', with: 'foobar'
-    fill_in 'Last Name', with: 'bazqaz'
-
-    click_button 'Update'
-
-    click_menu_link 'My Profile'
-
-    expect(find_field('First Name').value).to eq 'foobar'
-    expect(find_field('Last Name').value).to eq 'bazqaz'
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
   end
 
   scenario 'User can update password' do

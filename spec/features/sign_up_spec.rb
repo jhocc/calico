@@ -22,8 +22,8 @@ feature 'Sign up' do
     fill_in 'City', with: 'Brooklyn'
     select 'New York', from: 'State'
     fill_in 'Zip Code', with: '10010'
-    fill_in 'Password', with: 'Password123'
-    fill_in 'Password Confirmation', with: 'Password123'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
     click_button 'Save'
 
     click_menu_link 'My Profile'
@@ -39,18 +39,19 @@ feature 'Sign up' do
     click_link 'Sign Up'
     fill_in 'Email Address', with: 'foo.baz@test.com'
     fill_in 'Zip Code', with: '10010'
-    fill_in 'Password', with: 'Password123'
-    fill_in 'Password Confirmation', with: 'Password123'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
 
     click_button 'Save'
 
-    expect(page).to have_content('errors')
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
 
     fill_in 'First Name', with: 'foo'
     fill_in 'Last Name', with: 'baz'
     fill_in 'Zip Code', with: '10010'
-    fill_in 'Password', with: 'Password123'
-    fill_in 'Password Confirmation', with: 'Password123'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
 
     click_button 'Save'
 
