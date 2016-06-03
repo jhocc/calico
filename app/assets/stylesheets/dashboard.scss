@@ -61,8 +61,8 @@
 
   .message-window {
     margin-bottom: 2rem;
-    height: 50rem;
-    overflow-y: scroll;
+    max-height: 55vh;
+    overflow-y: auto;
     display: block;
   }
 
