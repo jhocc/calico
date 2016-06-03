@@ -42,7 +42,7 @@ function seq(task) {
 }
 
 gulp.task('default', function(callback) {
-  return seq(['js', 'css'], callback)()
+  return seq(['js', 'css', 'images'], callback)()
 })
 
 gulp.task('server', function() {
@@ -80,8 +80,9 @@ gulp.task('translate-versioned-assets', function() {
 })
 
 gulp.task('images', function() {
+  var imageOutputDir = config.nonRevOutputDir + 'images/'
   return gulp.src(config.images.src)
-    .pipe(gulp.dest(config.nonRevOutputDir))
+    .pipe(gulp.dest(imageOutputDir))
 })
 
 gulp.task('css', function() {
