@@ -1,4 +1,4 @@
-web:
+app:
   build: .
   dockerfile: Dockerfile.dev
   working_dir: /app/user
@@ -39,7 +39,7 @@ postgresql:
     POSTGRES_USER: calico
     POSTGRES_DB: ca_development
     POSTGRES_PASSWORD: calico
-nginx:
+webserver:
   build: .
   dockerfile: ./docker/Dockerfile.nginx
   container_name: dev_calico_nginx
@@ -47,4 +47,4 @@ nginx:
   ports:
     - "80:80"
   links:
-    - web
+    - app
