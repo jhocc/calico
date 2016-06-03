@@ -8,10 +8,20 @@
     margin-top: 0;
     font-weight: 600;
   }
+
+  i {
+    width: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
   .form-foster-family-agency {
     max-width: 100%;
+  }
+}
+
+.resource-table {
+  h2 {
+    margin-bottom: 1.7rem;
   }
 }

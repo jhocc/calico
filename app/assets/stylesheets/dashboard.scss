@@ -1,12 +1,15 @@
 .dashboard {
+
+  margin-top: 1.2rem;
+
   h2 {
     margin-top: -0.6rem;
-    margin-bottom: 0.5em;
+    margin-bottom: 1.6rem;
   }
 
   .sidebar-header {
     padding: 0.5em;
-    background-color: #112E51;
+    background-color: #00a6d2;
     color: #fff;
     font-weight: 600;
 
@@ -113,8 +116,6 @@
 
     .profile-picture {
 
-
-
       img {
         height: 7.5rem;
         width: 7.5rem;
@@ -140,7 +141,7 @@
   .actions {
     .btn {
         float: right;
-        width: 14rem;
+        width: auto;
         margin-bottom: 4rem;
       }
   }

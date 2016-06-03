@@ -1,13 +1,15 @@
-<h2> Foster Family Agencies in <b><%= current_user.primary_address.zip_code %></b> </h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Facility Name</th>
-      <th>Facility Address</th>
-      <th>Facility Phone Number</th>
-    </tr>
-  </thead>
-  <tbody>
-  <%= render partial: "foster_family_agency", collection: @foster_family_agencies %>
-  </tbody>
-</table>
+<div class="resource-table">
+  <h2> Foster Family Agencies in <b><%= current_user.primary_address.zip_code %></b> </h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "foster_family_agency", collection: @foster_family_agencies %>
+    </tbody>
+  </table>
+</div>

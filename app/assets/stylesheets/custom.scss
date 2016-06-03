@@ -72,6 +72,7 @@ h2 {
 
 .navbar-inverse {
   background-color: #112E51;
+  border-color:#112E51;
 
   .navbar-brand {
     color: #fff;
@@ -80,6 +81,10 @@ h2 {
     padding: 2.1rem 0 0 0;
     float: left;
     font-size: 4.6rem;
+  }
+
+  .navbar-brand:hover {
+    color: #d6d7d9;
   }
 }
 
@@ -122,6 +127,10 @@ h2 {
   padding: 1em;
   margin-bottom: 2rem;
   padding-left:7rem;
+  background-image: url("images/error.svg");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 2.4rem 2.7rem;
 }
 
 #error_explanation h2 {
@@ -129,21 +138,6 @@ h2 {
   margin: 0 0 2rem 0;
   padding:0;
   line-height: 2.6rem;
-}
-
-#error_explanation:after{
-  content: "\f06a";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    position: absolute;
-    font-size: 3rem;
-    color: #333;
-    top: 50%;
-    left: 50%;
-    margin: -374px 0 0 -141px;
-    z-index: 1;
 }
 
 // FORM //
@@ -176,7 +170,7 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
 
 .btn {
   font-size: 1.9rem;
-  padding: 1.5rem 3rem 1.5rem 3rem;
+  padding: 1.2rem 2rem 1.2rem 2rem;
   border: none;
   border-radius: 0.3rem;
 }
@@ -189,7 +183,7 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
   background-color: #205493;
 }
 
-.btn-primary:active {
+.btn-primary:active, .btn-primary:focus {
   background-color: #112E51;
 }
 
@@ -203,14 +197,14 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
   color: #fff;
 }
 
-.btn-secondary:active {
+.btn-secondary:active, .btn-secondary:focus {
   background-color: #981B1E;
   color: #fff;
 }
 
 // TRANSITIONS //
 
-a, li, .btn, .drawer, .drawer-right {
+a, li, .container, .btn, .drawer, .drawer-right, .form-signin {
   -o-transition:.3s;
   -ms-transition:.3s;
   -moz-transition:.3s;
