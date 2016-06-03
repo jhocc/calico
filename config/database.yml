@@ -1,8 +1,5 @@
 default: &default
   adapter: postgresql
-  username: <%= ENV['PG_USER'] || 'calico' %>
-  port: <%= ENV['PG_PORT'] || 5432 %>
-  password: <%= ENV['PG_PASSWORD'] %>
   encoding: utf8
   prepared_statements: false
   pool: 5
@@ -10,15 +7,14 @@ default: &default
 
 development:
   <<: *default
-  host: <%= ENV['PG_HOST'] || 'localhost' %>
-  database: <%= ENV['PG_DB'] || 'ca_development' %>
+  database: ca_development
+  username: calico
 
 test:
   <<: *default
-  host: <%= ENV['PG_HOST'] || 'localhost' %>
-  database: <%= ENV['PG_DB'] || 'ca_test' %>
+  database: ca_test
+  username: calico
 
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  database: ca_production
