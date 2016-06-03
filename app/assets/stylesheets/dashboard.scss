@@ -61,8 +61,8 @@
 
   .message-window {
     margin-bottom: 2rem;
-    height: 50rem;
-    overflow-y: scroll;
+    max-height: 55vh;
+    overflow-y: auto;
     display: block;
   }
 
@@ -115,7 +115,6 @@
     margin-bottom: 2rem;
 
     .profile-picture {
-
       img {
         height: 7.5rem;
         width: 7.5rem;
@@ -124,25 +123,82 @@
       }
     }
 
-    .message-body {
+    .message-box {
 
       width: 100%;
-      padding-left: 95px;
+      padding-left: 9.5rem;
+      padding-right: 12rem;
 
       textarea {
         border: none;
         min-height: 7.5rem;
         float: left;
         width: 100%;
+
+      }
+    }
+
+    .actions {
+      float: right;
+      .btn {
+        height: 4em;
       }
     }
   }
+}
 
-  .actions {
-    .btn {
-        float: right;
-        width: auto;
-        margin-bottom: 4rem;
+// MOBILE VIEW //
+
+@media (max-width: 768px) {
+  .mobile-spacer {
+    height: 5.5em;
+    display:block;
+  }
+  .dashboard {
+    h2 {
+      display: none;
+    }
+    ul {
+      margin-bottom: 2rem;
+    }
+    .message-window {
+      height: auto;
+      overflow: visible;
+    }
+    .message-input {
+      position: fixed;
+      bottom: -2rem;
+      z-index: 9998;
+      width: 100%;
+      padding: 1rem;
+      margin-left: -2rem;
+      margin-top:-1rem;
+      border-top: 1px solid #f1f1f1;
+
+      .message-box {
+
+        padding-right: 5.5em;
+
+        textarea {
+          min-height: 0rem;
+        }
       }
+
+      .profile-picture {
+        display: none;
+      }
+
+      .message-box {
+        padding-left: 0;
+      }
+
+      .actions{
+        .btn {
+          height: 5rem;
+          padding: 1rem 2rem 1rem 2rem;
+          border-radius: 0;
+        }
+      }
+    }
   }
 }
