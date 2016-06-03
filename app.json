@@ -1,0 +1,13 @@
+{
+  "name": "calico",
+  "description": "Working Prototype for California",
+  "image": "heroku/ruby",
+  "keywords": [
+    "ruby",
+    "rails"
+  ],
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
+

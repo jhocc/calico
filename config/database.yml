@@ -1,9 +1,5 @@
 default: &default
   adapter: postgresql
-  username: <%= ENV['PG_USER'] || 'casebook' %>
-  host: <%= ENV['PG_HOST'] || 'localhost' %>
-  port: <%= ENV['PG_PORT'] || 5432 %>
-  password:
   encoding: utf8
   prepared_statements: false
   pool: 5
@@ -12,11 +8,13 @@ default: &default
 development:
   <<: *default
   database: ca_development
+  username: casebook
 
 test:
   <<: *default
   database: ca_test
+  username: casebook
 
 production:
   <<: *default
-  database: ca_production
+  url: <%= ENV['DATABASE_URL'] %>
