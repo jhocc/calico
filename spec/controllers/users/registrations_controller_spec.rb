@@ -25,8 +25,6 @@ RSpec.describe Users::RegistrationsController, type: :controller do
       expect(response.status).to eq 302
       expect(current_user.reload.channels.count).to eq 1
       expect(current_user.reload.channels.first.users.count).to eq 2
-      expect(current_user.reload.channels.first.messages.count).to eq 1
-      expect(current_user.reload.channels.first.messages.first.content).to include 'Hi there!'
     end
 
     it 'does NOT generate signup message with the calicao feedback user on failure' do

@@ -68,17 +68,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       user.password = SecureRandom.uuid
     end
 
-    welcome_message = <<-MSG
-      Hi there!
-      Welcome to Calico, a messaging app for caseworkers, birth and foster parents, designed to help coordinate and communicate.
-      To get started, click on the menu button (embed icon?) and go to the resource finder.
-      This will put you in touch with foster family agencies in your area.
-      From there, select a resource and you will see a list of caseworkers that you can message.
-      Next time you login, you will see all conversations with caseworkers on your home page so you can message there.
-    MSG
-
     feedback_channel = current_user.channels.build(users: [calico_feedback_user, current_user])
-    feedback_channel.messages.build(content: welcome_message, user: calico_feedback_user)
     feedback_channel.save!
   end
 end

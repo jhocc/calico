@@ -6,6 +6,52 @@ import TestUtils from 'react-addons-test-utils'
 
 describe('ConversationHistory', () => {
   describe('render', () => {
+    describe('when the channel user is the calico feedback user', () => {
+      it('renders the welcome message as the first message', () => {
+        const channel = Immutable.fromJS({
+          messages: [],
+          channels_users: [{
+            user_id: 3,
+            user: {
+              first_name: 'Calico Feedback',
+              last_name: 'User',
+              email: 'calico_feedback_user@casecommons.org',
+            },
+          }],
+          created_at: '2016-06-03T11:31:40.163Z',
+        })
+        const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} />)
+        const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
+        expect(messageView.textContent).toContain(
+          'Welcome to Calico, a messaging app for caseworkers, birth and foster parents,'
+        )
+        expect(messageView.textContent).toContain('Calico Feedback User')
+        expect(messageView.textContent).toContain('Calico Feedback User')
+        expect(messageView.textContent).toContain('6/3, 7:31 am')
+      })
+
+      describe('when the channel user is NOT the calico feedback user', () => {
+        it('does NOT render the welcome message as the first message', () => {
+          const channel = Immutable.fromJS({
+            messages: [],
+            channels_users: [{
+              user_id: 3,
+              user: {
+                first_name: 'Phillip',
+                last_name: 'Fry',
+                email: 'not_the_feedback_users_email@casecommons.org',
+              },
+            }],
+          })
+          const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} />)
+          const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
+          expect(messageView.textContent).not.toContain(
+            'Welcome to Calico, a messaging app for caseworkers, birth and foster parents,'
+          )
+        })
+      })
+    })
+
     it('renders the current channels messages', () => {
       const channel = Immutable.fromJS({
         messages: [{
