@@ -81,6 +81,10 @@ h2 {
     float: left;
     font-size: 4.6rem;
   }
+
+  .navbar-brand:hover {
+    color: #d6d7d9;
+  }
 }
 
 .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
