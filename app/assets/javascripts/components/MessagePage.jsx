@@ -1,5 +1,6 @@
 import * as Util from 'util/http'
 import ChannelNav from 'components/ChannelNav'
+import ConversationHeader from 'components/ConversationHeader'
 import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
 import moment from 'moment'
@@ -30,19 +31,6 @@ export default class MessagePage extends Component {
       ))
       return channel.set('channels_users', otherChannelUsers)
     })
-  }
-
-  conversationHeader(currentChannel) {
-    if (currentChannel) {
-      const user = currentChannel.getIn(['channels_users', 0, 'user'])
-      const firstName = user.get('first_name')
-      const lastName = user.get('last_name')
-      return (
-        <h2 className='conversation-header'>
-          Conversation with <strong>{firstName} {lastName}</strong>
-        </h2>
-      )
-    }
   }
 
   setActiveChannel(index) {
@@ -78,7 +66,7 @@ export default class MessagePage extends Component {
           <ChannelNav data={this.state.channels} onChannelSelect={this.setActiveChannel}/>
         </div>
         <div className='col-md-9'>
-          {this.conversationHeader(currentChannel)}
+          <ConversationHeader channel={currentChannel} />
           <div className='message-window' style={{background: 'white'}}>
             {messages}
           </div>
