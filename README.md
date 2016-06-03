@@ -6,7 +6,7 @@ Calico is a web-based, responsive messaging app for parents (birth and foster) a
 
 Calico was built using Case Commons' agile development process, in response to the State of California's AGPQ solicitation.   
 
-1. The Calico team was led by Nicole Reece (Product Manager).  Team members: 
+1. The Calico team was led by Nicole Tecco Reece (Product Manager).  Team members: 
 	* Pierre Klein (UX) 
 	* Pema Geyleg (Technical Architect)
 	* Nate Jones (Full stack developer)
