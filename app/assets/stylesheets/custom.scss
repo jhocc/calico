@@ -126,6 +126,10 @@ h2 {
   padding: 1em;
   margin-bottom: 2rem;
   padding-left:7rem;
+  background-image: url("images/error.svg");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 2.4rem 2.7rem;
 }
 
 #error_explanation h2 {
@@ -133,21 +137,6 @@ h2 {
   margin: 0 0 2rem 0;
   padding:0;
   line-height: 2.6rem;
-}
-
-#error_explanation:after{
-  content: "\f06a";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    position: absolute;
-    font-size: 3rem;
-    color: #333;
-    top: 50%;
-    left: 50%;
-    margin: -374px 0 0 -141px;
-    z-index: 1;
 }
 
 // FORM //
