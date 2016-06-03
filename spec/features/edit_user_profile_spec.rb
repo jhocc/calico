@@ -34,6 +34,31 @@ feature 'Edit user profile' do
     expect(find_field('Street Address').value).to eq 'Localhost 34th street'
   end
 
+  scenario 'requires first_name and last_name' do
+    login_as user
+
+    visit root_path
+
+    click_menu_link 'My Profile'
+
+    fill_in 'First Name', with: ''
+    fill_in 'Last Name', with: ''
+
+    click_button 'Update'
+
+    expect(page).to have_content('errors')
+
+    fill_in 'First Name', with: 'foobar'
+    fill_in 'Last Name', with: 'bazqaz'
+
+    click_button 'Update'
+
+    click_menu_link 'My Profile'
+
+    expect(find_field('First Name').value).to eq 'foobar'
+    expect(find_field('Last Name').value).to eq 'bazqaz'
+  end
+
   scenario 'User can update password' do
     login_as user
 
