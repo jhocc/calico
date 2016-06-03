@@ -145,6 +145,14 @@ describe('MessagePage', () => {
         expect(messageView.textContent).toContain('Phillip Fry')
         expect(messageView.textContent).toContain('6/2, 6:31 pm')
       })
+
+      it('renders a message input view and send button', () => {
+        const textarea = TestUtils.findRenderedDOMComponentWithTag(view, 'textarea')
+        expect(textarea.getAttribute('placeholder')).toEqual('Type your message here...')
+
+        const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-success')
+        expect(button.value).toEqual('Send')
+      })
     })
 
     describe('when there are no channels present', () => {

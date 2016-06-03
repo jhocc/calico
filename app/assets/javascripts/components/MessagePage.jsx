@@ -82,6 +82,17 @@ export default class MessagePage extends Component {
           <div className='message-window' style={{background: 'white'}}>
             {messages}
           </div>
+          <div className='message-input'>
+            <div className='profile-picture'>
+              <img src=''/>
+            </div>
+            <div className='message-body'>
+              <textarea placeholder='Type your message here...'></textarea>
+            </div>
+          </div>
+          <div className='actions'>
+            <input type='submit' value='Send' className='btn btn-lg btn-primary btn-block btn-success'/>
+          </div>
         </div>
       </div>
     )

@@ -25,6 +25,8 @@ feature 'my messages' do
       expect(page).to have_content 'Hi there!'
       expect(page).to have_content 'Calico Feedback User'
     end
+
+    expect(page).to have_button 'Send'
   end
 
   scenario 'user can see a list of other users who have messaged them' do
