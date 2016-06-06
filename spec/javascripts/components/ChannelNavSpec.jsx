@@ -9,7 +9,7 @@ describe('ChannelNav', () => {
     var view
     var onChannelSelectSpy
 
-    describe('when there is no data present', () => {
+    describe('when there is data present', () => {
       beforeEach(() => {
         const data = Immutable.fromJS([
           { id: 1, channels_users: [{ user: { first_name: 'Phillip', last_name: 'Fry' }}] },
@@ -33,9 +33,14 @@ describe('ChannelNav', () => {
         TestUtils.Simulate.click(channelLinks[1])
         expect(onChannelSelectSpy).toHaveBeenCalledWith(1)
       })
+
+      it('adds the active class to the active channel', () => {
+        const activeChannel = TestUtils.findRenderedDOMComponentWithClass(view, 'active')
+        expect(activeChannel.textContent).toContain('Turanga Leela')
+      })
     })
 
-    describe('when there is data present', () => {
+    describe('when there is no data present', () => {
       beforeEach(() => {
         const data = Immutable.List()
         view = TestUtils.renderIntoDocument(<ChannelNav data={data} />)
