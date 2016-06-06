@@ -6,7 +6,7 @@ hooks:
 test_pattern:
   - spec/**/*_spec.rb
 tests:
-  - bundle exec rake rspec
+  - bundle exec rspec
 :environment:
   'RAILS_ENV': 'test'
 :nodejs:
