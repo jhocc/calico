@@ -12,7 +12,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
       post :create, {
         user: {
           first_name: 'John',
-          last_name: 'Doe',
+          last_name: 'Snow',
           phone: '234-123-123',
           email: 'test@example.com',
           password: 'password',
@@ -20,7 +20,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
         }
       }
       expect(response.status).to eq 302
-      created_user = User.find_by(first_name: 'John', last_name: 'Doe')
+      created_user = User.find_by(first_name: 'John', last_name: 'Snow')
       expect(created_user.channels.count).to eq 1
       expect(created_user.channels.first.users.count).to eq 2
     end
