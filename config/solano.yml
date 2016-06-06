@@ -7,11 +7,10 @@ test_pattern:
   - spec/**/*_spec.rb
 tests:
   - name: rspec_tests
-    command: bundle exec rake rspec
+    command: RAILS_ENV=test bundle exec rake rspec
 :environment:
   'RAILS_ENV': 'test'
 :nodejs:
   version: '0.10.31'
 :postgresql:
   :version: '9.5'
-  :shards: 3
