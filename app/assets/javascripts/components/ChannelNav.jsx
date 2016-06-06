@@ -17,7 +17,7 @@ export default class ChannelNav extends Component {
                     const lastName = user.get('last_name')
                     const onChannelSelect = () => { this.props.onChannelSelect(index) }
                     return (
-                      <li>
+                      <li key={`channel_${channel.get('id')}`}>
                         <a href='#' onClick={onChannelSelect}>
                           <img src='' alt='' />
                           <span>{firstName} {lastName}</span>

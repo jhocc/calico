@@ -39,7 +39,7 @@ export default class ConversationHistory extends Component {
         const fullName = `${msg.getIn(['user', 'first_name'])} ${msg.getIn(['user', 'last_name'])}`
         const createdAt = moment(msg.get('created_at')).format('M/D, h:mm a')
         return (
-          <div className='message'>
+          <div key={`message_${msg.get('id')}`} className='message'>
             <div className='profile-picture'>
               <img src=''/>
             </div>
