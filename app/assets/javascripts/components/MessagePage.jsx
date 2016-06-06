@@ -79,17 +79,17 @@ export default class MessagePage extends Component {
             <div className='profile-picture'>
               <img src=''/>
             </div>
-            <div className='message-body'>
+            <div className='message-box'>
               <textarea autoFocus ref='messageInput' name='message-input' placeholder='Type your message here...'></textarea>
             </div>
-          </div>
-          <div className='actions'>
-            <input
-              type='submit'
-              onClick={this.send}
-              value='Send'
-              className='btn btn-lg btn-primary btn-block btn-success'
-            />
+            <div className='actions'>
+              <input
+                type='submit'
+                onClick={this.send}
+                value='Send'
+                className='btn btn-lg btn-primary btn-block btn-success'
+              />
+            </div>
           </div>
         </div>
       </div>
