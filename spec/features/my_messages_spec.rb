@@ -112,16 +112,58 @@ feature 'my messages' do
 
     click_on 'Finn Mertens'
 
-    channel.messages.create(content: 'another message', user: finn_the_human)
-    within '.message-window' do
-      expect(page).to have_content 'another message'
-    end
-
     fill_in 'message-input', with: 'a new message'
     click_on 'Send'
 
     within '.message-window' do
      expect(page).to have_content 'a new message'
+    end
+  end
+
+  scenario 'user can receive messages in their available user channels' do
+    user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
+    finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
+    channel = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
+
+    login_as user_myself
+    visit channels_path
+
+    click_on 'Finn Mertens'
+
+    channel.messages.create(content: 'another message', user: finn_the_human)
+    within '.message-window' do
+      expect(page).to have_content 'another message'
+    end
+  end
+
+  scenario 'user sees indicators for unread channels' do
+    user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
+    finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
+    jake_the_dog = FactoryGirl.create(:user, first_name: 'Jake', last_name: 'The Dog')
+    FactoryGirl.create(:channel, users: [jake_the_dog, user_myself])
+    channel_with_finn = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
+    channel_with_finn.messages.create(content: 'another message', user: finn_the_human)
+
+    login_as user_myself
+    visit channels_path
+
+    within '.channels .active' do
+      expect(page).to have_content('Jake The Dog')
+    end
+
+    within '.channels .unread' do
+      expect(page).to have_content('Finn Mertens')
+    end
+    click_on 'Finn Mertens'
+
+    within '.channels .active' do
+      expect(page).to have_content('Finn Mertens')
+    end
+
+    click_on 'Jake The Dog'
+
+    within '.channels .read' do
+      expect(page).to have_content('Finn Mertens')
     end
   end
 end
