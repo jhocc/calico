@@ -29,18 +29,19 @@ RSpec.describe MessagesController, type: :controller do
       get :index, format: :json
       json = JSON.parse(response.body)
 
-      expect(json[0]['id']).to eq(channel_one.id)
-      expect(json[0]['messages'][0]['content']).to eq('Hi there!')
-      expect(json[0]['messages'][0]['user']['first_name']).to eq('Phillip')
-      expect(json[0]['messages'][0]['user']['last_name']).to eq('Fry')
-      channel_user = json[0]['channels_users'].find { |user| user['user_id'] == phillip_fry.id }['user']
+      channel_one_json = json.detect { |hash| hash['id'] == channel_one.id }
+      expect(channel_one_json['id']).to eq(channel_one.id)
+      expect(channel_one_json['messages'][0]['content']).to eq('Hi there!')
+      expect(channel_one_json['messages'][0]['user']['first_name']).to eq('Phillip')
+      expect(channel_one_json['messages'][0]['user']['last_name']).to eq('Fry')
+      channel_user = channel_one_json['channels_users'].find { |user| user['user_id'] == phillip_fry.id }['user']
       expect(channel_user['id']).to eq(phillip_fry.id)
       expect(channel_user['first_name']).to eq('Phillip')
       expect(channel_user['last_name']).to eq('Fry')
       expect(channel_user['email']).to eq('phillip.fry@futuramalabs.com')
 
-      expect(json[1]['id']).to eq(channel_two.id)
-      channel_user = json[1]['channels_users'].find { |user| user['user_id'] == turanga_leela.id }['user']
+      channel_two_json = json.detect { |hash| hash['id'] == channel_two.id }
+      channel_user = channel_two_json['channels_users'].find { |user| user['user_id'] == turanga_leela.id }['user']
       expect(channel_user['id']).to eq(turanga_leela.id)
       expect(channel_user['first_name']).to eq('Turanga')
       expect(channel_user['last_name']).to eq('Leela')
