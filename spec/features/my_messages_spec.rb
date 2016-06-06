@@ -92,6 +92,10 @@ feature 'my messages' do
     visit channels_path
 
     click_on 'Finn Mertens'
+    within '.channels .active' do
+      expect(page).to have_content 'Finn Mertens'
+    end
+
     expect(page).to have_content 'Is that Jake?'
 
     click_on 'Princess Bubblegum'

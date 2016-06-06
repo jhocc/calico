@@ -29,7 +29,7 @@
     }
   }
 
-  ul.channels li  {
+  .channels li  {
     border-bottom: 0.1rem solid #ddd;
     padding: 1rem;
     list-style-type: none;
@@ -47,16 +47,24 @@
       }
   }
 
-  ul.channels li:active  {
+  .channels li:active  {
     background-color: #dce4ee;
   }
 
-  ul.channels li:last-child  {
+  .channels li:last-child  {
     border-bottom: none;
   }
 
-  ul.channels li:hover  {
+  .channels li:hover  {
     background-color: #dce4ee;
+  }
+
+  .channels li.active {
+    background-color: #112E51;
+    a {
+      color: #ffffff;
+    }
+    font-weight: 300;
   }
 
   .message-window {
