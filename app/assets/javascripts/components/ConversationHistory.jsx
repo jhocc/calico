@@ -3,6 +3,12 @@ import React, { Component, DOM } from 'react'
 import moment from 'moment'
 
 export default class ConversationHistory extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.channel.equals(prevProps.channel)) {
+      this.refs.messageWindow.scrollTop = this.refs.messageWindow.scrollHeight
+    }
+  }
+
   welcomeMessage() {
     const channel = this.props.channel
     if (channel) {
@@ -54,7 +60,7 @@ export default class ConversationHistory extends Component {
     }
 
     return (
-      <div className='message-window' style={{background: 'white'}}>
+      <div ref='messageWindow' className='message-window' style={{background: 'white'}}>
         {this.welcomeMessage()}
         {messages}
       </div>
