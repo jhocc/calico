@@ -13,11 +13,17 @@ export default class MessagePage extends Component {
       activeChannel: 0,
     }
     this.setActiveChannel = this.setActiveChannel.bind(this)
+    this.loadChannels = this.loadChannels.bind(this)
     this.send = this.send.bind(this)
   }
 
   componentDidMount() {
     this.loadChannels()
+    this.interval = setInterval(this.loadChannels, 2000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   loadChannels() {

@@ -101,12 +101,17 @@ feature 'my messages' do
   scenario 'user can send messages in their available user channels' do
     user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
     finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
-    FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
+    channel = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
 
     login_as user_myself
     visit channels_path
 
     click_on 'Finn Mertens'
+
+    channel.messages.create(content: 'another message', user: finn_the_human)
+    within '.message-window' do
+      expect(page).to have_content 'another message'
+    end
 
     fill_in 'message-input', with: 'a new message'
     click_on 'Send'
