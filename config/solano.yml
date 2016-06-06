@@ -1,8 +1,8 @@
 ruby_version: 'ruby-2.2.3'
 bundler_version: 1.12.5
 hooks:
-  pre_setup: npm install
-  worker_setup: bundle exec rake db:setup  # Runs once for each worker to do, e.g., database setup
+  pre_setup: 'bundle exec rake --trace assets:precompile'
+  worker_setup: 'bundle exec rake --trace db:setup'  # Runs once for each worker to do, e.g., database setup
 test_pattern:
   - spec/**/*_spec.rb
 tests:
