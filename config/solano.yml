@@ -1,0 +1,15 @@
+ruby_version: 'ruby-2.2.3'
+bundler_version: 1.12.5
+hooks:
+  pre_setup: 'bundle exec rake --trace assets:precompile'
+  worker_setup: 'bundle exec rake --trace db:setup'  # Runs once for each worker to do, e.g., database setup
+test_pattern:
+  - spec/**/*_spec.rb
+tests:
+  - bundle exec rspec
+:environment:
+  'RAILS_ENV': 'test'
+:nodejs:
+  version: '0.10.31'
+:postgresql:
+  :version: '9.5'
