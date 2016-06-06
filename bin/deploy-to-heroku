@@ -1,11 +1,44 @@
 #!/bin/bash
-set -e
-set -x
-
 ROOT="$(dirname "$0")/.."
 cd "$ROOT"
-eval $(docker-machine env)
 
+set -e
+
+PROGRAM=`basename $0`
+
+usage() {
+  cat >&2 <<STR
+usage: $PROGRAM [ --app <app_name> ]
+
+Builds docker images and deploys to heroku using <app_name>, app name defaults to beta-calico
+STR
+}
+
+HEROKU_APP="beta-calico"
+while test $# -gt 0
+do
+  case $1 in
+  --app | -a)
+    HEROKU_APP="$2"
+    shift
+    ;;
+  --help | -h | '-?' )
+    usage
+    ;;
+  -*)
+    fatal "Unrecognized option: $1"
+    usage
+    exit 1
+    ;;
+  *)
+    break
+    ;;
+  esac
+  shift
+done
+
+eval $(docker-machine env)
 docker-compose build web
 echo "Assuming that you have logged into heroku"
-heroku docker:release --app beta-calico
+set -x
+heroku docker:release --app "$HEROKU_APP"
