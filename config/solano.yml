@@ -7,6 +7,7 @@ test_pattern:
   - spec/**/*_spec.rb
 tests:
   - bundle exec rspec
+  - bin/karma
 :environment:
   'RAILS_ENV': 'test'
 :nodejs:
