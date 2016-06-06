@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
   def is_feedback_user?
     email == FEEDBACK_USER_EMAIL
   end
+
+  def is_case_worker?
+    role == Role::CASE_WORKER
+  end
 end
