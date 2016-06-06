@@ -1,0 +1,74 @@
+#!/bin/bash
+ROOT="$(dirname "$0")/.."
+source "$ROOT/bin/_util"
+
+cd "$ROOT"
+
+set -e
+
+PROGRAM=`basename $0`
+
+usage() {
+  cat >&2 <<STR
+usage: $PROGRAM [ --env <environment_name> ]
+
+Builds docker images and run containers, environment defaults to <development>
+STR
+}
+
+ENV="development"
+while test $# -gt 0
+do
+  case $1 in
+  --env | -e)
+    ENV="$2"
+    shift
+    ;;
+  --help | -h | '-?' )
+    usage
+    exit 0
+    ;;
+  -*)
+    fatal "Unrecognized option: $1"
+    usage
+    exit 1
+    ;;
+  *)
+    break
+    ;;
+  esac
+  shift
+done
+
+validate_host_vm() {
+  if ! docker-machine status default | egrep --quiet "Running"; then
+    runcmd abort "Host virtual machine default is not running'"
+  fi
+}
+
+docker_compose_file() {
+  if [[ "$ENV" = "development" ]]; then
+    runcmd echo "docker-compose.development.yml"
+  else
+    runcmd echo "docker-compose.yml"
+  fi
+}
+
+project_name() {
+  runcmd echo "$ENV"_calico
+}
+
+app_container_name() {
+  if [[ "$ENV" = "development" ]]; then
+    runcmd echo "dev_calico_app"
+  else
+    runcmd echo "calico_app"
+  fi
+}
+
+validate_host_vm
+runcmd eval $(docker-machine env)
+runcmd docker-compose --file $(docker_compose_file) build webserver
+runcmd docker-compose --file $(docker_compose_file)  --project-name $(project_name) up -d webserver
+docker exec $(app_container_name) bundle exec rake --trace db:migrate db:seed
+runcmd echo "Access app at http://$(docker-machine ip default)"
