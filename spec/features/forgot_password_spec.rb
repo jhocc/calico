@@ -9,9 +9,10 @@ feature 'Forgot password' do
     expect(page).to have_field 'Email Address'
     expect(page).to have_button 'Send Password Reset Instructions'
 
-
     fill_in 'Email Address', with: user.email
     click_button 'Send Password Reset Instructions'
+
+    expect(page).to have_content('If you are an existing Calico user, you will get an email with a link to create a new password momentarily.  Please click on that link and follow the instructions to change your password and login.')
 
     mail = ActionMailer::Base.deliveries.first.body
     expect(mail).to include(user.email)
