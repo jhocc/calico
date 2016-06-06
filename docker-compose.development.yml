@@ -1,6 +1,6 @@
 app:
   build: .
-  dockerfile: Dockerfile.dev
+  dockerfile: Dockerfile.development
   working_dir: /app/user
   command: 'bash -c ''bundle exec foreman start -f Procfile-dev'''
   container_name: dev_calico_app
@@ -13,20 +13,6 @@ app:
   ports:
     - "3000:3000"
     - "4857:4857"
-  links:
-    - postgresql
-shell:
-  build: .
-  dockerfile: Dockerfile.dev
-  working_dir: /app/user
-  command: bash
-  environment:
-    PORT: 8080
-    RAILS_ENV: development
-    SECRET_KEY_BASE: 'GNeBhAoT81xWAlRls7NJa1zZjZ/BTJ9EMGO+YcMh/8/+Xu9R6jzAWk/uUZIYEDuoIK19vwesRA5SQPVJow6dxQ=='
-    DATABASE_URL: 'postgres://calico:calico@postgresql:5432/ca_development'
-  ports:
-    - '8080:8080'
   links:
     - postgresql
   volumes:

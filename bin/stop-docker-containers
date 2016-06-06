@@ -1,9 +1,13 @@
 #!/bin/bash
-set -e
-set -x
 
 ROOT="$(dirname "$0")/.."
-cd "$ROOT"
-eval $(docker-machine env)
+source "$ROOT/bin/_util"
 
-docker stop $(docker ps --all --quiet)
+cd "$ROOT"
+
+set -e
+
+if [[ -z $DOCKER_HOST ]]; then
+  eval $(docker-machine env)
+fi
+runcmd docker stop $(docker ps --all --quiet)

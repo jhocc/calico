@@ -26,7 +26,6 @@ ENV BUNDLE_APP_CONFIG /app/ruby/.bundle/config
 # # Run bundler to cache dependencies
 COPY ["Gemfile", "Gemfile.lock", "/app/user/"]
 RUN bundle install --path /app/ruby/bundle --jobs 4
-ADD . /app/user
 
 # How to conditionally `rake assets:precompile`?
 ENV RAILS_ENV development 
