@@ -15,6 +15,7 @@ export default class MessagePage extends Component {
     this.setActiveChannel = this.setActiveChannel.bind(this)
     this.loadChannels = this.loadChannels.bind(this)
     this.send = this.send.bind(this)
+    this.mark = this.mark.bind(this)
   }
 
   componentDidMount() {
@@ -46,6 +47,16 @@ export default class MessagePage extends Component {
     this.refs.messageInput.value = ''
   }
 
+  mark() {
+    Util.request(
+      'PUT',
+      `/channels/${this.getActiveChannelId()}/mark.json`,
+      { channel_id: this.getActiveChannelId() }
+    ).done((_) => {
+      this.loadChannels()
+    })
+  }
+
   filterUserChannelsOfCurrent(channels, currentUserId) {
     return channels.map((channel) => {
       const otherChannelUsers = channel.get('channels_users').filter((channelUser) => (
@@ -63,6 +74,7 @@ export default class MessagePage extends Component {
     this.setState({
       activeChannel: index
     })
+    this.mark()
   }
 
   render() {
