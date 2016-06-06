@@ -59,6 +59,14 @@
     background-color: #dce4ee;
   }
 
+  .channels li.active {
+    background-color: #112E51;
+    a {
+      color: #ffffff;
+    }
+    font-weight: 300;
+  }
+
   .message-window {
     margin-bottom: 2rem;
     max-height: 55vh;

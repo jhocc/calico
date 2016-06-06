@@ -17,7 +17,9 @@ describe('ChannelNav', () => {
           { id: 3, channels_users: [{ user: { first_name: 'Bender', last_name: 'Rodriguez'}}] },
         ])
         onChannelSelectSpy = jasmine.createSpy('onChannelSelectSpy')
-        view = TestUtils.renderIntoDocument(<ChannelNav data={data} onChannelSelect={onChannelSelectSpy}/>)
+        view = TestUtils.renderIntoDocument(
+          <ChannelNav data={data} onChannelSelect={onChannelSelectSpy} activeIndex={1} />
+        )
       })
 
       it('lists the users for each channel as links', () => {

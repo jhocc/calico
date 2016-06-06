@@ -70,7 +70,11 @@ export default class MessagePage extends Component {
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
-          <ChannelNav data={this.state.channels} onChannelSelect={this.setActiveChannel}/>
+          <ChannelNav
+            data={this.state.channels}
+            onChannelSelect={this.setActiveChannel}
+            activeIndex={this.state.activeChannel}
+          />
         </div>
         <div className='col-md-9'>
           <ConversationHeader channel={currentChannel} />
