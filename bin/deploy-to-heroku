@@ -24,6 +24,7 @@ do
     ;;
   --help | -h | '-?' )
     usage
+    exit 0
     ;;
   -*)
     fatal "Unrecognized option: $1"
@@ -42,3 +43,4 @@ docker-compose build web
 echo "Assuming that you have logged into heroku"
 set -x
 heroku docker:release --app "$HEROKU_APP"
+heroku run --app beta-calico rake --trace db:migrate db:seed
