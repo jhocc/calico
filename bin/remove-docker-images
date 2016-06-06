@@ -1,9 +1,15 @@
 #!/bin/bash
-set -e
 ROOT="$(dirname "$0")/.."
+source "$ROOT/bin/_util"
+
 cd "$ROOT"
-eval $(docker-machine env)
+
+set -e
+
+if [[ -z $DOCKER_HOST ]]; then
+  eval $(docker-machine env)
+fi
+
 number_of_images=$(($(docker images | wc -l)-1))
 
-set -x
-docker rmi -f $(docker images | sed -n 2,"$number_of_images"p | awk '{ print $3 }')
+runcmd docker rmi -f $(docker images | sed -n 2,"$number_of_images"p | awk '{ print $3 }')
