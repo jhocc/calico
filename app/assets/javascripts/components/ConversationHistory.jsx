@@ -3,6 +3,12 @@ import React, { Component, DOM } from 'react'
 import moment from 'moment'
 
 export default class ConversationHistory extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.channel.equals(prevProps.channel)) {
+      this.refs.messageWindow.scrollTop = this.refs.messageWindow.scrollHeight
+    }
+  }
+
   welcomeMessage() {
     const channel = this.props.channel
     if (channel) {
@@ -21,7 +27,7 @@ export default class ConversationHistory extends Component {
               <p>Hi there!<br /><br />
                 Welcome to Calico, a messaging app for caseworkers, birth and foster parents,
                 designed to help coordinate and communicate. <br /><br />
-                To get started, click on the menu button (<i className='fa fa-bars' aria-hidden='true'></i>) and go to the <a>Resource Finder</a> (<i className='fa fa-crosshairs' aria-hidden='true'></i>).
+                To get started, click on the menu button (<i className='fa fa-bars' aria-hidden='true'></i>) and go to the <a href='/foster_family_agencies'>Resource Finder</a> (<i className='fa fa-crosshairs' aria-hidden='true'></i>).
                 This will put you in touch with foster family agencies in your area.
                 From there, select a resource and you will see a list of caseworkers that you can message.<br /><br />
                 Next time you login, you will see all conversations with caseworkers on your home page so you can message there.</p>
@@ -39,7 +45,7 @@ export default class ConversationHistory extends Component {
         const fullName = `${msg.getIn(['user', 'first_name'])} ${msg.getIn(['user', 'last_name'])}`
         const createdAt = moment(msg.get('created_at')).format('M/D, h:mm a')
         return (
-          <div className='message'>
+          <div key={`message_${msg.get('id')}`} className='message'>
             <div className='profile-picture'>
               <img src=''/>
             </div>
@@ -54,7 +60,7 @@ export default class ConversationHistory extends Component {
     }
 
     return (
-      <div className='message-window' style={{background: 'white'}}>
+      <div ref='messageWindow' className='message-window' style={{background: 'white'}}>
         {this.welcomeMessage()}
         {messages}
       </div>

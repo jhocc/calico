@@ -8,7 +8,7 @@ export default class ConversationHeader extends Component {
       const firstName = user.get('first_name')
       const lastName = user.get('last_name')
       return (
-        <h2 className='conversation-header'>
+        <h2 style={{marginBottom: '20px'}} className='conversation-header'>
           Conversation with <strong>{firstName} {lastName}</strong>
         </h2>
       )

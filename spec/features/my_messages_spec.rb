@@ -16,7 +16,7 @@ feature 'my messages' do
     fill_in 'user_password_confirmation', with: 'Password123'
     click_button 'Save'
 
-    visit messages_path
+    visit channels_path
 
     expect(page).to have_content 'Calico Feedback User'
     expect(page).to_not have_content 'Me And Myself'
@@ -42,7 +42,7 @@ feature 'my messages' do
       FactoryGirl.create(:channel, users: [other_user, user_myself])
     end
 
-    visit messages_path
+    visit channels_path
 
     expect(page).to have_content 'Phillip Fry'
     expect(page).to have_content 'Turanga Leela'
@@ -59,7 +59,7 @@ feature 'my messages' do
 
     login_as user_myself
 
-    visit messages_path
+    visit channels_path
     expect(page).to have_content 'Conversation with Finn Mertens'
 
     click_on('Princess Bubblegum')
@@ -89,12 +89,35 @@ feature 'my messages' do
     )
 
     login_as user_myself
-    visit messages_path
+    visit channels_path
 
     click_on 'Finn Mertens'
     expect(page).to have_content 'Is that Jake?'
 
     click_on 'Princess Bubblegum'
     expect(page).to have_content 'Get outta here varmints'
+  end
+
+  scenario 'user can send messages in their available user channels' do
+    user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
+    finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
+    channel = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
+
+    login_as user_myself
+    visit channels_path
+
+    click_on 'Finn Mertens'
+
+    channel.messages.create(content: 'another message', user: finn_the_human)
+    within '.message-window' do
+      expect(page).to have_content 'another message'
+    end
+
+    fill_in 'message-input', with: 'a new message'
+    click_on 'Send'
+
+    within '.message-window' do
+     expect(page).to have_content 'a new message'
+    end
   end
 end

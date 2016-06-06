@@ -131,5 +131,25 @@ feature 'Foster Family Agencies' do
       expect(page).to_not have_content(non_case_worker.first_name)
       expect(page).to_not have_content(non_case_worker.last_name)
     end
+
+    scenario 'user messages an associated worker by clicking a link' do
+      FactoryGirl.create(
+        :case_worker,
+        first_name: 'Robert',
+        last_name: 'Smith',
+        foster_family_agency_number: 10707644
+      )
+
+      login_as user
+      visit foster_family_agencies_path
+
+      click_link 'FAMILYPATHS, INC'
+      click_link 'Message Robert'
+
+      expect(page).to have_content('Conversation with Robert Smith')
+      within '.channels' do
+        expect(page).to have_content('Robert Smith')
+      end
+    end
   end
 end

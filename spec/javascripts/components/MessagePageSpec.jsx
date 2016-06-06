@@ -17,7 +17,7 @@ describe('MessagePage', () => {
 
     it('requests channels from message api', () => {
       TestUtils.renderIntoDocument(<MessagePage currentUserId={1} />)
-      expect(Util.request).toHaveBeenCalledWith('GET', '/messages.json', null)
+      expect(Util.request).toHaveBeenCalledWith('GET', '/channels.json', null)
       expect(xhrRequest.done).toHaveBeenCalledWith(jasmine.any(Function))
     })
   })
@@ -85,6 +85,36 @@ describe('MessagePage', () => {
     })
   })
 
+  describe('send', () => {
+    var xhrRequest
+    var view
+    beforeEach(() => {
+      spyOn(Util, 'request')
+      xhrRequest = jasmine.createSpyObj('xhr request', ['done'])
+      Util.request.and.returnValue(xhrRequest)
+      view = TestUtils.renderIntoDocument(<MessagePage currentUserId={1} />)
+      spyOn(view, 'getActiveChannelId')
+      view.getActiveChannelId.and.returnValue(1)
+      const messageInput = view.refs.messageInput;
+      messageInput.value = 'Hi there!';
+      TestUtils.Simulate.change(view.refs.messageInput);
+    })
+
+    it('calls the messages api with the message-input content', () => {
+      view.send()
+      expect(Util.request.calls.mostRecent().args).toEqual([
+        'POST',
+        '/channels/1/messages.json',
+        {message: {content: 'Hi there!'}}
+      ])
+    })
+
+    it('clears out the message input field', () => {
+      view.send()
+      expect(view.refs.messageInput.value).toEqual('')
+    })
+  })
+
   describe('render', () => {
     var view
     describe('when there are channels present', () => {
@@ -109,6 +139,7 @@ describe('MessagePage', () => {
           }],
         }
         view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} />)
+        spyOn(view, 'send')
         view.setState({ channels: Immutable.fromJS([channel_one]) })
       })
 
@@ -152,6 +183,13 @@ describe('MessagePage', () => {
 
         const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-success')
         expect(button.value).toEqual('Send')
+      })
+
+      it('wires up the send button to call send when send button is clicked', () => {
+        const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-success')
+        expect(button.value).toEqual('Send')
+        TestUtils.Simulate.click(button)
+        expect(view.send).toHaveBeenCalled()
       })
     })
 

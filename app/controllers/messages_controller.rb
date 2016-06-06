@@ -1,19 +1,20 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @channels = current_user.channels.includes({messages: :user, channels_users: :user}).order(
-      Channel.arel_table[:created_at].asc,
-    )
+  def create
+    @channel = Channel.find(message_params[:channel_id])
+    content = message_params[:message][:content]
+    message = @channel.messages.build(user: current_user, content: content)
+    message.save!
 
     respond_to do |format|
-      format.html
-      format.json {
-        render json: @channels.to_json(include: {
-          messages: { include: :user },
-          channels_users: { include: :user }
-        })
-      }
+      format.json { render json: {} }
     end
+  end
+
+  private
+
+  def message_params
+    params.permit(:channel_id, message: [:content])
   end
 end

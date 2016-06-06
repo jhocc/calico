@@ -13,15 +13,37 @@ export default class MessagePage extends Component {
       activeChannel: 0,
     }
     this.setActiveChannel = this.setActiveChannel.bind(this)
+    this.loadChannels = this.loadChannels.bind(this)
+    this.send = this.send.bind(this)
   }
 
   componentDidMount() {
-    const xhr = Util.request('GET', '/messages.json', null)
+    this.loadChannels()
+    this.interval = setInterval(this.loadChannels, 2000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  loadChannels() {
+    const xhr = Util.request('GET', '/channels.json', null)
     xhr.done((response) => {
       this.setState({
         channels: this.filterUserChannelsOfCurrent(Immutable.fromJS(response), this.props.currentUserId)
       })
     })
+  }
+
+  send() {
+    Util.request(
+      'POST',
+      `/channels/${this.getActiveChannelId()}/messages.json`,
+      { message: { content: this.refs.messageInput.value } }
+    ).done((_) => {
+      this.loadChannels()
+    })
+    this.refs.messageInput.value = ''
   }
 
   filterUserChannelsOfCurrent(channels, currentUserId) {
@@ -31,6 +53,10 @@ export default class MessagePage extends Component {
       ))
       return channel.set('channels_users', otherChannelUsers)
     })
+  }
+
+  getActiveChannelId() {
+    return this.state.channels.getIn([this.state.activeChannel, 'id'])
   }
 
   setActiveChannel(index) {
@@ -53,12 +79,17 @@ export default class MessagePage extends Component {
             <div className='profile-picture'>
               <img src=''/>
             </div>
-            <div className='message-body'>
-              <textarea placeholder='Type your message here...'></textarea>
+            <div className='message-box'>
+              <textarea autoFocus ref='messageInput' name='message-input' placeholder='Type your message here...'></textarea>
             </div>
-          </div>
-          <div className='actions'>
-            <input type='submit' value='Send' className='btn btn-lg btn-primary btn-block btn-success'/>
+            <div className='actions'>
+              <input
+                type='submit'
+                onClick={this.send}
+                value='Send'
+                className='btn btn-lg btn-primary btn-block btn-success'
+              />
+            </div>
           </div>
         </div>
       </div>
