@@ -10,7 +10,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
   end
 
   describe '#create' do
-    it 'generates signup message with the calicao feedback user on success' do
+    it 'generates signup message with the calico feedback user on success' do
       sign_out current_user
       post :create, {
         user: {
@@ -23,11 +23,12 @@ RSpec.describe Users::RegistrationsController, type: :controller do
         }
       }
       expect(response.status).to eq 302
-      expect(current_user.reload.channels.count).to eq 1
-      expect(current_user.reload.channels.first.users.count).to eq 2
+      created_user = User.find_by(first_name: 'John', last_name: 'Doe')
+      expect(created_user.channels.count).to eq 1
+      expect(created_user.channels.first.users.count).to eq 2
     end
 
-    it 'does NOT generate signup message with the calicao feedback user on failure' do
+    it 'does NOT generate signup message with the calico feedback user on failure' do
       sign_out current_user
       expect {
         put :create, {
