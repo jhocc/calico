@@ -61,4 +61,19 @@ RSpec.describe ChannelsController, type: :controller do
       expect(channel_user['email']).to eq('turanga.leela@futuramalabs.com')
     end
   end
+
+  describe '#mark' do
+    before do
+      sign_in current_user
+      allow(controller).to receive(:current_user).and_return(current_user)
+    end
+
+    it 'returns the users list of channels' do
+      my_channel_user = FactoryGirl.build(:channels_user, user: current_user, read_at: 1.day.ago)
+      channel = FactoryGirl.create(:channel, channels_users: [my_channel_user])
+      previous_read = my_channel_user.read_at
+      put :mark, { channel_id: channel.id, format: :json }
+      expect(my_channel_user.reload.read_at).to be > (previous_read)
+    end
+  end
 end
