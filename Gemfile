@@ -10,6 +10,7 @@ gem 'soda-ruby', :require => 'soda'
 
 gem 'rails_12factor', group: :production
 gem 'faker'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'factory_girl_rails', require: false
