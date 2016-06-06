@@ -7,7 +7,7 @@ feature 'Sign up' do
     expect(page).to have_content 'First Name'
     expect(page).to have_content 'Email Address'
     expect(page).to have_content 'Zip Code'
-    expect(page).to have_button('Upload Profile Picture', disabled: true)
+    # expect(page).to have_button('Upload Profile Picture', disabled: true)
     expect(page).to have_button 'Save'
   end
 
@@ -59,5 +59,29 @@ feature 'Sign up' do
 
     expect(find_field('First Name').value).to eq 'foo'
     expect(find_field('Last Name').value).to eq 'baz'
+  end
+
+  scenario 'upload profile photo' do
+    visit root_path
+    click_link 'Sign Up'
+
+    expect(page).to have_css("img[src='/assets/images/user.svg']")
+
+    fill_in 'Email Address', with: 'foo.baz@test.com'
+    fill_in 'Zip Code', with: '10010'
+    fill_in 'First Name', with: 'foo'
+    fill_in 'Last Name', with: 'baz'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
+
+    profile_photo =  File.open(File.join(Rails.root, 'spec/support/assets/cc.png'))
+    attach_file 'user_profile_photo', profile_photo.path
+
+    click_button 'Save'
+
+    click_menu_link 'My Profile'
+
+    user = User.find_by(email: 'foo.baz@test.com')
+    expect(page).to have_css("img[src='#{user.profile_photo.large.url}']")
   end
 end
