@@ -34,6 +34,12 @@ describe User do
     expect(user.errors[:last_name]).to be_present
   end
 
+  describe 'profile_photo' do
+    it 'mount PhotoUploader to profile_photo' do
+      expect(described_class.new.profile_photo.class).to eq PhotoUploader
+    end
+  end
+
   describe '#is_feedback_user?' do
     it 'returns true if user email is feedback user email' do
       user = FactoryGirl.build(:user, email: User::FEEDBACK_USER_EMAIL)

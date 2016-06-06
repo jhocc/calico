@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   scope :case_workers, -> { where(role: 'case_worker') }
 
+  mount_uploader :profile_photo, ::PhotoUploader
+
   def primary_address
     addresses.order(created_at: :desc).first
   end
