@@ -30,7 +30,7 @@ export default class MessagePage extends Component {
     const xhr = Util.request('GET', '/channels.json', null)
     xhr.done((response) => {
       this.setState({
-        channels: this.filterUserChannelsOfCurrent(Immutable.fromJS(response), this.props.currentUserId)
+        channels: Immutable.fromJS(response)
       })
     })
   }
@@ -66,7 +66,11 @@ export default class MessagePage extends Component {
   }
 
   render() {
-    const currentChannel = this.state.channels.get(this.state.activeChannel)
+    const filteredChannels = this.filterUserChannelsOfCurrent(
+      this.state.channels,
+      this.props.currentUserId
+    )
+    const currentChannel = filteredChannels.get(this.state.activeChannel)
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
@@ -74,6 +78,7 @@ export default class MessagePage extends Component {
             data={this.state.channels}
             onChannelSelect={this.setActiveChannel}
             activeIndex={this.state.activeChannel}
+            currentUserId={this.props.currentUserId}
           />
         </div>
         <div className='col-md-9'>
