@@ -7,7 +7,8 @@
     "rails"
   ],
   "addons": [
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "sendgrid"
   ]
 }
 
