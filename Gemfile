@@ -9,10 +9,10 @@ gem 'puma'
 gem 'soda-ruby', :require => 'soda'
 
 gem 'rails_12factor', group: :production
+gem 'faker'
 
 group :development, :test do
   gem 'factory_girl_rails', require: false
-  gem 'faker'
 
   gem 'pry'
   gem 'pry-byebug'
