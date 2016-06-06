@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/fschwahn/mini_magick.git
+  revision: 302aaa3b3e6a9a629d66fb32ecd07edfd8fbbe87
+  specs:
+    mini_magick (3.3)
+      subexec (~> 0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -233,6 +240,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    subexec (0.1.0)
     sys-uname (1.0.2)
       ffi (>= 1.0.0)
     tddium_client (0.6.0)
@@ -267,6 +275,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foreman
+  mini_magick!
   pg
   pry
   pry-byebug

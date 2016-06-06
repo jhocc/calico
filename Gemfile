@@ -11,6 +11,7 @@ gem 'soda-ruby', :require => 'soda'
 gem 'rails_12factor', group: :production
 gem 'faker'
 gem 'carrierwave'
+gem 'mini_magick', git: 'https://github.com/fschwahn/mini_magick.git'
 
 group :development, :test do
   gem 'factory_girl_rails', require: false
