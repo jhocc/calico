@@ -22,8 +22,8 @@ feature 'Sign up' do
     fill_in 'City', with: 'Brooklyn'
     select 'New York', from: 'State'
     fill_in 'Zip Code', with: '10010'
-    fill_in 'Password', with: 'Password123'
-    fill_in 'Password Confirmation', with: 'Password123'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
     click_button 'Save'
 
     click_menu_link 'My Profile'
@@ -32,5 +32,32 @@ feature 'Sign up' do
     expect(find_field('Last Name').value).to eq 'baz'
     expect(find_field('Street Address').value).to eq '14 main st'
     expect(find_field('Phone').value).to eq '9177187777'
+  end
+
+  scenario 'requires first_name and last_name' do
+    visit root_path
+    click_link 'Sign Up'
+    fill_in 'Email Address', with: 'foo.baz@test.com'
+    fill_in 'Zip Code', with: '10010'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
+
+    click_button 'Save'
+
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
+
+    fill_in 'First Name', with: 'foo'
+    fill_in 'Last Name', with: 'baz'
+    fill_in 'Zip Code', with: '10010'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
+
+    click_button 'Save'
+
+    click_menu_link 'My Profile'
+
+    expect(find_field('First Name').value).to eq 'foo'
+    expect(find_field('Last Name').value).to eq 'baz'
   end
 end

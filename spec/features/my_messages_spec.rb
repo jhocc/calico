@@ -12,8 +12,8 @@ feature 'my messages' do
     fill_in 'City', with: 'Brooklyn'
     select 'New York', from: 'State'
     fill_in 'Zip Code', with: '10010'
-    fill_in 'Password', with: 'Password123'
-    fill_in 'Password Confirmation', with: 'Password123'
+    fill_in 'user_password', with: 'Password123'
+    fill_in 'user_password_confirmation', with: 'Password123'
     click_button 'Save'
 
     visit messages_path

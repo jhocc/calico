@@ -2,11 +2,18 @@
   <%= devise_error_messages! %>
 
   <div class="field form-group">
-    <%= f.label :first_name, 'First Name' %>
+    <%= f.label :first_name do %>
+      <span>First Name</span>
+      <em>Required</em>
+    <% end %>
     <%= f.text_field :first_name, autofocus: true, class: 'form-control'%>
   </div>
+
   <div class="field form-group">
-    <%= f.label :last_name, 'Last Name' %>
+    <%= f.label :last_name do %>
+      <span>Last Name</span>
+      <em>Required</em>
+    <% end %>
     <%= f.text_field :last_name, class: 'form-control'%>
   </div>
 
@@ -16,8 +23,10 @@
   </div>
 
   <div class="field form-group">
-    <%= f.label :email, 'Email Address' %>
-    <em>Required</em>
+    <%= f.label :email do %>
+      <span>Email Address</span>
+      <em>Required</em>
+    <% end %>
     <%= f.email_field :email, class: 'form-control'%>
   </div>
 
@@ -39,21 +48,27 @@
     </div>
 
     <div class="field form-group">
-      <%= addresses_form.label :zip_code, 'Zip Code' %>
-      <em>Required</em>
+      <%= addresses_form.label :zip_code do %>
+        <span>Zip Code</span>
+        <em>Required</em>
+      <% end %>
       <%= addresses_form.number_field :zip_code, class: 'form-control'%>
     </div>
   <% end %>
 
   <div class="field form-group">
-    <%= f.label :password %>
-    <em>Required</em>
+    <%= f.label :password do %>
+      <span>Password</span>
+      <em>Required</em>
+    <% end %>
     <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: minimum_password_message %>
   </div>
 
   <div class="field form-group">
-    <%= f.label :password_confirmation, 'Password Confirmation' %>
-    <em>Required</em>
+    <%= f.label :password_confirmation do %>
+      <em>Required</em>
+      <span>Password Confirmation</span>
+    <% end %>
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'%>
   </div>
 

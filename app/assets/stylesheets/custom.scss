@@ -146,16 +146,26 @@ h2 {
   border-radius: 0;
   box-shadow: none;
   border: 0.1rem solid #5b616b;
-    box-sizing: border-box;
-    color: #212121;
-}
-
-.form-group em {
-  float: right;
+  box-sizing: border-box;
+  color: #212121;
 }
 
 .form-group {
   margin-bottom: 2rem;
+
+  label {
+    display: block;
+    overflow: auto;
+  }
+
+  span {
+    float: left;
+  }
+
+  label em {
+    font-weight: 200;
+    float: right;
+  }
 }
 
 select {
