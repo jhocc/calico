@@ -43,6 +43,7 @@ export default class MessagePage extends Component {
     ).done((_) => {
       this.loadChannels()
     })
+    this.refs.messageInput.value = ''
   }
 
   filterUserChannelsOfCurrent(channels, currentUserId) {

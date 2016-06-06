@@ -108,6 +108,11 @@ describe('MessagePage', () => {
         {message: {content: 'Hi there!'}}
       ])
     })
+
+    it('clears out the message input field', () => {
+      view.send()
+      expect(view.refs.messageInput.value).toEqual('')
+    })
   })
 
   describe('render', () => {
