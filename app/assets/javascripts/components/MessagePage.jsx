@@ -80,7 +80,7 @@ export default class MessagePage extends Component {
               <img src=''/>
             </div>
             <div className='message-body'>
-              <textarea ref='messageInput' name='message-input' placeholder='Type your message here...'></textarea>
+              <textarea autoFocus ref='messageInput' name='message-input' placeholder='Type your message here...'></textarea>
             </div>
           </div>
           <div className='actions'>
