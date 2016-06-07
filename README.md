@@ -55,6 +55,12 @@ Public users can go to beta-calico.herokuapp.com to sign up for a Calico account
 Message the help user on your messages page with any questions.
 
 ## How to Deploy Calico?
+### Development environment
+  * Mac OS X 10.9.5
+  * Virtual Box 5.0.20 r106931
+  * docker-machine version 0.7.0, build a650a40
+  * docker version 1.11.1, build 5604cbe
+  * docker-compose version 1.7.1, build 0a9ab35
 
 * System dependencies
 * Configuration
