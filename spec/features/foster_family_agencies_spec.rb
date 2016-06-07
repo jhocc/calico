@@ -211,5 +211,44 @@ feature 'Foster Family Agencies' do
         expect(page).to have_content('Robert Smith')
       end
     end
+
+    scenario 'user opens existing channel with associated worker by clicking a link' do
+      other_case_worker = FactoryGirl.create(
+        :case_worker,
+        first_name: 'Sarah',
+        last_name: 'Sheehan',
+        foster_family_agency_number: 10707644
+      )
+      case_worker = FactoryGirl.create(
+        :case_worker,
+        first_name: 'Robert',
+        last_name: 'Smith',
+        foster_family_agency_number: 10707644
+      )
+      FactoryGirl.create(:channel, users: [case_worker, user])
+      FactoryGirl.create(:channel, users: [other_case_worker, user])
+
+      login_as user
+
+      visit root_path
+      within '.channels .active' do
+        expect(page).to have_content('Sarah Sheehan')
+      end
+
+      visit foster_family_agencies_path
+
+      click_link 'FAMILYPATHS, INC'
+      click_link 'Message Robert'
+
+      page.find_all('.channels li').count
+      within '.channels' do
+        expect(page.find_all('li').count).to eq 2
+      end
+
+      expect(page).to have_content('Conversation with Robert Smith')
+      within '.channels .active' do
+        expect(page).to have_content('Robert Smith')
+      end
+    end
   end
 end
