@@ -67,6 +67,22 @@
     font-weight: 300;
   }
 
+  .channels li.unread {
+    background-color: #dce4ee;
+    font-weight: 600;
+    a {
+      color: #333;
+    }
+  }
+
+  .channels li.read {
+    background-color: #ffffff;
+    a {
+      color: #5d616b;
+    }
+    font-weight: 300;
+  }
+
   .message-window {
     margin-bottom: 2rem;
     max-height: 55vh;

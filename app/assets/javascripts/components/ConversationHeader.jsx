@@ -1,10 +1,12 @@
+import * as ChannelUtil from 'util/channels'
 import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
 
 export default class ConversationHeader extends Component {
   render() {
     if (this.props.channel) {
-      const user = this.props.channel.getIn(['channels_users', 0, 'user'])
+      const [_, otherChannelUser] = ChannelUtil.userAndOther(this.props.channel, this.props.currentUserId)
+      const user = otherChannelUser.get('user')
       const firstName = user.get('first_name')
       const lastName = user.get('last_name')
       return (
@@ -20,5 +22,6 @@ export default class ConversationHeader extends Component {
 
 ConversationHeader.propTypes = {
   channel: React.PropTypes.object.isRequired,
+  currentUserId: React.PropTypes.number.isRequired,
 }
 

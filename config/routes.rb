@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :foster_family_agencies, only: [:index, :show]
   resources :channels, only: [:index, :create] do
+    put :mark
     resources :messages, only: [:create]
   end
 

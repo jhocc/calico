@@ -1,18 +1,26 @@
+import * as ChannelUtil from 'util/channels'
 import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
 import moment from 'moment'
 
 export default class ConversationHistory extends Component {
+  shouldComponentUpdate(nextProps, _) {
+    if (!this.props.channel) { return true }
+
+    const messages = this.props.channel.get('messages')
+    const nextMessages =  nextProps.channel.get('messages')
+    return !messages.equals(nextMessages)
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    if (!this.props.channel.equals(prevProps.channel)) {
-      this.refs.messageWindow.scrollTop = this.refs.messageWindow.scrollHeight
-    }
+    this.refs.messageWindow.scrollTop = this.refs.messageWindow.scrollHeight
   }
 
   welcomeMessage() {
     const channel = this.props.channel
     if (channel) {
-      const user = channel.getIn(['channels_users', 0, 'user'])
+      const [_, otherChannelUser] = ChannelUtil.userAndOther(this.props.channel, this.props.currentUserId)
+      const user = otherChannelUser.get('user')
       if (user.get('email') === 'calico_feedback_user@casecommons.org') {
         const fullName = `${user.get('first_name')} ${user.get('last_name')}`
         const createdAt = moment(channel.get('created_at')).format('M/D, h:mm a')
@@ -47,7 +55,7 @@ export default class ConversationHistory extends Component {
         return (
           <div key={`message_${msg.get('id')}`} className='message'>
             <div className='profile-picture'>
-              <img src=''/>
+              <img src={msg.getIn(['user', 'profile_photo', 'small', 'url'])} alt={fullName} />
             </div>
             <div className='message-body'>
               <span className='username'>{fullName}</span>
@@ -70,5 +78,6 @@ export default class ConversationHistory extends Component {
 
 ConversationHistory.propTypes = {
   channel: React.PropTypes.object.isRequired,
+  currentUserId: React.PropTypes.number.isRequired,
 }
 

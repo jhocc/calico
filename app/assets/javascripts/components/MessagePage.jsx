@@ -1,4 +1,5 @@
 import * as Util from 'util/http'
+import * as ChannelUtil from 'util/channels'
 import ChannelNav from 'components/ChannelNav'
 import ConversationHeader from 'components/ConversationHeader'
 import ConversationHistory from 'components/ConversationHistory'
@@ -15,11 +16,13 @@ export default class MessagePage extends Component {
     this.setActiveChannel = this.setActiveChannel.bind(this)
     this.loadChannels = this.loadChannels.bind(this)
     this.send = this.send.bind(this)
+    this.mark = this.mark.bind(this)
   }
 
   componentDidMount() {
     this.loadChannels()
     this.interval = setInterval(this.loadChannels, 2000);
+    this.interval = setInterval(this.mark, 2000);
   }
 
   componentWillUnmount() {
@@ -30,7 +33,7 @@ export default class MessagePage extends Component {
     const xhr = Util.request('GET', '/channels.json', null)
     xhr.done((response) => {
       this.setState({
-        channels: this.filterUserChannelsOfCurrent(Immutable.fromJS(response), this.props.currentUserId)
+        channels: Immutable.fromJS(response)
       })
     })
   }
@@ -46,13 +49,12 @@ export default class MessagePage extends Component {
     this.refs.messageInput.value = ''
   }
 
-  filterUserChannelsOfCurrent(channels, currentUserId) {
-    return channels.map((channel) => {
-      const otherChannelUsers = channel.get('channels_users').filter((channelUser) => (
-        channelUser.get('user_id') !== currentUserId
-      ))
-      return channel.set('channels_users', otherChannelUsers)
-    })
+  mark() {
+    Util.request(
+      'PUT',
+      `/channels/${this.getActiveChannelId()}/mark.json`,
+      { channel_id: this.getActiveChannelId() }
+    )
   }
 
   getActiveChannelId() {
@@ -63,10 +65,16 @@ export default class MessagePage extends Component {
     this.setState({
       activeChannel: index
     })
+    this.mark()
   }
 
   render() {
     const currentChannel = this.state.channels.get(this.state.activeChannel)
+    var channelUserProfile
+    if (this.state.channels && this.state.channels.get(this.state.activeChannel)) {
+      const [channelUser, _] = ChannelUtil.userAndOther(this.state.channels.get(this.state.activeChannel), this.props.currentUserId)
+      channelUserProfile = channelUser.getIn(['user', 'profile_photo', 'small', 'url'])
+    }
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
@@ -74,14 +82,15 @@ export default class MessagePage extends Component {
             data={this.state.channels}
             onChannelSelect={this.setActiveChannel}
             activeIndex={this.state.activeChannel}
+            currentUserId={this.props.currentUserId}
           />
         </div>
         <div className='col-md-9'>
-          <ConversationHeader channel={currentChannel} />
-          <ConversationHistory channel={currentChannel} />
+          <ConversationHeader channel={currentChannel} currentUserId={this.props.currentUserId} />
+          <ConversationHistory channel={currentChannel} currentUserId={this.props.currentUserId} />
           <div className='message-input'>
             <div className='profile-picture'>
-              <img src=''/>
+              <img className='my-profile-picture' src={channelUserProfile} />
             </div>
             <div className='message-box'>
               <textarea autoFocus ref='messageInput' name='message-input' placeholder='Type your message here...'></textarea>
