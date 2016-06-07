@@ -62,7 +62,7 @@ feature 'Foster Family Agencies' do
       expect(page).to have_content('(510) 208-1870')
     end
 
-    scenario "displays no rows when no foster family agencies in the user's zip code" do
+    scenario "displays no rows and flash message when no foster family agencies in the user's zip code" do
       response = {}
 
       expect_any_instance_of(SODA::Client).to receive(:get).and_return(response)
@@ -72,6 +72,7 @@ feature 'Foster Family Agencies' do
 
       expect(page).to have_content("Foster Family Agencies in #{zip_code}")
       expect(page.all('table tbody tr').count).to eq 0
+      expect(page).to have_content("There are no foster family agencies in your zip code")
     end
   end
 

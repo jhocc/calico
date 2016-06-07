@@ -12,15 +12,29 @@ RSpec.describe FosterFamilyAgenciesController, type: :controller do
   end
 
   describe '#index' do
-    let(:foster_family_agencies) { [double(:foster_family_agency), double(:foster_family_agency) ]}
-    it 'loads the foster_family_agencies from api endpoint' do
-      expect(service).to receive(:find_by_zip_code)
-        .with(current_user.primary_address.zip_code)
-        .and_return(foster_family_agencies)
+    context 'when there are foster families in your zipcode' do
+      let(:foster_family_agencies) { [double(:foster_family_agency), double(:foster_family_agency) ]}
+      it 'loads the foster_family_agencies from api endpoint' do
+        expect(service).to receive(:find_by_zip_code)
+          .with(current_user.primary_address.zip_code)
+          .and_return(foster_family_agencies)
 
-      get :index
+        get :index
+        expect(assigns(:foster_family_agencies)).to eq foster_family_agencies
+      end
+    end
 
-      expect(assigns(:foster_family_agencies)).to eq foster_family_agencies
+    context 'when there are no foster families in your zipcode' do
+      let(:foster_family_agencies) { [double(:foster_family_agency), double(:foster_family_agency) ]}
+      it 'sets a flash message' do
+        expect(service).to receive(:find_by_zip_code)
+          .with(current_user.primary_address.zip_code)
+          .and_return([])
+
+        get :index
+        expect(assigns(:foster_family_agencies)).to eq []
+        expect(flash[:notice]).to eq 'There are no foster family agencies in your zip code'
+      end
     end
   end
 
