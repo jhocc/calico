@@ -4,10 +4,16 @@ import React, { Component, DOM } from 'react'
 import moment from 'moment'
 
 export default class ConversationHistory extends Component {
+  shouldComponentUpdate(nextProps, _) {
+    if (!this.props.channel) { return true }
+
+    const messages = this.props.channel.get('messages')
+    const nextMessages =  nextProps.channel.get('messages')
+    return !messages.equals(nextMessages)
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    if (!this.props.channel.equals(prevProps.channel)) {
-      this.refs.messageWindow.scrollTop = this.refs.messageWindow.scrollHeight
-    }
+    this.refs.messageWindow.scrollTop = this.refs.messageWindow.scrollHeight
   }
 
   welcomeMessage() {
