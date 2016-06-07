@@ -83,6 +83,17 @@ export default class MessagePage extends Component {
       this.props.currentUserId
     )
     const currentChannel = filteredChannels.get(this.state.activeChannel)
+    var channelUserProfile
+    if (this.state.channels) {
+      if (this.state.channels.get(this.state.activeChannel)) {
+        if (this.state.channels.get(this.state.activeChannel).get('channels_users')) {
+          const channelUser = this.state.channels.get(this.state.activeChannel).get('channels_users').find((channelUser) => {
+            return channelUser.get('user_id') === this.props.currentUserId
+          })
+          channelUserProfile = channelUser.getIn(['user', 'profile_photo', 'small', 'url'])
+        }
+      }
+    }
     return (
       <div className='row dashboard'>
         <div className='col-md-3'>
@@ -98,7 +109,7 @@ export default class MessagePage extends Component {
           <ConversationHistory channel={currentChannel} />
           <div className='message-input'>
             <div className='profile-picture'>
-              <img src=''/>
+              <img className='my-profile-picture' src={channelUserProfile} />
             </div>
             <div className='message-box'>
               <textarea autoFocus ref='messageInput' name='message-input' placeholder='Type your message here...'></textarea>

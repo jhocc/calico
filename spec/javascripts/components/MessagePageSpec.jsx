@@ -159,6 +159,13 @@ describe('MessagePage', () => {
               first_name: 'Phillip',
               last_name: 'Fry',
             },
+          }, {
+            user_id: 1,
+            user: {
+              first_name: 'Me',
+              last_name: 'Myself',
+              profile_photo: { small: { url: 'my_profile_url' } }
+            },
           }],
         }
         view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} />)
@@ -185,6 +192,13 @@ describe('MessagePage', () => {
               first_name: 'Phillip',
               last_name: 'Fry',
             },
+          }, {
+            user_id: 1,
+            user: {
+              first_name: 'Me',
+              last_name: 'Myself',
+              profile_photo: { small: { url: 'my_profile_url' } }
+            },
           }],
         }])
       })
@@ -204,6 +218,9 @@ describe('MessagePage', () => {
       it('renders a message input view and send button', () => {
         const textarea = TestUtils.findRenderedDOMComponentWithTag(view, 'textarea')
         expect(textarea.getAttribute('placeholder')).toEqual('Type your message here...')
+
+        const messageViewImg = TestUtils.findRenderedDOMComponentWithClass(view, 'my-profile-picture')
+        expect(messageViewImg.src).toContain('my_profile_url')
 
         const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-success')
         expect(button.value).toEqual('Send')
