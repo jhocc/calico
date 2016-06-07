@@ -59,7 +59,7 @@ export default class ChannelNav extends Component {
               return (
                 <li key={`channel_${channel.get('id')}`} className={className}>
                   <a href='#' onClick={onChannelSelect}>
-                    <img src='' alt='' />
+                    <img src={otherChannelUser.getIn(['user', 'profile_photo', 'small', 'url'])} alt={fullName} />
                     <span>{fullName}</span>
                   </a>
                 </li>

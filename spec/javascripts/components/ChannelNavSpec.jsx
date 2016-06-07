@@ -100,10 +100,24 @@ describe('ChannelNav', () => {
 
     describe('when there is data present', () => {
       beforeEach(() => {
-        const fry = { user_id: 44, user: { first_name: 'Phillip', last_name: 'Fry' } }
-        const leela = { user_id: 55, user: { first_name: 'Turanga', last_name: 'Leela'} }
-        const bender = { user_id: 66, user: { first_name: 'Bender', last_name: 'Rodriguez' } }
-
+        const fry = {
+          user_id: 44,
+          user: {
+            first_name: 'Phillip', last_name: 'Fry', profile_photo: { small: { url: 'frys_profile_url' } }
+          }
+        }
+        const leela = {
+          user_id: 55,
+          user: {
+            first_name: 'Turanga', last_name: 'Leela', profile_photo: { small: { url: 'leelas_profile_url' } }
+          }
+        }
+        const bender = {
+          user_id: 66,
+          user: {
+            first_name: 'Bender', last_name: 'Rodriguez', profile_photo: { small: { url: 'benders_profile_url' } }
+          }
+        }
         const unreadMessage = {
           id: 1,
           created_at: '2016-06-06T16:17:01.000Z'
@@ -112,7 +126,6 @@ describe('ChannelNav', () => {
           id: 1,
           created_at: '2016-06-05T16:17:01.000Z'
         }
-
         const unreadMe = { user_id: 77, user: { first_name: 'Me', last_name: 'And Myself' }, read_at: '2016-06-06T16:14:01.000Z' }
         const readMe = { user_id: 77, user: { first_name: 'Me', last_name: 'And Myself' }, read_at: readMessage.created_at }
 
@@ -140,6 +153,12 @@ describe('ChannelNav', () => {
         expect(channelLinks[0].textContent).toContain('Phillip Fry')
         expect(channelLinks[1].textContent).toContain('Turanga Leela')
         expect(channelLinks[2].textContent).toContain('Bender Rodriguez')
+
+        const channelProfiles = TestUtils.scryRenderedDOMComponentsWithTag(view, 'img')
+        expect(channelProfiles.length).toEqual(3)
+        expect(channelProfiles[0].src).toContain('frys_profile_url')
+        expect(channelProfiles[1].src).toContain('leelas_profile_url')
+        expect(channelProfiles[2].src).toContain('benders_profile_url')
       })
 
       it('calls onChannelSelect with channel index when a channel link is clicked', () => {
