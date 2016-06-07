@@ -70,4 +70,23 @@ feature 'Edit user profile' do
     expect(find_field('First Name').value).to eq 'john'
     expect(find_field('Last Name').value).to eq 'doe'
   end
+
+  scenario 'upload profile photo' do
+    login_as user
+
+    visit root_path
+
+    click_menu_link 'My Profile'
+
+    expect(page).to have_css("img[src='/assets/images/user.svg']")
+
+    profile_photo =  File.open(File.join(Rails.root, 'spec/support/assets/cc.png'))
+    attach_file 'user_profile_photo', profile_photo.path
+
+    click_button 'Update'
+
+    click_menu_link 'My Profile'
+
+    expect(page).to have_css("img[src='#{user.reload.profile_photo.large.url}']")
+  end
 end

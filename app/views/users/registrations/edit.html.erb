@@ -71,8 +71,14 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'%>
   </div>
 
+  <div class="field form-group">
+    <%= f.label :profile_photo, 'Profile Picture' %>
+    <%= image_tag(current_user.profile_photo.large.url) %>
+    <%= f.file_field :profile_photo %>
+  </div>
+
   <div class="actions">
-    <%= f.submit "Upload New Profile Picture", class: 'btn btn-lg btn-secondary btn-block margin-bottom', disabled: true %>
+    <!-- <%= f.submit "Upload New Profile Picture", class: 'btn btn-lg btn-secondary btn-block margin-bottom', disabled: true %> -->
     <%= f.submit "Update Profile", class: 'btn btn-lg btn-primary btn-block btn-primary double-margin-bottom' %>
   </div>
 <% end %>

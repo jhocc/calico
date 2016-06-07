@@ -26,6 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :last_name,
         :phone,
         :email,
+        :profile_photo,
         :addresses_attributes => [
           :street_address, :city, :state, :zip_code
         ]
@@ -40,6 +41,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :last_name,
       :phone,
       :email,
+      :profile_photo,
       :addresses_attributes => [
         :street_address, :city, :state, :zip_code, :id
       ]

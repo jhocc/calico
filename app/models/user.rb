@@ -13,11 +13,17 @@ class User < ActiveRecord::Base
 
   scope :case_workers, -> { where(role: 'case_worker') }
 
+  mount_uploader :profile_photo, ::PhotoUploader
+
   def primary_address
     addresses.order(created_at: :desc).first
   end
 
   def is_feedback_user?
     email == FEEDBACK_USER_EMAIL
+  end
+
+  def is_case_worker?
+    role == Role::CASE_WORKER
   end
 end
