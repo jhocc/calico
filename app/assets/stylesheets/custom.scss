@@ -39,6 +39,10 @@ h2 {
 
 // TABLES //
 
+.table > thead > tr > th {
+    vertical-align: middle;
+}
+
 .table {
     background-color: #fff;
 
@@ -233,6 +237,23 @@ a, li, .container, .btn, .drawer, .drawer-right, .form-signin {
   .drawer {
     margin-top: 0em;
     z-index: 9999;
+  }
+
+  .table {
+    thead {
+      tr {
+        th {
+          padding: 1rem;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          padding: 1rem;;
+        }
+      }
+    }
   }
 
   .navbar {
