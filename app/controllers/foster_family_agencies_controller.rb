@@ -3,6 +3,7 @@ class FosterFamilyAgenciesController < ApplicationController
 
   def index
     @foster_family_agencies = service.find_by_zip_code(current_user.primary_address.zip_code)
+    flash[:notice] = 'There are no foster family agencies in your zip code' if @foster_family_agencies.empty?
   end
 
   def show
