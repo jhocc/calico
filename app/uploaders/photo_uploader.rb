@@ -4,9 +4,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   include CarrierWave::Compatibility::Paperclip
 
-  storage :file
-  # storage :fog
-
   def store_dir
     "assets/images/#{mounted_as}/#{model.id}/"
   end

@@ -10,6 +10,7 @@ gem 'soda-ruby', :require => 'soda'
 
 gem 'faker'
 gem 'carrierwave'
+gem 'fog'
 gem 'mini_magick', git: 'https://github.com/fschwahn/mini_magick.git'
 gem 'dragonfly'
 gem 'avatar_magick'
@@ -22,6 +23,8 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails', require: false
+  gem 'dotenv-rails'
+
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-doc'
