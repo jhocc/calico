@@ -25,6 +25,16 @@ export default class ChannelNav extends Component {
     }
   }
 
+  userAndOther(channel, currentUserId) {
+    const otherChannelUser = channel.get('channels_users').filter((channelUser) => (
+      channelUser.get('user_id') !== currentUserId
+    )).first()
+    const channelUser = channel.get('channels_users').filter((channelUser) => (
+      channelUser.get('user_id') === currentUserId
+    )).first()
+    return [channelUser, otherChannelUser]
+  }
+
   render() {
     var divStyle = { background: 'white' }
     return (
@@ -35,14 +45,7 @@ export default class ChannelNav extends Component {
         <ul className='channels' style={divStyle}>
           {
             this.props.data.map((channel, index) => {
-              const otherChannelUser = channel.get('channels_users').filter((channelUser) => (
-                channelUser.get('user_id') !== this.props.currentUserId
-              )).first().get('user')
-
-              const channelUser = channel.get('channels_users').filter((channelUser) => (
-                channelUser.get('user_id') === this.props.currentUserId
-              )).first()
-
+              const [channelUser, otherChannelUser] = this.userAndOther(channel, this.props.currentUserId)
               let className = ''
               const isActive = (index === this.props.activeIndex)
               if (isActive) {
@@ -51,7 +54,7 @@ export default class ChannelNav extends Component {
                 const lastCreatedAt = this.lastMessageCreatedAt(channel.get('messages'))
                 className = this.channelClass(channelUser.get('read_at'), lastCreatedAt)
               }
-              const fullName = `${otherChannelUser.get('first_name')} ${otherChannelUser.get('last_name')}`
+              const fullName = `${otherChannelUser.getIn(['user', 'first_name'])} ${otherChannelUser.getIn(['user', 'last_name'])}`
               const onChannelSelect = () => { this.props.onChannelSelect(index) }
               return (
                 <li key={`channel_${channel.get('id')}`} className={className}>
