@@ -22,69 +22,6 @@ describe('MessagePage', () => {
     })
   })
 
-  describe('filterUserChannelsOfCurrent', () => {
-    var currentUserId
-    var channels
-    var view
-
-    beforeEach(() => {
-      currentUserId = 1
-      const channel_one = {
-        channels_users: [{
-          user_id: 5,
-          user: {
-            first_name: 'Phillip',
-            last_name: 'Fry',
-          },
-        }, {
-          user_id: currentUserId,
-          user: {
-            first_name: 'Me',
-            last_name: '& Myself',
-          },
-        }]
-      }
-      const channel_two = {
-        channels_users: [{
-          user_id: 6,
-          user: {
-            first_name: 'Turunga',
-            last_name: 'Leela',
-          },
-        }, {
-          user_id: currentUserId,
-          user: {
-            first_name: 'Me',
-            last_name: '& Myself',
-          },
-        }]
-      }
-      channels = Immutable.fromJS([ channel_one, channel_two ])
-      view = TestUtils.renderIntoDocument(<MessagePage />)
-    })
-
-    it('filters out channel users who match current user id', () => {
-      const filteredChannels = view.filterUserChannelsOfCurrent(channels, currentUserId)
-      expect(filteredChannels.toJS()).toEqual([{
-        channels_users: [{
-          user_id: 5,
-          user: {
-            first_name: 'Phillip',
-            last_name: 'Fry',
-          },
-        }],
-      }, {
-        channels_users: [{
-          user_id: 6,
-          user: {
-            first_name: 'Turunga',
-            last_name: 'Leela',
-          },
-        }]
-      }])
-    })
-  })
-
   describe('send', () => {
     var xhrRequest
     var view

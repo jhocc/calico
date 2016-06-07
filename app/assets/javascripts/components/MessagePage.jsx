@@ -58,15 +58,6 @@ export default class MessagePage extends Component {
     })
   }
 
-  filterUserChannelsOfCurrent(channels, currentUserId) {
-    return channels.map((channel) => {
-      const otherChannelUsers = channel.get('channels_users').filter((channelUser) => (
-        channelUser.get('user_id') !== currentUserId
-      ))
-      return channel.set('channels_users', otherChannelUsers)
-    })
-  }
-
   getActiveChannelId() {
     return this.state.channels.getIn([this.state.activeChannel, 'id'])
   }
@@ -79,11 +70,7 @@ export default class MessagePage extends Component {
   }
 
   render() {
-    const filteredChannels = this.filterUserChannelsOfCurrent(
-      this.state.channels,
-      this.props.currentUserId
-    )
-    const currentChannel = filteredChannels.get(this.state.activeChannel)
+    const currentChannel = this.state.channels.get(this.state.activeChannel)
     var channelUserProfile
     if (this.state.channels && this.state.channels.get(this.state.activeChannel)) {
       const [channelUser, _] = ChannelUtil.userAndOther(this.state.channels.get(this.state.activeChannel), this.props.currentUserId)
