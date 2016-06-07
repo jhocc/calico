@@ -36,6 +36,20 @@ RSpec.describe FosterFamilyAgenciesController, type: :controller do
         expect(flash[:notice]).to eq 'There are no foster family agencies in your zip code'
       end
     end
+
+    context 'when filtering by user entered zip code' do
+      let(:foster_family_agencies) { [double(:foster_family_agency), double(:foster_family_agency) ]}
+      it 'loads the foster_family_agencies from api endpoint' do
+        new_zip_code = '11111'
+        expect(service).to receive(:find_by_zip_code)
+          .with(new_zip_code)
+          .and_return(foster_family_agencies)
+
+        get :index, {zip_code: new_zip_code}
+        expect(assigns(:foster_family_agencies)).to eq foster_family_agencies
+        expect(assigns(:current_zip_code)).to eq new_zip_code
+      end
+    end
   end
 
   describe '#show' do

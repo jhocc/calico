@@ -1,5 +1,10 @@
 <div class="resource-table">
-  <h2> Foster Family Agencies in <b><%= current_user.primary_address.zip_code %></b> </h2>
+  <h2> Foster Family Agencies in </h2>
+  <%= form_tag(foster_family_agencies_path, method: :get, enforce_utf8: false) do %>
+    <%= text_field_tag(:zip_code, @current_zip_code) %>
+    <%= submit_tag 'Update ZIP', name: '' %>
+  <% end %>
+
   <table class="table">
     <thead>
       <tr>

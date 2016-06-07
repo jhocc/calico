@@ -47,7 +47,9 @@ feature 'Foster Family Agencies' do
       login_as user
       visit foster_family_agencies_path
 
-      expect(page).to have_content("Foster Family Agencies in #{zip_code}")
+      expect(page).to have_content("Foster Family Agencies in")
+      expect(page).to have_button('Update ZIP')
+      expect(page).to have_field('zip_code', with: zip_code)
 
       expect(page).to have_content('FAMILYPATHS, INC')
       expect(page).to have_content('1727 Martin Luther King Wy#109, Oakland, CA 94612')
@@ -70,9 +72,66 @@ feature 'Foster Family Agencies' do
       login_as user
       visit foster_family_agencies_path
 
-      expect(page).to have_content("Foster Family Agencies in #{zip_code}")
+      expect(page).to have_content("Foster Family Agencies in")
+      expect(page).to have_field('zip_code', with: zip_code)
+
       expect(page.all('table tbody tr').count).to eq 0
       expect(page).to have_content("There are no foster family agencies in your zip code")
+    end
+
+    scenario 'change zip and display foster family agencies in new zip code' do
+      response1 = [Hashie::Mash.new({
+        'facility_address' => '1727 MARTIN LUTHER KING WY#109',
+        'facility_name' => 'FAMILYPATHS, INC.',
+        'facility_number' => '10707644',
+        'facility_state' => 'CA',
+        'facility_city' => 'OAKLAND',
+        'facility_status' => 'LICENSED',
+        'facility_telephone_number' => '(510) 893-9230',
+        'facility_type' => 'FOSTER FAMILY AGENCY',
+        'facility_zip' => '94612',
+      })]
+
+      response2 = [Hashie::Mash.new({
+        'facility_address' => '40W 23rd Street',
+        'facility_name' => 'Case Commons',
+        'facility_number' => '10707649',
+        'facility_state' => 'NY',
+        'facility_city' => 'New York',
+        'facility_status' => 'LICENSED',
+        'facility_telephone_number' => '(234) 234-1234',
+        'facility_type' => 'FOSTER FAMILY AGENCY',
+        'facility_zip' => '10010',
+      })]
+
+      allow_any_instance_of(FosterFamilyAgencyService).to receive(:find_by_zip_code)
+        .with(zip_code)
+        .and_return(response1)
+
+      allow_any_instance_of(FosterFamilyAgencyService).to receive(:find_by_zip_code)
+        .with('10010')
+        .and_return(response2)
+
+      login_as user
+      visit foster_family_agencies_path
+
+      expect(page).to have_content("Foster Family Agencies in")
+      expect(page).to have_field('zip_code', with: zip_code)
+
+      expect(page).to have_content('FAMILYPATHS, INC')
+      expect(page).to have_content('1727 Martin Luther King Wy#109, Oakland, CA 94612')
+      expect(page).to have_content('(510) 893-9230')
+
+      fill_in 'zip_code', with: '10010'
+
+      click_button 'Update ZIP'
+
+      expect(page).to have_content("Foster Family Agencies in")
+      expect(page).to have_field('zip_code', with: 10010)
+
+      expect(page).to have_content('Case Commons')
+      expect(page).to have_content('40 W 23rd Street, New York, NY 10010')
+      expect(page).to have_content('(234) 234-1234')
     end
   end
 
