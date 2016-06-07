@@ -5,7 +5,7 @@ class ChannelsController < ApplicationController
     chat_user = User.find(channel_params[:user_id])
     Channel.create(users: [current_user, chat_user])
 
-    redirect_to channels_path
+    redirect_to root_path
   end
 
   def index
@@ -14,7 +14,6 @@ class ChannelsController < ApplicationController
     )
 
     respond_to do |format|
-      format.html
       format.json {
         render json: @channels.to_json(include: {
           messages: { include: :user },

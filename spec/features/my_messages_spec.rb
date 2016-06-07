@@ -16,7 +16,7 @@ feature 'my messages' do
     fill_in 'user_password_confirmation', with: 'Password123'
     click_button 'Save'
 
-    visit channels_path
+    visit root_path
 
     expect(page).to have_content 'Calico Feedback User'
     expect(page).to_not have_content 'Me And Myself'
@@ -42,7 +42,7 @@ feature 'my messages' do
       FactoryGirl.create(:channel, users: [other_user, user_myself])
     end
 
-    visit channels_path
+    visit root_path
 
     expect(page).to have_content 'Phillip Fry'
     expect(page).to have_content 'Turanga Leela'
@@ -59,7 +59,7 @@ feature 'my messages' do
 
     login_as user_myself
 
-    visit channels_path
+    visit root_path
     expect(page).to have_content 'Conversation with Finn Mertens'
 
     click_on('Princess Bubblegum')
@@ -89,7 +89,7 @@ feature 'my messages' do
     )
 
     login_as user_myself
-    visit channels_path
+    visit root_path
 
     click_on 'Finn Mertens'
     within '.channels .active' do
@@ -108,7 +108,7 @@ feature 'my messages' do
     channel = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
 
     login_as user_myself
-    visit channels_path
+    visit root_path
 
     click_on 'Finn Mertens'
 
@@ -126,7 +126,7 @@ feature 'my messages' do
     channel = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
 
     login_as user_myself
-    visit channels_path
+    visit root_path
 
     click_on 'Finn Mertens'
 
@@ -145,7 +145,7 @@ feature 'my messages' do
     channel_with_finn.messages.create(content: 'another message', user: finn_the_human)
 
     login_as user_myself
-    visit channels_path
+    visit root_path
 
     within '.channels .active' do
       expect(page).to have_content('Jake The Dog')
