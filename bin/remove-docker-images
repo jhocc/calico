@@ -12,4 +12,4 @@ fi
 
 number_of_images=$(($(docker images | wc -l)-1))
 
-runcmd docker rmi -f $(docker images | sed -n 2,"$number_of_images"p | awk '{ print $3 }')
+runcmd docker rmi -f $(docker images --quiet)
