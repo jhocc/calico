@@ -58,19 +58,29 @@ Message the help user on your messages page with any questions.
 ### Development environment
   * Mac OS X 10.9.5
   * Virtual Box 5.0.20 r106931
-  * docker-machine version 0.7.0, build a650a40
-  * docker version 1.11.1, build 5604cbe
-  * docker-compose version 1.7.1, build 0a9ab35
+  * Docker Toolbox version 1.11.2
+    * docker-machine version 0.7.0, build a650a40
+    * docker version 1.11.1, build 5604cbe
+    * docker-compose version 1.7.1, build 0a9ab35
 
-* System dependencies
-* Configuration
-* Database creation
-* Database initialization
-* How to run the test suite
-* Services (job queues, cache servers, search engines, etc.)
-* Deployment instructions
-
-
+### Running containers in development environment
+```
+git clone git@github.com:Casecommons/calico.git
+cd calico
+bin/run-app-in-container -e development
+```
+### Running containers in production environment
+```
+git clone git@github.com:Casecommons/calico.git
+cd calico
+bin/run-app-in-container -e production 
+```
+### Deployment to SasS platform Heroku
+* Sign up at Heroku (https://www.heroku.com)
+* Create ruby app
+* Add Heroku addon for that app. You will need to add heroku-postgresql and sendgrid addon for the app.
+* Install Heroku Toolbelt
+* Install Heroku plugin heroku docker
 ## Full Documentation
 
 * Project stories are in [Pivotal Tracker] (https://www.pivotaltracker.com/n/projects/1593991)
