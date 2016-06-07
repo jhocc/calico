@@ -78,7 +78,7 @@ feature 'Edit user profile' do
 
     click_menu_link 'My Profile'
 
-    expect(page).to have_css("img[src='/assets/images/user.svg']")
+    expect(page).to have_css("img[src='/avatar/350/8ba6ca/john%20doe']")
 
     profile_photo =  File.open(File.join(Rails.root, 'spec/support/assets/cc.png'))
     attach_file 'user_profile_photo', profile_photo.path

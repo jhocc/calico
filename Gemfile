@@ -11,6 +11,8 @@ gem 'soda-ruby', :require => 'soda'
 gem 'faker'
 gem 'carrierwave'
 gem 'mini_magick', git: 'https://github.com/fschwahn/mini_magick.git'
+gem 'dragonfly'
+gem 'avatar_magick'
 
 
 group :production do

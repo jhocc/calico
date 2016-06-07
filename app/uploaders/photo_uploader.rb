@@ -4,7 +4,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   include CarrierWave::Compatibility::Paperclip
 
-  # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
 
@@ -12,22 +11,37 @@ class PhotoUploader < CarrierWave::Uploader::Base
     "assets/images/#{mounted_as}/#{model.id}/"
   end
 
-  def default_url
-    if model.is_case_worker?
-      "/assets/images/worker.svg"
-    else
-      "/assets/images/user.svg"
-    end
-  end
+  AVATAR_COLORS = {
+    'public' => '8ba6ca',
+    'case_worker' => '95bfa2'
+  }.freeze
+
+  SIZE = {
+    small: 75,
+    large: 350
+  }
+
+  delegate :url_helpers, to: 'Rails.application.routes'
 
   version :small do
-    process :resize_to_fill => [75, 75]
+    process :resize_to_fill => [SIZE[:small], SIZE[:small]]
   end
 
   version :large do
-    process :resize_to_fill => [350, 350]
+    process :resize_to_fill => [SIZE[:large], SIZE[:large]]
   end
 
+  def store_dir
+    "assets/images/#{mounted_as}/#{model.id}/"
+  end
+
+  def default_url
+    url_helpers.send(:avatar_path, avatar_size, AVATAR_COLORS[model.role], model.name)
+  end
+
+  def avatar_size
+    SIZE[version_name] || 350
+  end
 
   def extension_white_list
     %w(jpg jpeg gif png)

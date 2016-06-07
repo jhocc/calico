@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
   def is_case_worker?
     role == Role::CASE_WORKER
   end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

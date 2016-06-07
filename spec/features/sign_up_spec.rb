@@ -65,8 +65,6 @@ feature 'Sign up' do
     visit root_path
     click_link 'Sign Up'
 
-    expect(page).to have_css("img[src='/assets/images/user.svg']")
-
     fill_in 'Email Address', with: 'foo.baz@test.com'
     fill_in 'Zip Code', with: '10010'
     fill_in 'First Name', with: 'foo'
