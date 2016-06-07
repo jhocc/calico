@@ -1,3 +1,4 @@
+import * as ChannelUtil from 'util/channels'
 import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
 import moment from 'moment'
@@ -12,7 +13,8 @@ export default class ConversationHistory extends Component {
   welcomeMessage() {
     const channel = this.props.channel
     if (channel) {
-      const user = channel.getIn(['channels_users', 0, 'user'])
+      const [_, otherChannelUser] = ChannelUtil.userAndOther(this.props.channel, this.props.currentUserId)
+      const user = otherChannelUser.get('user')
       if (user.get('email') === 'calico_feedback_user@casecommons.org') {
         const fullName = `${user.get('first_name')} ${user.get('last_name')}`
         const createdAt = moment(channel.get('created_at')).format('M/D, h:mm a')
@@ -70,5 +72,6 @@ export default class ConversationHistory extends Component {
 
 ConversationHistory.propTypes = {
   channel: React.PropTypes.object.isRequired,
+  currentUserId: React.PropTypes.number.isRequired,
 }
 

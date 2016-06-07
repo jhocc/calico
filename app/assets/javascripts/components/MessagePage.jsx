@@ -101,7 +101,7 @@ export default class MessagePage extends Component {
         </div>
         <div className='col-md-9'>
           <ConversationHeader channel={currentChannel} currentUserId={this.props.currentUserId} />
-          <ConversationHistory channel={currentChannel} />
+          <ConversationHistory channel={currentChannel} currentUserId={this.props.currentUserId} />
           <div className='message-input'>
             <div className='profile-picture'>
               <img className='my-profile-picture' src={channelUserProfile} />

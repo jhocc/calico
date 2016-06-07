@@ -11,6 +11,13 @@ describe('ConversationHistory', () => {
         const channel = Immutable.fromJS({
           messages: [],
           channels_users: [{
+            user_id: 1,
+            user: {
+              first_name: 'Me',
+              last_name: 'Myself',
+              email: 'me_myself@casecommons.org',
+            },
+          }, {
             user_id: 3,
             user: {
               first_name: 'Calico Feedback',
@@ -20,7 +27,7 @@ describe('ConversationHistory', () => {
           }],
           created_at: '2016-06-03T11:31:40.163Z',
         })
-        const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} />)
+        const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} currentUserId={1}/>)
         const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
         expect(messageView.textContent).toContain(
           'Welcome to Calico, a messaging app for caseworkers, birth and foster parents,'
@@ -35,6 +42,13 @@ describe('ConversationHistory', () => {
           const channel = Immutable.fromJS({
             messages: [],
             channels_users: [{
+              user_id: 1,
+              user: {
+                first_name: 'Me',
+                last_name: 'Myself',
+                email: 'me_myself@casecommons.org',
+              },
+            },{
               user_id: 3,
               user: {
                 first_name: 'Phillip',
@@ -43,7 +57,7 @@ describe('ConversationHistory', () => {
               },
             }],
           })
-          const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} />)
+          const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} currentUserId={1} />)
           const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
           expect(messageView.textContent).not.toContain(
             'Welcome to Calico, a messaging app for caseworkers, birth and foster parents,'
