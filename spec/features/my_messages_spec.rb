@@ -166,4 +166,34 @@ feature 'my messages' do
       expect(page).to have_content('Finn Mertens')
     end
   end
+
+  scenario 'user marks currently selected channels as read' do
+    user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
+    jake_the_dog = FactoryGirl.create(:user, first_name: 'Jake', last_name: 'The Dog')
+    FactoryGirl.create(:channel, users: [jake_the_dog, user_myself])
+    finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
+    channel_with_finn = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
+    channel_with_finn.messages.create(content: 'another message', user: finn_the_human)
+
+    login_as user_myself
+    visit root_path
+
+    within '.channels .active' do
+      expect(page).to have_content('Jake The Dog')
+    end
+    click_on 'Finn Mertens'
+    channel_with_finn.messages.create(content: 'yet another message', user: finn_the_human)
+
+    within '.message-window' do
+      expect(page).to have_content 'yet another message'
+    end
+    click_menu_link 'Log Out'
+
+    login_as user_myself
+    visit root_path
+
+    within '.channels .read' do
+      expect(page).to have_content('Finn Mertens')
+    end
+  end
 end

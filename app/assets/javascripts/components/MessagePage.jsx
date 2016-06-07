@@ -22,6 +22,7 @@ export default class MessagePage extends Component {
   componentDidMount() {
     this.loadChannels()
     this.interval = setInterval(this.loadChannels, 2000);
+    this.interval = setInterval(this.mark, 2000);
   }
 
   componentWillUnmount() {
@@ -53,9 +54,7 @@ export default class MessagePage extends Component {
       'PUT',
       `/channels/${this.getActiveChannelId()}/mark.json`,
       { channel_id: this.getActiveChannelId() }
-    ).done((_) => {
-      this.loadChannels()
-    })
+    )
   }
 
   getActiveChannelId() {
