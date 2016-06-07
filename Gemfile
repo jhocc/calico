@@ -8,14 +8,18 @@ gem 'devise', '4.1.1'
 gem 'puma'
 gem 'soda-ruby', :require => 'soda'
 
-gem 'rails_12factor', group: :production
 gem 'faker'
 gem 'carrierwave'
 gem 'mini_magick', git: 'https://github.com/fschwahn/mini_magick.git'
 
+
+group :production do
+  gem 'newrelic_rpm'
+  gem 'rails_12factor'
+end
+
 group :development, :test do
   gem 'factory_girl_rails', require: false
-
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-doc'
