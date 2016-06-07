@@ -79,21 +79,6 @@ describe('ChannelNav', () => {
     })
   })
 
-  describe('userAndOther', () => {
-    it('returns an array where the first element is the current user and the last element is not', () => {
-      const fry = { user_id: 44, user: { first_name: 'Phillip', last_name: 'Fry' } }
-      const me = { user_id: 77, user: { first_name: 'Me', last_name: 'And Myself' } }
-      const channel = Immutable.fromJS({
-        channels_users: [fry, me],
-      })
-      const view = TestUtils.renderIntoDocument(<ChannelNav />)
-      expect(view.userAndOther(channel, me.user_id)[0].toJS()).toEqual(me)
-      expect(view.userAndOther(channel, me.user_id)[1].toJS()).toEqual(fry)
-      expect(view.userAndOther(channel, fry.user_id)[0].toJS()).toEqual(fry)
-      expect(view.userAndOther(channel, fry.user_id)[1].toJS()).toEqual(me)
-    })
-  })
-
   describe('render', () => {
     var view
     var onChannelSelectSpy

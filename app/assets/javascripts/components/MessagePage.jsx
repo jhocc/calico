@@ -1,4 +1,5 @@
 import * as Util from 'util/http'
+import * as ChannelUtil from 'util/channels'
 import ChannelNav from 'components/ChannelNav'
 import ConversationHeader from 'components/ConversationHeader'
 import ConversationHistory from 'components/ConversationHistory'
@@ -84,15 +85,9 @@ export default class MessagePage extends Component {
     )
     const currentChannel = filteredChannels.get(this.state.activeChannel)
     var channelUserProfile
-    if (this.state.channels) {
-      if (this.state.channels.get(this.state.activeChannel)) {
-        if (this.state.channels.get(this.state.activeChannel).get('channels_users')) {
-          const channelUser = this.state.channels.get(this.state.activeChannel).get('channels_users').find((channelUser) => {
-            return channelUser.get('user_id') === this.props.currentUserId
-          })
-          channelUserProfile = channelUser.getIn(['user', 'profile_photo', 'small', 'url'])
-        }
-      }
+    if (this.state.channels && this.state.channels.get(this.state.activeChannel)) {
+      const [channelUser, _] = ChannelUtil.userAndOther(this.state.channels.get(this.state.activeChannel), this.props.currentUserId)
+      channelUserProfile = channelUser.getIn(['user', 'profile_photo', 'small', 'url'])
     }
     return (
       <div className='row dashboard'>
@@ -105,7 +100,7 @@ export default class MessagePage extends Component {
           />
         </div>
         <div className='col-md-9'>
-          <ConversationHeader channel={currentChannel} />
+          <ConversationHeader channel={currentChannel} currentUserId={this.props.currentUserId} />
           <ConversationHistory channel={currentChannel} />
           <div className='message-input'>
             <div className='profile-picture'>

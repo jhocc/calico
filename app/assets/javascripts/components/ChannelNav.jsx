@@ -1,3 +1,4 @@
+import * as Util from 'util/channels'
 import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
 
@@ -25,16 +26,6 @@ export default class ChannelNav extends Component {
     }
   }
 
-  userAndOther(channel, currentUserId) {
-    const otherChannelUser = channel.get('channels_users').filter((channelUser) => (
-      channelUser.get('user_id') !== currentUserId
-    )).first()
-    const channelUser = channel.get('channels_users').filter((channelUser) => (
-      channelUser.get('user_id') === currentUserId
-    )).first()
-    return [channelUser, otherChannelUser]
-  }
-
   render() {
     var divStyle = { background: 'white' }
     return (
@@ -45,7 +36,7 @@ export default class ChannelNav extends Component {
         <ul className='channels' style={divStyle}>
           {
             this.props.data.map((channel, index) => {
-              const [channelUser, otherChannelUser] = this.userAndOther(channel, this.props.currentUserId)
+              const [channelUser, otherChannelUser] = Util.userAndOther(channel, this.props.currentUserId)
               let className = ''
               const isActive = (index === this.props.activeIndex)
               if (isActive) {
