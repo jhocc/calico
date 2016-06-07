@@ -123,14 +123,15 @@ h2 {
 // VALIDATIONS //
 
 #error_explanation {
-  background-color: #f9dede;
+  background-color: #e1f3f8;
   padding: 1em;
   margin-bottom: 2rem;
   padding-left:7rem;
   background-image: url("images/error.svg");
   background-repeat: no-repeat;
   background-size: 24px;
-  background-position: 2.4rem 2.7rem;
+  background-position: 2.4rem 1.7rem;
+  border: 1px solid #CFEDF9;
 }
 
 #error_explanation h2 {
