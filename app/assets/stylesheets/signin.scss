@@ -6,18 +6,27 @@
   .form-signin-circle {
     border: 1px #eee solid;
     border-radius: 25px;
-    padding: 10px;
+    padding: 7px 8px;;
     width: 40px;
     height: 40px;
     position: absolute;
     margin: auto;
-    top: -30px; left: 0; bottom: 0; right: 0;
+    top: -29px; left: 0; bottom: 0; right: 0;
     background-color: white;
   }
 
   .form-signin-divider {
     position: relative;
     height: 30px;
+    margin-bottom: 0.5rem;
+  }
+
+  .btn-primary {
+    margin-bottom: 3.3rem;
+  }
+
+  .divider {
+    border-width: 2px;
   }
 
   .form-control {
