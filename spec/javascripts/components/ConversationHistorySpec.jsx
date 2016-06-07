@@ -59,6 +59,7 @@ describe('ConversationHistory', () => {
           user: {
             first_name: 'Phillip',
             last_name: 'Fry',
+            profile_photo: { small: { url: 'frys_profile_url' } }
           },
           created_at: '2016-06-02T22:31:40.163Z',
           content: 'Hi there!'
@@ -76,6 +77,9 @@ describe('ConversationHistory', () => {
       expect(messageView.textContent).toContain('Hi there!')
       expect(messageView.textContent).toContain('Phillip Fry')
       expect(messageView.textContent).toContain('6/2, 6:31 pm')
+
+      const messageViewImg = TestUtils.findRenderedDOMComponentWithTag(view, 'img')
+      expect(messageViewImg.src).toContain('frys_profile_url')
     })
   })
 })

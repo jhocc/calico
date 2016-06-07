@@ -47,7 +47,7 @@ export default class ConversationHistory extends Component {
         return (
           <div key={`message_${msg.get('id')}`} className='message'>
             <div className='profile-picture'>
-              <img src=''/>
+              <img src={msg.getIn(['user', 'profile_photo', 'small', 'url'])} alt={fullName} />
             </div>
             <div className='message-body'>
               <span className='username'>{fullName}</span>
