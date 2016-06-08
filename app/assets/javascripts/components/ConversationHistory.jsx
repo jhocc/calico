@@ -71,6 +71,7 @@ export default class ConversationHistory extends Component {
       <div ref='messageWindow' className='message-window' style={{background: 'white'}}>
         {this.welcomeMessage()}
         {messages}
+        <div className='mobile-spacer'></div>
       </div>
     )
   }
