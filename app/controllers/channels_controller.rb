@@ -20,6 +20,10 @@ class ChannelsController < ApplicationController
       Channel.arel_table[:updated_at].desc,
     )
 
+    if current_user.is_feedback_user?
+      @channels = @channels.limit(50)
+    end
+
     respond_to do |format|
       format.json {
         render json: @channels.to_json(include: {
