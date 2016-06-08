@@ -73,4 +73,5 @@ fi
 runcmd docker-compose --file $(docker_compose_file) build webserver
 runcmd docker-compose --file $(docker_compose_file)  --project-name $(project_name) up -d webserver
 docker exec $(app_container_name) bundle exec rake --trace db:migrate db:seed
-runcmd echo "Access app at http://$(docker-machine ip default)"
+runcmd info "Access app at http://$(docker-machine ip default)"
+echo $?

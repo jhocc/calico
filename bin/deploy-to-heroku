@@ -1,8 +1,10 @@
 #!/bin/bash
 ROOT="$(dirname "$0")/.."
-cd "$ROOT"
+source "$ROOT/bin/_util"
 
 set -e
+
+cd "$ROOT"
 
 PROGRAM=`basename $0`
 
@@ -40,7 +42,9 @@ done
 
 eval $(docker-machine env)
 docker-compose build web
-echo "Assuming that you have logged into heroku"
+info "Assuming that you have logged into heroku"
 set -x
 heroku docker:release --app "$HEROKU_APP"
 heroku run --app beta-calico rake --trace db:migrate db:seed
+info "Completed deployment"
+echo $?
