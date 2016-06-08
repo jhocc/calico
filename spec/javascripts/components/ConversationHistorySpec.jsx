@@ -8,6 +8,7 @@ import TestUtils from 'react-addons-test-utils'
 describe('ConversationHistory', () => {
   describe('shouldComponentUpdate', () => {
     const channel = Immutable.fromJS({
+      id: 1,
       messages: [],
       channels_users: [{
         user_id: 1,
@@ -38,6 +39,18 @@ describe('ConversationHistory', () => {
       const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} />)
       const channelWithUpdatedMessages = channel.setIn(['messages', 0, 'id'], 1)
       expect(view.shouldComponentUpdate({channel: channelWithUpdatedMessages})).toBe(true)
+    })
+
+    it('returns true when channel changed', () => {
+      const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} />)
+      const channelWithUpdatedMessages = channel.set('id', 2)
+      expect(view.shouldComponentUpdate({channel: channelWithUpdatedMessages})).toBe(true)
+    })
+
+    it('returns false when channel messages have different content', () => {
+      const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel.setIn(['messages', 0, 'url'], 'test')} />)
+      const channelWithUpdatedMessages = channel.setIn(['messages', 0, 'url'], 'test2')
+      expect(view.shouldComponentUpdate({channel: channelWithUpdatedMessages})).toBe(false)
     })
 
     it('returns false when channel messages did not change', () => {

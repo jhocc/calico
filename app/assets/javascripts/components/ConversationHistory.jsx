@@ -10,7 +10,8 @@ export default class ConversationHistory extends Component {
 
     const messages = this.props.channel.get('messages')
     const nextMessages =  nextProps.channel.get('messages')
-    return !messages.equals(nextMessages)
+    return this.props.channel.get('id') !== nextProps.channel.get('id') ||
+      messages.length !== nextMessages.length
   }
 
   componentDidUpdate(prevProps, prevState) {
