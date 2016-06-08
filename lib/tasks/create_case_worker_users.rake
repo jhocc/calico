@@ -42,4 +42,21 @@ namespace :calico do
 
     puts "Created #{count} new case worker users for foster family agencies..."
   end
+
+  task :update_example_case_worker_emails => :environment do
+    puts "Updating case worker users email to <first_name>.<last_name>@example.com"
+    count = 0
+
+    User.where(role: Role::CASE_WORKER).find_each do |user|
+      email = "#{user.first_name}.#{user.last_name}@example.com"
+      if user.email != email.downcase && user.email != User::FEEDBACK_USER_EMAIL
+        user.update_attributes(email: email)
+
+        print '.'
+        count += 1
+      end
+    end
+
+    puts "\r\nUpdated #{count} case worker users email to <first_name>.<last_name>@example.com"
+  end
 end
