@@ -145,6 +145,16 @@ h2 {
   line-height: 2.6rem;
 }
 
+a .delete-button {
+  float:right;
+  font-size: 24px;
+  color: #333;
+}
+
+a .delete-button:hover {
+  color: #5b616b;
+}
+
 // FORM //
 
 .form-control {
@@ -219,7 +229,7 @@ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.
 
 // TRANSITIONS //
 
-a, li, .container, .btn, .drawer, .drawer-right, .form-signin, textarea, .message {
+a, li, .container, .btn, .drawer, .drawer-right, .form-signin, textarea, .message, .delete-button {
   -o-transition:.3s;
   -ms-transition:.3s;
   -moz-transition:.3s;

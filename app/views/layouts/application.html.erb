@@ -39,10 +39,10 @@
     <% flash_messages.each do |message| %>
       <div id="error_explanation">
         <%= message %>
+      <a href="#"><i class="delete-button fa fa-times-circle"aria-hidden="true"></i></a>
       </div>
     <% end %>
     <%= yield %>
   </div>
 </body>
 </html>
-
