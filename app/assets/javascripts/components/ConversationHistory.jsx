@@ -24,10 +24,11 @@ export default class ConversationHistory extends Component {
       if (user.get('email') === 'calico_feedback_user@casecommons.org') {
         const fullName = `${user.get('first_name')} ${user.get('last_name')}`
         const createdAt = moment(channel.get('created_at')).format('M/D, h:mm a')
+        const profilePictureUrl = user.getIn(['profile_photo', 'small', 'url'])
         return (
           <div className='message'>
             <div className='profile-picture'>
-              <img src=''/>
+              <img src={profilePictureUrl}/>
             </div>
             <div className='message-body'>
               <span className='username'>{fullName}</span>

@@ -63,6 +63,7 @@ describe('ConversationHistory', () => {
               first_name: 'Calico Feedback',
               last_name: 'User',
               email: 'calico_feedback_user@casecommons.org',
+              profile_photo: { small: { url: 'calico_profile_url' } },
             },
           }],
           created_at: '2016-06-03T11:31:40.163Z',
@@ -75,6 +76,9 @@ describe('ConversationHistory', () => {
         expect(messageView.textContent).toContain('Calico Feedback User')
         expect(messageView.textContent).toContain('Calico Feedback User')
         expect(messageView.textContent).toContain('6/3, 7:31 am')
+
+        const profileView = TestUtils.findRenderedDOMComponentWithTag(view, 'img')
+        expect(profileView.src).toContain('calico_profile_url')
       })
 
       describe('when the channel user is NOT the calico feedback user', () => {
@@ -87,6 +91,7 @@ describe('ConversationHistory', () => {
                 first_name: 'Me',
                 last_name: 'Myself',
                 email: 'me_myself@casecommons.org',
+                profile_photo: { small: { url: 'my_profile_url' } }
               },
             },{
               user_id: 3,
@@ -94,6 +99,7 @@ describe('ConversationHistory', () => {
                 first_name: 'Phillip',
                 last_name: 'Fry',
                 email: 'not_the_feedback_users_email@casecommons.org',
+                profile_photo: { small: { url: 'frys_profile_url' } }
               },
             }],
           })
