@@ -50,11 +50,14 @@ export default class MessagePage extends Component {
   }
 
   mark() {
-    Util.request(
-      'PUT',
-      `/channels/${this.getActiveChannelId()}/mark.json`,
-      { channel_id: this.getActiveChannelId() }
-    )
+    const activeChannel = this.getActiveChannelId()
+    if (activeChannel) {
+      Util.request(
+        'PUT',
+        `/channels/${activeChannel}/mark.json`,
+        { channel_id: activeChannel }
+      )
+    }
   }
 
   getActiveChannelId() {
