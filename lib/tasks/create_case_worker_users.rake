@@ -16,7 +16,7 @@ namespace :calico do
       number_of_users_to_create.times do
         first_name = Faker::Name.first_name
         last_name = Faker::Name.last_name
-        email = "#{first_name}.#{last_name}@example.com"
+        email = "#{first_name}.#{last_name}@calicoapp.co"
 
         case_worker = FactoryGirl.create(
           :case_worker,
@@ -48,7 +48,7 @@ namespace :calico do
     count = 0
 
     User.where(role: Role::CASE_WORKER).find_each do |user|
-      email = "#{user.first_name}.#{user.last_name}@example.com"
+      email = "#{first_name}.#{last_name}@calicoapp.co"
       if user.email != email.downcase && user.email != User::FEEDBACK_USER_EMAIL
         user.update_attributes(email: email)
 
