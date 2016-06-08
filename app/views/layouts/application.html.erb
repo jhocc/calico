@@ -36,9 +36,9 @@
     </div>
   </nav>
   <div id="container" class="container">
-    <% flash.each do |key, value| %>
+    <% flash_messages.each do |message| %>
       <div id="error_explanation">
-        <%= value %>
+        <%= message %>
       </div>
     <% end %>
     <%= yield %>
