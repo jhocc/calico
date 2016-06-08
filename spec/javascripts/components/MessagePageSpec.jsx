@@ -75,12 +75,28 @@ describe('MessagePage', () => {
     })
   })
 
+  describe('setActiveChannel', () => {
+    var view
+    beforeEach(() => {
+      view = TestUtils.renderIntoDocument(<MessagePage currentUserId={1} />)
+      spyOn(view, 'setState')
+      spyOn(view, 'mark')
+    })
+
+    it('sets the active channel and calls mark', () => {
+      view.setActiveChannel(2)
+      expect(view.setState).toHaveBeenCalledWith({activeChannel: 2})
+      expect(view.mark).toHaveBeenCalled()
+    })
+  })
+
   describe('render', () => {
     var view
     describe('when there are channels present', () => {
       beforeEach(() => {
         const currentUserId = 1
         const channel_one = {
+          id: 1,
           messages: [{
             id: 1,
             user: {
@@ -105,15 +121,16 @@ describe('MessagePage', () => {
             },
           }],
         }
-        view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} />)
+        view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} activeChannel={1} />)
         spyOn(view, 'send')
         view.setState({ channels: Immutable.fromJS([channel_one]) })
       })
 
       it('renders the channel nav with non current user labels', () => {
         const channelView = TestUtils.findRenderedComponentWithType(view, ChannelNav)
-        expect(channelView.props.activeIndex).toEqual(0)
+        expect(channelView.props.activeIndex).toEqual(1)
         expect(channelView.props.data.toJS()).toEqual([{
+          id: 1,
           messages: [{
             id: 1,
             user: {
