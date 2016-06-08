@@ -174,21 +174,51 @@
 // MOBILE VIEW //
 
 @media (max-width: 768px) {
+
   .mobile-spacer {
     height: 5.5em;
     display:block;
   }
   .dashboard {
+    margin-top: 0;
+
     h2 {
       display: none;
     }
     ul {
       margin-bottom: 2rem;
     }
+
     .message-window {
       height: auto;
       overflow: visible;
     }
+
+    .message {
+      padding: 1rem;
+      
+      .profile-picture {
+          img {
+            height: 5.5rem;
+            width: 5.5rem;
+            margin-right: 1rem;
+            float: none;
+          }
+      }
+
+      .message-body {
+        p {
+          margin: 0;
+          overflow: inherit;
+        }
+
+        span {
+          float:none;
+        }
+
+      } 
+    }
+      
     .message-input {
       position: fixed;
       bottom: -2rem;
@@ -226,3 +256,4 @@
     }
   }
 }
+
