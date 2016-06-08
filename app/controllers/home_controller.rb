@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!
-
   def index
+    if current_user.blank?
+      redirect_to new_user_session_path
+    end
   end
 end
