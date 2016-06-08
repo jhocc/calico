@@ -39,12 +39,12 @@ do
   esac
   shift
 done
-
-eval $(docker-machine env)
+if [[ -z $DOCKER_HOST ]]; then
+  eval $(docker-machine env)
+fi
 docker-compose build web
-info "Assuming that you have logged into heroku"
-set -x
+warn "You should be logged into heroku before running this command"
 heroku docker:release --app "$HEROKU_APP"
-heroku run --app beta-calico rake --trace db:migrate db:seed
+heroku run --app "$HEROKU_APP" rake --trace db:migrate db:seed
 info "Completed deployment"
 echo $?
