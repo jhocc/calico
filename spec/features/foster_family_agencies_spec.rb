@@ -79,6 +79,40 @@ feature 'Foster Family Agencies' do
       expect(page).to have_content("There are no foster family agencies in your zip code")
     end
 
+    scenario 'displays no flash message when changing from zip code without foster family agencies to zip code with agency' do
+      response1 = {}
+
+      response2 = [Hashie::Mash.new({
+        'facility_address' => '40W 23rd Street',
+        'facility_name' => 'Case Commons',
+        'facility_number' => '10707649',
+        'facility_state' => 'NY',
+        'facility_city' => 'New York',
+        'facility_status' => 'LICENSED',
+        'facility_telephone_number' => '(234) 234-1234',
+        'facility_type' => 'FOSTER FAMILY AGENCY',
+        'facility_zip' => '10010',
+      })]
+
+      allow_any_instance_of(FosterFamilyAgencyService).to receive(:find_by_zip_code)
+        .with(zip_code)
+        .and_return(response1)
+
+      allow_any_instance_of(FosterFamilyAgencyService).to receive(:find_by_zip_code)
+        .with('10010')
+        .and_return(response2)
+
+      login_as user
+      visit foster_family_agencies_path
+
+      expect(page).to have_content("There are no foster family agencies in your zip code")
+
+      fill_in 'zip_code', with: '10010'
+      click_button 'Update ZIP'
+
+      expect(page).to_not have_content("There are no foster family agencies in your zip code")
+    end
+
     scenario 'change zip and display foster family agencies in new zip code' do
       response1 = [Hashie::Mash.new({
         'facility_address' => '1727 MARTIN LUTHER KING WY#109',
