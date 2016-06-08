@@ -10,11 +10,19 @@ namespace :calico do
 
     count = 0
     ff_agencies.each do |ffa|
-      3.times do
+      case_workers_count = User.where(foster_family_agency_number: ffa.facility_number).count
+      number_of_users_to_create = [3 - case_workers_count, 0].max
+
+      number_of_users_to_create.times do
+        first_name = Faker::Name.first_name
+        last_name = Faker::Name.last_name
+        email = "#{first_name}.#{last_name}@calicoapp.co"
+
         case_worker = FactoryGirl.create(
           :case_worker,
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
+          email: email,
+          first_name: first_name,
+          last_name: last_name,
           foster_family_agency_number: ffa.facility_number,
           password: 'Calico2016!',
           password_confirmation: 'Calico2016!'
@@ -33,5 +41,22 @@ namespace :calico do
     end
 
     puts "Created #{count} new case worker users for foster family agencies..."
+  end
+
+  task :update_example_case_worker_emails => :environment do
+    puts "Updating case worker users email to <first_name>.<last_name>@example.com"
+    count = 0
+
+    User.where(role: Role::CASE_WORKER).find_each do |user|
+      email = "#{first_name}.#{last_name}@calicoapp.co"
+      if user.email != email.downcase && user.email != User::FEEDBACK_USER_EMAIL
+        user.update_attributes(email: email)
+
+        print '.'
+        count += 1
+      end
+    end
+
+    puts "\r\nUpdated #{count} case worker users email to <first_name>.<last_name>@example.com"
   end
 end
