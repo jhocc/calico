@@ -1,0 +1,62 @@
+#!/bin/bash
+ROOT="$(dirname "$0")/.."
+source "$ROOT/bin/_util"
+
+set -e
+
+cd "$ROOT"
+
+PROGRAM=`basename $0`
+
+usage() {
+  cat >&2 <<STR
+usage: $PROGRAM [ --app <app_name> ]
+
+Create heroku app with <app_name> and sets up heroku addons
+STR
+}
+
+HEROKU_APP="cc-calico"
+while test $# -gt 0
+do
+  case $1 in
+  --app | -a)
+    HEROKU_APP="$2"
+    shift
+    ;;
+  --help | -h | '-?' )
+    usage
+    exit 0
+    ;;
+  -*)
+    fatal "Unrecognized option: $1"
+    usage
+    exit 1
+    ;;
+  *)
+    break
+    ;;
+  esac
+  shift
+done
+
+warn "You should be logged into heroku before running this command"
+if [[ -z $DOCKER_HOST ]]; then
+  eval $(docker-machine env)
+fi
+
+heroku plugins:install heroku-container-tools
+heroku apps:create "$HEROKU_APP"
+info "Created heroku app $HEROKU_APP"
+heroku addons:create heroku-postgresql:hobby-dev --app "$HEROKU_APP"
+info "Added heroku postgresql addon"
+heroku addons:create sendgrid:starter --app "$HEROKU_APP"
+info "Added heroku sendgrid addon"
+
+warn "newrelic variables and aws s3 variables needs to be replaced"
+heroku config:set NEWRELIC_LICENSE=mynewriclicensekey --app "$HEROKU_APP"
+heroku config:set AWS_SECRET_ACCESS_KEY=myseceretaccess AWS_REGION=us-east-1 AWS_BUCKET=cc-calico \
+AWS_ACCESS_KEY_ID=myaccesskey --app "$HEROKU_APP"
+
+info "App $HEROKU_APP is available at"
+heroku domains --app "$HEROKU_APP"
