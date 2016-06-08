@@ -10,11 +10,19 @@ namespace :calico do
 
     count = 0
     ff_agencies.each do |ffa|
-      3.times do
+      case_workers_count = User.where(foster_family_agency_number: ffa.facility_number).count
+      number_of_users_to_create = [3 - case_workers_count, 0].max
+
+      number_of_users_to_create.times do
+        first_name = Faker::Name.first_name
+        last_name = Faker::Name.last_name
+        email = "#{first_name}.#{last_name}@example.com"
+
         case_worker = FactoryGirl.create(
           :case_worker,
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
+          email: email,
+          first_name: first_name,
+          last_name: last_name,
           foster_family_agency_number: ffa.facility_number,
           password: 'Calico2016!',
           password_confirmation: 'Calico2016!'
