@@ -3,10 +3,7 @@ class ChannelsController < ApplicationController
 
   def create
     user_id = channel_params[:user_id]
-    user_table = ChannelsUser.arel_table
-    current_user_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(user_id))
-    other_user_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(current_user.id))
-    existing_channel = other_user_channels.where(id: current_user_channels.pluck(:id).uniq).first
+    existing_channel = find_common_channel(current_user.id, user_id)
 
     if existing_channel.nil?
       chat_user = User.find(user_id)
@@ -43,6 +40,13 @@ class ChannelsController < ApplicationController
   end
 
   private
+
+  def find_common_channel(user_one_id, user_two_id)
+    user_table = ChannelsUser.arel_table
+    user_one_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(user_one_id))
+    user_two_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(user_two_id))
+    user_two_channels.where(id: user_two_channels.pluck(:id).uniq).first
+  end
 
   def channel_params
     params.permit(:user_id, :channel_id)
