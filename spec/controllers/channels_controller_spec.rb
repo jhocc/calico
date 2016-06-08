@@ -20,6 +20,12 @@ RSpec.describe ChannelsController, type: :controller do
         expect(current_user.channels.first.users).to include (current_user)
         expect(current_user.channels.first.users).to include (other_user)
       end
+
+      it 'redirects to root path with new channel id' do
+        post :create, { user_id: other_user }
+        new_channel_id = current_user.channel_ids.first
+        expect(response).to redirect_to(root_path(open_channel_id: new_channel_id))
+      end
     end
 
     describe 'when there is as existing channel between current user and the user passed' do
@@ -28,6 +34,12 @@ RSpec.describe ChannelsController, type: :controller do
         expect {
           post :create, { user_id: other_user }
         }.to change(Channel, :count).by(0)
+      end
+
+      it 'redirects to root path with existing channel id' do
+        existing_channel_id = current_user.channel_ids.first
+        post :create, { user_id: other_user }
+        expect(response).to redirect_to(root_path(open_channel_id: existing_channel_id))
       end
     end
   end

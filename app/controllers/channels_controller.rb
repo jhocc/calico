@@ -7,12 +7,12 @@ class ChannelsController < ApplicationController
 
     if existing_channel.nil?
       chat_user = User.find(user_id)
-      Channel.create(users: [current_user, chat_user])
+      existing_channel = Channel.create(users: [current_user, chat_user])
     else
       existing_channel.touch(:updated_at)
     end
 
-    redirect_to root_path
+    redirect_to root_path(open_channel_id: existing_channel.id)
   end
 
   def index
