@@ -27,5 +27,33 @@
 .resource-table {
   h2 {
     margin-bottom: 1.7rem;
+    float: left;
+  }
+
+  #zip_code {
+    float: left;
+    margin-left: 1rem;
+    text-align: center;
+    padding: 0rem;
+    width: 10rem;
+    font-size: 3rem;
+    font-weight: 600;
+  
+  }
+
+  .btn {
+  
+    float: left;
+    padding: 0.95rem 1.5rem;
+    margin-left: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .resource-table {
+    #zip_code {
+      margin-left: 0;
+      margin-bottom: 1rem;
+    }
   }
 }
