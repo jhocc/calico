@@ -60,3 +60,4 @@ AWS_ACCESS_KEY_ID=myaccesskey --app "$HEROKU_APP"
 
 info "App $HEROKU_APP is available at"
 heroku domains --app "$HEROKU_APP"
+echo $?

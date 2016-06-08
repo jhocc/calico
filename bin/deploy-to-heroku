@@ -47,4 +47,6 @@ warn "You should be logged into heroku before running this command"
 heroku docker:release --app "$HEROKU_APP"
 heroku run --app "$HEROKU_APP" rake --trace db:migrate db:seed
 info "Completed deployment"
+info "App $HEROKU_APP is available at"
+heroku domains --app "$HEROKU_APP"
 echo $?
