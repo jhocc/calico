@@ -1,4 +1,4 @@
-help_user = User.find_or_initialize_by(
+help_user = User.find_or_create_by(
   email: User::FEEDBACK_USER_EMAIL,
   first_name: 'Calico Feedback',
   last_name: 'User',
