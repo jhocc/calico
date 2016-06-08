@@ -45,7 +45,7 @@ class ChannelsController < ApplicationController
     user_table = ChannelsUser.arel_table
     user_one_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(user_one_id))
     user_two_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(user_two_id))
-    user_two_channels.where(id: user_two_channels.pluck(:id).uniq).first
+    user_one_channels.where(id: user_two_channels.pluck(:id).uniq).first
   end
 
   def channel_params

@@ -5,7 +5,9 @@ RSpec.describe ChannelsController, type: :controller do
 
   describe '#create' do
     let(:other_user) { FactoryGirl.create(:user) }
+    let(:another_user) { FactoryGirl.create(:user) }
     before do
+      FactoryGirl.create(:channel, users: [other_user, another_user])
       sign_in current_user
     end
 
@@ -14,6 +16,9 @@ RSpec.describe ChannelsController, type: :controller do
         expect {
           post :create, { user_id: other_user }
         }.to change(Channel, :count).by(1)
+        expect(current_user.channels.count).to eq 1
+        expect(current_user.channels.first.users).to include (current_user)
+        expect(current_user.channels.first.users).to include (other_user)
       end
     end
 
