@@ -54,8 +54,9 @@ feature 'my messages' do
     user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
     finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
     princess_bubblegum = FactoryGirl.create(:user, first_name: 'Princess', last_name: 'Bubblegum')
-    FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
+
     FactoryGirl.create(:channel, users: [princess_bubblegum, user_myself])
+    FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
 
     login_as user_myself
 
@@ -140,9 +141,9 @@ feature 'my messages' do
     user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
     finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
     jake_the_dog = FactoryGirl.create(:user, first_name: 'Jake', last_name: 'The Dog')
-    FactoryGirl.create(:channel, users: [jake_the_dog, user_myself])
     channel_with_finn = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
     channel_with_finn.messages.create(content: 'another message', user: finn_the_human)
+    FactoryGirl.create(:channel, users: [jake_the_dog, user_myself])
 
     login_as user_myself
     visit root_path
@@ -170,10 +171,10 @@ feature 'my messages' do
   scenario 'user marks currently selected channels as read' do
     user_myself = FactoryGirl.create(:user, first_name: 'Me', last_name: 'And Myself')
     jake_the_dog = FactoryGirl.create(:user, first_name: 'Jake', last_name: 'The Dog')
-    FactoryGirl.create(:channel, users: [jake_the_dog, user_myself])
     finn_the_human = FactoryGirl.create(:user, first_name: 'Finn', last_name: 'Mertens')
     channel_with_finn = FactoryGirl.create(:channel, users: [finn_the_human, user_myself])
     channel_with_finn.messages.create(content: 'another message', user: finn_the_human)
+    FactoryGirl.create(:channel, users: [jake_the_dog, user_myself])
 
     login_as user_myself
     visit root_path
