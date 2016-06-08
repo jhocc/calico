@@ -66,11 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def generate_signup_message
     return false if resource.invalid? || resource.is_feedback_user?
 
-    calico_feedback_user = User.find_or_initialize_by(email: User::FEEDBACK_USER_EMAIL) do |user|
-      user.first_name = 'Calico Feedback'
-      user.last_name = 'User'
-      user.password = SecureRandom.uuid
-    end
+    calico_feedback_user = User.find_by(email: User::FEEDBACK_USER_EMAIL)
 
     feedback_channel = resource.channels.build(users: [calico_feedback_user, resource])
     feedback_channel.save!
