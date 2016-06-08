@@ -37,9 +37,9 @@
   </nav>
   <div id="container" class="container">
     <% flash_messages.each do |message| %>
-      <div id="error_explanation">
+      <div id="error_explanation" data-presents="error-explanation">
         <%= message %>
-      <a href="#"><i class="delete-button fa fa-times-circle"aria-hidden="true"></i></a>
+        <a href="#"><i class="delete-button fa fa-times-circle"aria-hidden="true"></i></a>
       </div>
     <% end %>
     <%= yield %>

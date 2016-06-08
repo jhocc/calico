@@ -22,5 +22,8 @@ feature 'Sign in' do
 
     expect(page).to have_link 'Sign Up'
     expect(page).to have_button 'Sign In'
+
+    find('#error_explanation a').click
+    expect(page).to_not have_css('#error_explanation')
   end
 end
