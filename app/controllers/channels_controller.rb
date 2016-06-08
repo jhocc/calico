@@ -2,15 +2,22 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    chat_user = User.find(channel_params[:user_id])
-    Channel.create(users: [current_user, chat_user])
+    user_id = channel_params[:user_id]
+    existing_channel = find_common_channel(current_user.id, user_id)
+
+    if existing_channel.nil?
+      chat_user = User.find(user_id)
+      Channel.create(users: [current_user, chat_user])
+    else
+      existing_channel.touch(:updated_at)
+    end
 
     redirect_to root_path
   end
 
   def index
     @channels = current_user.channels.includes({messages: :user, channels_users: :user}).order(
-      Channel.arel_table[:created_at].asc,
+      Channel.arel_table[:updated_at].desc,
     )
 
     respond_to do |format|
@@ -33,6 +40,13 @@ class ChannelsController < ApplicationController
   end
 
   private
+
+  def find_common_channel(user_one_id, user_two_id)
+    user_table = ChannelsUser.arel_table
+    user_one_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(user_one_id))
+    user_two_channels = Channel.joins(:channels_users).where(user_table[:user_id].eq(user_two_id))
+    user_two_channels.where(id: user_two_channels.pluck(:id).uniq).first
+  end
 
   def channel_params
     params.permit(:user_id, :channel_id)
