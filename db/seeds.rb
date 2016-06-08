@@ -6,7 +6,7 @@ help_user = User.find_or_create_by(
   user.password = 'Password123'
 end
 
-image_file = File.open(File.join(Rails.root, '/public/assets/images/helper.png'))
+image_file = File.open(File.join(Rails.root, '/app/assets/images/helper.png'))
 help_user.profile_photo.store!(image_file)
 help_user.save!
 
