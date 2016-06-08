@@ -1,5 +1,6 @@
 import ConversationHistory from 'components/ConversationHistory'
 import Immutable from 'immutable'
+import Message from 'components/Message'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
@@ -63,30 +64,36 @@ describe('ConversationHistory', () => {
               first_name: 'Calico Feedback',
               last_name: 'User',
               email: 'calico_feedback_user@casecommons.org',
+              profile_photo: { small: { url: 'calico_profile_url' } },
             },
           }],
           created_at: '2016-06-03T11:31:40.163Z',
         })
         const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} currentUserId={1}/>)
-        const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
-        expect(messageView.textContent).toContain(
+        const message = TestUtils.scryRenderedComponentsWithType(view, Message)[0]
+        expect(message.props.username).toContain('Calico Feedback User')
+        expect(message.props.createdAt).toContain('6/3, 7:31 am')
+        expect(message.props.profileUrl).toContain('calico_profile_url')
+
+        const messageBody = TestUtils.findRenderedDOMComponentWithClass(message, 'message-body')
+        expect(messageBody.textContent).toContain(
           'Welcome to Calico, a messaging app for caseworkers, birth and foster parents,'
         )
-        expect(messageView.textContent).toContain('Calico Feedback User')
-        expect(messageView.textContent).toContain('Calico Feedback User')
-        expect(messageView.textContent).toContain('6/3, 7:31 am')
       })
 
       describe('when the channel user is NOT the calico feedback user', () => {
         it('does NOT render the welcome message as the first message', () => {
           const channel = Immutable.fromJS({
-            messages: [],
+            messages: [
+              {'id':2,'user_id':1,'channel_id':7,'content':'hello','created_at':'2016-06-06T15:54:28.674Z'}
+            ],
             channels_users: [{
               user_id: 1,
               user: {
                 first_name: 'Me',
                 last_name: 'Myself',
                 email: 'me_myself@casecommons.org',
+                profile_photo: { small: { url: 'my_profile_url' } }
               },
             },{
               user_id: 3,
@@ -94,12 +101,14 @@ describe('ConversationHistory', () => {
                 first_name: 'Phillip',
                 last_name: 'Fry',
                 email: 'not_the_feedback_users_email@casecommons.org',
+                profile_photo: { small: { url: 'frys_profile_url' } }
               },
             }],
           })
-          const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} currentUserId={1} />)
-          const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
-          expect(messageView.textContent).not.toContain(
+          const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel} currentUserId={1}/>)
+          const message = TestUtils.scryRenderedComponentsWithType(view, Message)[0]
+          const messageBody = TestUtils.findRenderedDOMComponentWithClass(message, 'message-body')
+          expect(messageBody.textContent).not.toContain(
             'Welcome to Calico, a messaging app for caseworkers, birth and foster parents,'
           )
         })
@@ -127,13 +136,11 @@ describe('ConversationHistory', () => {
         }],
       })
       const view = TestUtils.renderIntoDocument(<ConversationHistory channel={channel}/>)
-      const messageView = TestUtils.findRenderedDOMComponentWithClass(view, 'message-window')
-      expect(messageView.textContent).toContain('Hi there!')
-      expect(messageView.textContent).toContain('Phillip Fry')
-      expect(messageView.textContent).toContain('6/2, 6:31 pm')
-
-      const messageViewImg = TestUtils.findRenderedDOMComponentWithTag(view, 'img')
-      expect(messageViewImg.src).toContain('frys_profile_url')
+      const message = TestUtils.scryRenderedComponentsWithType(view, Message)[0]
+      expect(message.props.children.props.children).toContain('Hi there!')
+      expect(message.props.username).toContain('Phillip Fry')
+      expect(message.props.createdAt).toContain('6/2, 6:31 pm')
+      expect(message.props.profileUrl).toContain('frys_profile_url')
     })
   })
 })
