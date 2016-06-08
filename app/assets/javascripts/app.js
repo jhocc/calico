@@ -3,12 +3,16 @@ import 'babel-polyfill'
 import React, { Component, DOM } from 'react'
 import ReactDOM from 'react-dom'
 import rails from 'jquery-ujs'
+import 'vendor/message_bus'
 import 'vendor/drawer'
 import 'menu'
 import 'error-explanation'
 import MessagePage from 'components/MessagePage'
 import 'presenter'
 import _ from 'lodash'
+
+MessageBus.start()
+MessageBus.callbackInterval = 500
 
 function bindAndRenderReact(eventName, Component, dataAttrs = [], dataTransformer = (x) => x) {
   $(document).bind(eventName, (event) => {

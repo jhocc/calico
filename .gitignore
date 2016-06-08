@@ -19,3 +19,4 @@ node_modules
 public/assets/
 .solano*
 .env
+dump.rdb

@@ -14,7 +14,7 @@ gem 'fog'
 gem 'mini_magick', git: 'https://github.com/fschwahn/mini_magick.git'
 gem 'dragonfly'
 gem 'avatar_magick'
-
+gem 'message_bus'
 
 group :production do
   gem 'newrelic_rpm'
