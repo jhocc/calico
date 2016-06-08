@@ -88,19 +88,25 @@ describe('ChannelNav', () => {
         const fry = {
           user_id: 44,
           user: {
-            first_name: 'Phillip', last_name: 'Fry', profile_photo: { small: { url: 'frys_profile_url' } }
+            first_name: 'Phillip',
+            last_name: 'Fry',
+            profile_photo: { small: { url: 'frys_profile_url' } }
           }
         }
         const leela = {
           user_id: 55,
           user: {
-            first_name: 'Turanga', last_name: 'Leela', profile_photo: { small: { url: 'leelas_profile_url' } }
+            first_name: 'Turanga',
+            last_name: 'Leela',
+            profile_photo: { small: { url: 'leelas_profile_url' } }
           }
         }
         const bender = {
           user_id: 66,
           user: {
-            first_name: 'Bender', last_name: 'Rodriguez', profile_photo: { small: { url: 'benders_profile_url' } }
+            first_name: 'Bender',
+            last_name: 'Rodriguez',
+            profile_photo: { small: { url: 'benders_profile_url' } }
           }
         }
         const unreadMessage = {
@@ -111,16 +117,24 @@ describe('ChannelNav', () => {
           id: 1,
           created_at: '2016-06-05T16:17:01.000Z'
         }
-        const unreadMe = { user_id: 77, user: { first_name: 'Me', last_name: 'And Myself' }, read_at: '2016-06-06T16:14:01.000Z' }
-        const readMe = { user_id: 77, user: { first_name: 'Me', last_name: 'And Myself' }, read_at: readMessage.created_at }
-
+        const unreadMe = {
+          user_id: 77,
+          user: { first_name: 'Me', last_name: 'And Myself' },
+          read_at: '2016-06-06T16:14:01.000Z'
+        }
+        const readMe = {
+          user_id: 77,
+          user: { first_name: 'Me', last_name: 'And Myself' },
+          read_at: readMessage.created_at
+        }
         const data = Immutable.fromJS([{
           id: 1,
-          channels_users: [fry, unreadMe],
-          messages: [unreadMessage],
+          channels_users: [fry, readMe],
+          messages: [readMessage],
         }, {
           id: 2,
-          channels_users: [leela, readMe],
+          channels_users: [leela, unreadMe],
+          messages: [unreadMessage],
         }, {
           id: 3,
           channels_users: [readMe, bender],
@@ -128,7 +142,12 @@ describe('ChannelNav', () => {
         }])
         onChannelSelectSpy = jasmine.createSpy('onChannelSelectSpy')
         view = TestUtils.renderIntoDocument(
-          <ChannelNav data={data} onChannelSelect={onChannelSelectSpy} activeIndex={1} currentUserId={readMe.user_id}/>
+          <ChannelNav
+            data={data}
+            onChannelSelect={onChannelSelectSpy}
+            activeIndex={1}
+            currentUserId={readMe.user_id}
+          />
         )
       })
 
@@ -149,12 +168,12 @@ describe('ChannelNav', () => {
       it('calls onChannelSelect with channel index when a channel link is clicked', () => {
         const channelLinks = TestUtils.scryRenderedDOMComponentsWithTag(view, 'a')
         TestUtils.Simulate.click(channelLinks[1])
-        expect(onChannelSelectSpy).toHaveBeenCalledWith(1)
+        expect(onChannelSelectSpy).toHaveBeenCalledWith(2)
       })
 
       it('adds the active class to the active channel', () => {
         const activeChannel = TestUtils.findRenderedDOMComponentWithClass(view, 'active')
-        expect(activeChannel.textContent).toContain('Turanga Leela')
+        expect(activeChannel.textContent).toContain('Phillip Fry')
       })
 
       it('adds the read class to channels that have been read', () => {
@@ -164,7 +183,7 @@ describe('ChannelNav', () => {
 
       it('adds the unread class to channels that have been read', () => {
         const unreadChannel = TestUtils.findRenderedDOMComponentWithClass(view, 'unread')
-        expect(unreadChannel.textContent).toContain('Phillip Fry')
+        expect(unreadChannel.textContent).toContain('Turanga Leela')
       })
     })
 
