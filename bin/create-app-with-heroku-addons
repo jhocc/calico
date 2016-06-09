@@ -46,6 +46,7 @@ if [[ -z $DOCKER_HOST ]]; then
 fi
 
 heroku plugins:install heroku-container-tools
+heroku plugins:install heroku-docker
 heroku apps:create "$HEROKU_APP"
 info "Created heroku app $HEROKU_APP"
 heroku addons:create heroku-postgresql:hobby-dev --app "$HEROKU_APP"
