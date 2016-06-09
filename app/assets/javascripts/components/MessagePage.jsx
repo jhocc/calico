@@ -11,7 +11,7 @@ export default class MessagePage extends Component {
     super(...arguments)
     this.state = {
       channels: Immutable.List(),
-      activeChannel: 0,
+      activeChannel: this.props.activeChannel
     }
     this.setActiveChannel = this.setActiveChannel.bind(this)
     this.loadChannels = this.loadChannels.bind(this)
@@ -50,29 +50,32 @@ export default class MessagePage extends Component {
   }
 
   mark() {
-    Util.request(
-      'PUT',
-      `/channels/${this.getActiveChannelId()}/mark.json`,
-      { channel_id: this.getActiveChannelId() }
-    )
+    const activeChannel = this.getActiveChannelId()
+    if (activeChannel) {
+      Util.request(
+        'PUT',
+        `/channels/${activeChannel}/mark.json`,
+        { channel_id: activeChannel }
+      )
+    }
   }
 
   getActiveChannelId() {
-    return this.state.channels.getIn([this.state.activeChannel, 'id'])
+    return this.state.activeChannel
   }
 
-  setActiveChannel(index) {
+  setActiveChannel(channelId) {
     this.setState({
-      activeChannel: index
+      activeChannel: channelId
     })
     this.mark()
   }
 
   render() {
-    const currentChannel = this.state.channels.get(this.state.activeChannel)
+    const currentChannel = this.state.channels.find((channel) => (channel.get('id') === this.state.activeChannel))
     var channelUserProfile
-    if (this.state.channels && this.state.channels.get(this.state.activeChannel)) {
-      const [channelUser, _] = ChannelUtil.userAndOther(this.state.channels.get(this.state.activeChannel), this.props.currentUserId)
+    if (currentChannel) {
+      const [channelUser, _] = ChannelUtil.userAndOther(currentChannel, this.props.currentUserId)
       channelUserProfile = channelUser.getIn(['user', 'profile_photo', 'small', 'url'])
     }
     return (
@@ -81,7 +84,7 @@ export default class MessagePage extends Component {
           <ChannelNav
             data={this.state.channels}
             onChannelSelect={this.setActiveChannel}
-            activeIndex={this.state.activeChannel}
+            activeChannel={this.state.activeChannel}
             currentUserId={this.props.currentUserId}
           />
         </div>
@@ -112,5 +115,6 @@ export default class MessagePage extends Component {
 
 MessagePage.propTypes = {
   currentUserId: React.PropTypes.number.isRequired,
+  activeChannel: React.PropTypes.number,
 }
 

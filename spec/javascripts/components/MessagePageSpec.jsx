@@ -60,18 +60,54 @@ describe('MessagePage', () => {
       xhrRequest = jasmine.createSpyObj('xhr request', ['done'])
       Util.request.and.returnValue(xhrRequest)
       view = TestUtils.renderIntoDocument(<MessagePage currentUserId={1} />)
-      spyOn(view, 'getActiveChannelId')
-      view.getActiveChannelId.and.returnValue(1)
       TestUtils.Simulate.change(view.refs.messageInput);
     })
 
-    it('calls the messages api with the message-input content', () => {
-      view.mark()
-      expect(Util.request.calls.mostRecent().args).toEqual([
-        'PUT',
-        '/channels/1/mark.json',
-        {channel_id: 1}
-      ])
+    describe('when the active channel is not null', () => {
+      beforeEach(() => {
+        spyOn(view, 'getActiveChannelId')
+        view.getActiveChannelId.and.returnValue(1)
+      })
+
+      it('calls the mark api with the current channel id', () => {
+        view.mark()
+        expect(Util.request.calls.mostRecent().args).toEqual([
+          'PUT',
+          '/channels/1/mark.json',
+          {channel_id: 1}
+        ])
+      })
+    })
+
+    describe('when the active channel is null', () => {
+      beforeEach(() => {
+        spyOn(view, 'getActiveChannelId')
+        view.getActiveChannelId.and.returnValue(null)
+      })
+
+      it('does not call the mark api', () => {
+        view.mark()
+        expect(Util.request.calls.mostRecent().args).not.toEqual([
+          'PUT',
+          '/channels/null/mark.json',
+          {channel_id: null}
+        ])
+      })
+    })
+  })
+
+  describe('setActiveChannel', () => {
+    var view
+    beforeEach(() => {
+      view = TestUtils.renderIntoDocument(<MessagePage currentUserId={1} />)
+      spyOn(view, 'setState')
+      spyOn(view, 'mark')
+    })
+
+    it('sets the active channel and calls mark', () => {
+      view.setActiveChannel(2)
+      expect(view.setState).toHaveBeenCalledWith({activeChannel: 2})
+      expect(view.mark).toHaveBeenCalled()
     })
   })
 
@@ -81,6 +117,7 @@ describe('MessagePage', () => {
       beforeEach(() => {
         const currentUserId = 1
         const channel_one = {
+          id: 1,
           messages: [{
             id: 1,
             user: {
@@ -105,15 +142,16 @@ describe('MessagePage', () => {
             },
           }],
         }
-        view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} />)
+        view = TestUtils.renderIntoDocument(<MessagePage currentUserId={currentUserId} activeChannel={1} />)
         spyOn(view, 'send')
         view.setState({ channels: Immutable.fromJS([channel_one]) })
       })
 
       it('renders the channel nav with non current user labels', () => {
         const channelView = TestUtils.findRenderedComponentWithType(view, ChannelNav)
-        expect(channelView.props.activeIndex).toEqual(0)
+        expect(channelView.props.activeChannel).toEqual(1)
         expect(channelView.props.data.toJS()).toEqual([{
+          id: 1,
           messages: [{
             id: 1,
             user: {

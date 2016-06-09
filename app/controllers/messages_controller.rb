@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     content = message_params[:message][:content]
     message = @channel.messages.build(user: current_user, content: content)
     message.save!
+    message.channel.touch(:updated_at)
 
     respond_to do |format|
       format.json { render json: {} }

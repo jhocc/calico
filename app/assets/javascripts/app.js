@@ -26,6 +26,6 @@ function present() {
   if ($.isReady) {
     throw new Error('DOM already ready, too late to bind')
   }
-  bindAndRenderReact('MessagePage:present', MessagePage, ['currentUserId'])
+  bindAndRenderReact('MessagePage:present', MessagePage, ['currentUserId', 'activeChannel'])
 }
 present()

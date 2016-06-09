@@ -35,10 +35,11 @@ export default class ChannelNav extends Component {
         </div>
         <ul className='channels' style={divStyle}>
           {
-            this.props.data.map((channel, index) => {
+            this.props.data.map((channel) => {
+              const channelId = channel.get('id')
               const [channelUser, otherChannelUser] = Util.userAndOther(channel, this.props.currentUserId)
               let className = ''
-              const isActive = (index === this.props.activeIndex)
+              const isActive = (channelId === this.props.activeChannel)
               if (isActive) {
                 className = 'active'
               } else {
@@ -46,9 +47,9 @@ export default class ChannelNav extends Component {
                 className = this.channelClass(channelUser.get('read_at'), lastCreatedAt)
               }
               const fullName = `${otherChannelUser.getIn(['user', 'first_name'])} ${otherChannelUser.getIn(['user', 'last_name'])}`
-              const onChannelSelect = () => { this.props.onChannelSelect(index) }
+              const onChannelSelect = () => { this.props.onChannelSelect(channelId) }
               return (
-                <li key={`channel_${channel.get('id')}`} className={className}>
+                <li key={`channel_${channelId}`} className={className}>
                   <a href='#' onClick={onChannelSelect}>
                     <img src={otherChannelUser.getIn(['user', 'profile_photo', 'small', 'url'])} alt={fullName} />
                     <span>{fullName}</span>
@@ -66,7 +67,7 @@ export default class ChannelNav extends Component {
 ChannelNav.propTypes = {
   data: React.PropTypes.object,
   onChannelSelect: React.PropTypes.func,
-  activeIndex: React.PropTypes.number,
+  activeChannel: React.PropTypes.number,
   currentUserId: React.PropTypes.number,
 }
 

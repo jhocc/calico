@@ -7,18 +7,22 @@ class ChannelsController < ApplicationController
 
     if existing_channel.nil?
       chat_user = User.find(user_id)
-      Channel.create(users: [current_user, chat_user])
+      existing_channel = Channel.create(users: [current_user, chat_user])
     else
       existing_channel.touch(:updated_at)
     end
 
-    redirect_to root_path
+    redirect_to root_path(open_channel_id: existing_channel.id)
   end
 
   def index
     @channels = current_user.channels.includes({messages: :user, channels_users: :user}).order(
       Channel.arel_table[:updated_at].desc,
     )
+
+    if current_user.is_feedback_user?
+      @channels = @channels.limit(50)
+    end
 
     respond_to do |format|
       format.json {
