@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'my messages' do
   scenario 'user can see an initial message from Calico Feedback user after sign up' do
     visit root_path
-    click_link 'Sign Up'
+    click_link 'Create New Account'
     fill_in 'First Name', with: 'foo'
     fill_in 'Last Name', with: 'baz'
     fill_in 'Email Address', with: 'foo.baz@test.com'

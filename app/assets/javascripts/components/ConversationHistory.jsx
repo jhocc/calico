@@ -35,7 +35,10 @@ export default class ConversationHistory extends Component {
               To get started, click on the menu button (<i className='fa fa-bars' aria-hidden='true'></i>) and go to the <a href='/foster_family_agencies'>Resource Finder</a> (<i className='fa fa-crosshairs' aria-hidden='true'></i>).
               This will put you in touch with foster family agencies in your area.
               From there, select a resource and you will see a list of caseworkers that you can message.<br /><br />
-              Next time you login, you will see all conversations with caseworkers on your home page so you can message there.</p>
+              Next time you login, you will see all conversations with caseworkers on your home page so you can message there.<br /><br />
+              Please do not enter confidential information in this application.  It is for demonstration purposes only.
+              </p>
+
           </Message>
         )
       }
