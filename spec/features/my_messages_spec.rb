@@ -197,4 +197,23 @@ feature 'my messages' do
       expect(page).to have_content('Finn Mertens')
     end
   end
+
+  scenario 'feedback user only loads the most recent updated_at 50 channels' do
+    user_myself = User.find_by(email: User::FEEDBACK_USER_EMAIL)
+    51.times do |index|
+      user = FactoryGirl.build(:user, first_name: "Number #{index}", last_name: 'User')
+      FactoryGirl.create(:channel, users: [user, user_myself], updated_at: index.days.ago)
+    end
+
+    login_as user_myself
+    visit root_path
+
+    within '.channels' do
+      expect(page.find_all('li').count).to eq 50
+      50.times do |index|
+        expect(page).to have_content "Number #{index} User"
+      end
+      expect(page).to have_no_content 'Number 50 User'
+    end
+  end
 end
