@@ -197,12 +197,12 @@ describe('MessagePage', () => {
         const messageViewImg = TestUtils.findRenderedDOMComponentWithClass(view, 'my-profile-picture')
         expect(messageViewImg.src).toContain('my_profile_url')
 
-        const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-success')
+        const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-primary')
         expect(button.value).toEqual('Send')
       })
 
       it('wires up the send button to call send when send button is clicked', () => {
-        const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-success')
+        const button = TestUtils.findRenderedDOMComponentWithClass(view, 'btn-primary')
         expect(button.value).toEqual('Send')
         TestUtils.Simulate.click(button)
         expect(view.send).toHaveBeenCalled()
