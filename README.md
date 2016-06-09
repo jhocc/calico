@@ -4,7 +4,7 @@ Calico is a web-based, responsive messaging app designed for birth and foster pa
 
 To get started, parents go to [http://calicoapp.co] (http://calicoapp.co) and create a profile with a California zipcode. Once logged in, users are taken to their My Messages page with a welcome message with details about how to locate FFAs and communicate with caseworkers.  Users link to FFA profiles with additional information and can then start a conversation with a caseworker.   Users can also reset passwords, update profiles, and upload profile pictures. 
 
-Calico was developed in response to the State of California’s ADPQ solicitation.
+Calico was developed in response to the State of California’s ADPQ vendor pool solicitation.
 
 ## Calico is: 
 
@@ -77,7 +77,8 @@ Calico was built using [Docker] (https://www.docker.com), with separate Docker i
 ## Deployment Instructions (Development Environment)
 
 Dependencies:  
-* These instructions require a computer running Mac OS X 10.9.5+ with Xcode Version 6.1.1+  
+* A Github account  
+* A computer running Mac OS X 10.9.5+ with Xcode Version 6.1.1+  
 * Download and install [Virtualbox 5.0.20] (http://download.virtualbox.org/virtualbox/5.0.20/VirtualBox-5.0.20-106931-OSX.dmg)  
 * Download and install [Docker Toolbox version 1.11.2] (https://github.com/docker/toolbox/releases/download/v1.11.2/DockerToolbox-1.11.2.pkg)  
 
