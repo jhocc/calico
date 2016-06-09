@@ -4,7 +4,7 @@ Calico is a web-based, responsive messaging app designed for birth and foster pa
 
 To get started, parents go to [http://calicoapp.co] (http://calicoapp.co) and create a profile with a California zipcode. Once logged in, users are taken to their My Messages page with a welcome message with details about how to locate FFAs and communicate with caseworkers.  Users link to FFA profiles with additional information and can then start a conversation with a caseworker.   Users can also reset passwords, update profiles, and upload profile pictures. 
 
-Calico was developed in response to the State of California’s ADPQ vendor pool solicitation.
+Calico was developed in response to the State of California’s ADPQ vendor pool RFI #75001.
 
 ## Calico is: 
 
