@@ -19,6 +19,12 @@ RUN curl -s --retry 3 -L http://s3pository.heroku.com/node/v0.12.7/node-v0.12.7-
 RUN mv /app/node/node-v0.12.7-linux-x64 /app/node/node-0.12.7
 ENV PATH /app/node/node-0.12.7/bin:$PATH
 
+ENV FIREFOX_VERSION="45.0.1"
+RUN \
+  wget -q --continue --output-document /firefox.tar.bz2 "https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${FIREFOX_VERSION}/linux-x86_64/en-US/firefox-${FIREFOX_VERSION}.tar.bz2" > /dev/null && \
+  tar -xvjf /firefox.tar.bz2 --directory /root && \
+  ln -s /root/firefox/firefox /usr/bin/firefox
+
 # Install Bundler
 RUN gem install bundler -v 1.9.10 --no-ri --no-rdoc
 ENV PATH /app/user/bin:/app/ruby/bundle/ruby/2.2.3/bin:$PATH
