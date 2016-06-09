@@ -51,7 +51,7 @@ The Product Manager (PM), Nicole Reece  also served as Project Manager and proxy
 
 ## Calico Open Source Technologies
 
-[Ruby on Rails] (http://rubyonrails.org) ,a rapid-development web application framework with strong community support. 
+[Ruby on Rails] (http://rubyonrails.org), a rapid-development web application framework with strong community support. 
 [PostgreSQL] (https://www.postgresql.org), an enterprise-grade database. 
 
 [React] (https://facebook.github.io/react/) and [Bootstrap] (http://getbootstrap.com), front-end framework and design style guide, chosen for their simple declarative programming model,  support for the [U.S. Web Design Standards] (https://standards.usa.gov/) and aspects of the Web Content Accessibility Guidelines. 
