@@ -56,7 +56,8 @@ The Product Manager (PM), Nicole Reece  also served as Project Manager and proxy
 
 [React] (https://facebook.github.io/react/) and [Bootstrap] (http://getbootstrap.com), front-end framework and design style guide, chosen for their simple declarative programming model,  support for the [U.S. Web Design Standards] (https://standards.usa.gov/) and aspects of the Web Content Accessibility Guidelines. 
 
-[Gulp] (http://gulpjs.com), to automate Javascript builds. 
+[Gulp] (http://gulpjs.com), to automate Javascript builds.  
+
 [Devise] (https://github.com/plataformatec/devise), a modular authentication platform.  We followed the HTTPS-only standard to provide data privacy.  
 
 The Socrata [Open Data API] (https://github.com/socrata/soda-ruby) to access CHHS data.   
