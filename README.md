@@ -101,7 +101,7 @@ Setting up and deploying Calico in production in Heroku is documented on the [wi
 
 ## Reviewer Testing
 
-Reviewers can sign up on the landing page, create a profile, and message a fictitious caseworker.   Zip code 90008 (among others) contains FFAs.   To verify that Calico messaging functionality works as advertised,  reviewers can log in to a caseworker account using the password “Calico2016!”.   For example, to log in as caseworker Ransom Lakin (Guardians of Love FFA In zip code 90008), log in using userid Ransom.Lakin@calicoapp.co with password “Calico2016!”
+Reviewers can sign up on the landing page, create a profile, and message a fictitious caseworker.   Zip code 93711 (among others) contains FFAs.   To verify that Calico messaging functionality works as advertised,  reviewers can log in to a caseworker account using the password “Calico2016!”.   For example, to log in as caseworker Devan Spinka (Kids Kasa Foster Care Inc in zip code 93711), log in using userid Devan.Spinka@calicoapp.co with password “Calico2016!”
 
 ## License
 
