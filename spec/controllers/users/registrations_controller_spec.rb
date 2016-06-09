@@ -79,6 +79,31 @@ RSpec.describe Users::RegistrationsController, type: :controller do
         expect(response.status).to eq 200
         expect(response.body).to include "1 error prohibited this user from being saved"
       end
+
+      context 'when user is case worker' do
+        let(:current_user) do
+          FactoryGirl.create(:case_worker,
+                             password: 'test123',
+                             password_confirmation: 'test123')
+        end
+        it 'can not change password' do
+          expect_any_instance_of(User).to_not receive(:update_with_password)
+
+          put :update, {
+            user: {
+              first_name: 'John',
+              last_name: 'Doe',
+              phone: '234-123-123',
+              email: 'test@example.com',
+              current_password: 'test123',
+              password: 'password',
+              password_confirmation: 'password',
+            }
+          }
+
+          expect(response.status).to eq 302
+        end
+      end
     end
 
     describe '#edit' do

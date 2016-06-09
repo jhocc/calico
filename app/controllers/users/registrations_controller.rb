@@ -59,6 +59,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def updating_password?(update_account_params)
+    return false if resource.is_case_worker?
+
     update_account_params[:current_password].present? ||
       update_account_params[:password].present?
   end

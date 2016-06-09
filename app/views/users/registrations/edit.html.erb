@@ -56,20 +56,22 @@
     </div>
   <% end %>
 
-  <div class="field form-group">
-    <%= f.label :current_password, 'Current Password' %>
-    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
-  </div>
+  <%- unless current_user.is_case_worker? %>
+    <div class="field form-group">
+      <%= f.label :current_password, 'Current Password' %>
+      <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+    </div>
 
-  <div class="field form-group">
-    <%= f.label :new_password, 'New Password'%>
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: minimum_password_message %>
-  </div>
+    <div class="field form-group">
+      <%= f.label :new_password, 'New Password'%>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: minimum_password_message %>
+    </div>
 
-  <div class="field form-group">
-    <%= f.label :password_confirmation, 'New Password Confirmation' %>
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'%>
-  </div>
+    <div class="field form-group">
+      <%= f.label :password_confirmation, 'New Password Confirmation' %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'%>
+    </div>
+  <%- end %>
 
   <div class="field form-group">
     <%= f.label :profile_photo, 'Profile Picture' %>

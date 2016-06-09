@@ -89,4 +89,15 @@ feature 'Edit user profile' do
 
     expect(page).to have_css("img[src='#{user.reload.profile_photo.large.url}']")
   end
+
+  scenario 'worker can not change password' do
+    worker = FactoryGirl.create(:case_worker)
+    login_as worker
+
+    visit root_path
+
+    click_menu_link 'My Profile'
+
+    expect(page).to_not have_field('user_password')
+  end
 end
