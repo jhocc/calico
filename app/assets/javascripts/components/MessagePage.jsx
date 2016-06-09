@@ -103,7 +103,7 @@ export default class MessagePage extends Component {
                 type='submit'
                 onClick={this.send}
                 value='Send'
-                className='btn btn-lg btn-primary btn-block btn-success'
+                className='btn btn-lg btn-primary btn-block'
               />
             </div>
           </div>
