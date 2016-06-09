@@ -39,7 +39,7 @@ export default class ChannelNav extends Component {
               const channelId = channel.get('id')
               const [channelUser, otherChannelUser] = Util.userAndOther(channel, this.props.currentUserId)
               let className = ''
-              const isActive = (channelId === this.props.activeIndex)
+              const isActive = (channelId === this.props.activeChannel)
               if (isActive) {
                 className = 'active'
               } else {
@@ -67,7 +67,7 @@ export default class ChannelNav extends Component {
 ChannelNav.propTypes = {
   data: React.PropTypes.object,
   onChannelSelect: React.PropTypes.func,
-  activeIndex: React.PropTypes.number,
+  activeChannel: React.PropTypes.number,
   currentUserId: React.PropTypes.number,
 }
 

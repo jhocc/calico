@@ -84,7 +84,7 @@ export default class MessagePage extends Component {
           <ChannelNav
             data={this.state.channels}
             onChannelSelect={this.setActiveChannel}
-            activeIndex={this.state.activeChannel}
+            activeChannel={this.state.activeChannel}
             currentUserId={this.props.currentUserId}
           />
         </div>

@@ -149,7 +149,7 @@ describe('MessagePage', () => {
 
       it('renders the channel nav with non current user labels', () => {
         const channelView = TestUtils.findRenderedComponentWithType(view, ChannelNav)
-        expect(channelView.props.activeIndex).toEqual(1)
+        expect(channelView.props.activeChannel).toEqual(1)
         expect(channelView.props.data.toJS()).toEqual([{
           id: 1,
           messages: [{

@@ -145,7 +145,7 @@ describe('ChannelNav', () => {
           <ChannelNav
             data={data}
             onChannelSelect={onChannelSelectSpy}
-            activeIndex={1}
+            activeChannel={1}
             currentUserId={readMe.user_id}
           />
         )
