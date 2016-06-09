@@ -30,4 +30,13 @@ class User < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
+
+  def channel_messages
+    channels.includes({messages: :user, channels_users: :user})
+      .order(updated_at: :desc)
+      .to_json(include: {
+      messages: { include: :user },
+      channels_users: { include: :user }
+    })
+  end
 end

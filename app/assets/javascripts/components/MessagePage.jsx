@@ -21,7 +21,11 @@ export default class MessagePage extends Component {
 
   componentDidMount() {
     this.loadChannels()
-    this.interval = setInterval(this.loadChannels, 2000);
+    MessageBus.subscribe(`/message/${this.props.currentUserId}`, (data) => {
+      this.setState({
+        channels: Immutable.fromJS(JSON.parse(data))
+      })
+    })
     this.interval = setInterval(this.mark, 2000);
   }
 
@@ -43,9 +47,7 @@ export default class MessagePage extends Component {
       'POST',
       `/channels/${this.getActiveChannelId()}/messages.json`,
       { message: { content: this.refs.messageInput.value } }
-    ).done((_) => {
-      this.loadChannels()
-    })
+    )
     this.refs.messageInput.value = ''
   }
 
