@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ROOT="$(dirname "$0")/.."
+source "$ROOT/bin/_util"
+set -e
+
+cd "$ROOT"
+
+if [[ -z $DOCKER_HOST ]]; then
+  eval $(docker-machine env)
+fi
+docker images -a
