@@ -20,7 +20,7 @@ feature 'Sign in' do
     click_button 'Sign In'
     click_menu_link 'Log Out'
 
-    expect(page).to have_link 'Sign Up'
+    expect(page).to have_link 'Create New Account'
     expect(page).to have_button 'Sign In'
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Sign up' do
   scenario 'user clicks sign up link on home page' do
     visit root_path
-    click_link 'Sign Up'
+    click_link 'Create New Account'
     expect(page).to have_content 'First Name'
     expect(page).to have_content 'Email Address'
     expect(page).to have_content 'Zip Code'
@@ -13,7 +13,7 @@ feature 'Sign up' do
 
   scenario 'user signs up' do
     visit root_path
-    click_link 'Sign Up'
+    click_link 'Create New Account'
     fill_in 'First Name', with: 'foo'
     fill_in 'Last Name', with: 'baz'
     fill_in 'Email Address', with: 'foo.baz@test.com'
@@ -36,7 +36,7 @@ feature 'Sign up' do
 
   scenario 'requires first_name and last_name' do
     visit root_path
-    click_link 'Sign Up'
+    click_link 'Create New Account'
     fill_in 'Email Address', with: 'foo.baz@test.com'
     fill_in 'Zip Code', with: '10010'
     fill_in 'user_password', with: 'Password123'
@@ -63,7 +63,7 @@ feature 'Sign up' do
 
   scenario 'upload profile photo' do
     visit root_path
-    click_link 'Sign Up'
+    click_link 'Create New Account'
 
     fill_in 'Email Address', with: 'foo.baz@test.com'
     fill_in 'Zip Code', with: '10010'
