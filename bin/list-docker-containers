@@ -2,10 +2,10 @@
 
 ROOT="$(dirname "$0")/.."
 source "$ROOT/bin/_util"
+set -e
 
 cd "$ROOT"
 
-set -e
 if [[ -z $DOCKER_HOST ]]; then
   eval $(docker-machine env)
 fi
