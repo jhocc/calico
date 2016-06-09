@@ -21,7 +21,7 @@ export default class ConversationHeader extends Component {
 }
 
 ConversationHeader.propTypes = {
-  channel: React.PropTypes.object.isRequired,
+  channel: React.PropTypes.object,
   currentUserId: React.PropTypes.number.isRequired,
 }
 

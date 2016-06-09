@@ -68,7 +68,7 @@ export default class ConversationHistory extends Component {
 }
 
 ConversationHistory.propTypes = {
-  channel: React.PropTypes.object.isRequired,
+  channel: React.PropTypes.object,
   currentUserId: React.PropTypes.number.isRequired,
 }
 
