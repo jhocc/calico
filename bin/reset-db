@@ -1,15 +1,43 @@
 #!/bin/bash
 
 ROOT="$(dirname "$0")/.."
+source "$ROOT/bin/_util"
 set -e
-set -x
-
-USER=${PG_USER:-calico}
-HOST=${PG_HOST:-localhost}
-PORT=${PG_PORT:-5432}
 
 cd "$ROOT"
-dropdb -h "$HOST" -p "$PORT" -w -U "$USER" --if-exists ca_development
-dropdb -h "$HOST" -p "$PORT" -w -U "$USER" --if-exists ca_test
-RAILS_ENV=development bundle exec rake --trace db:create db:migrate db:seed
-RAILS_ENV=test bundle exec rake --trace db:create db:migrate db:seed
+PROGRAM=`basename $0`
+
+usage() {
+  cat >&2 <<STR
+usage: $PROGRAM [ --env <environment_name> ]
+
+Drop and then Create the database, load the schema, and initialize with the seed data
+STR
+}
+
+ENV="development"
+while test $# -gt 0
+do
+  case $1 in
+  --env | -e)
+    ENV="$2"
+    shift
+    ;;
+  --help | -h | '-?' )
+    usage
+    exit 0
+    ;;
+  -*)
+    fatal "Unrecognized option: $1"
+    usage
+    exit 1
+    ;;
+  *)
+    break
+    ;;
+  esac
+  shift
+done
+
+cd "$ROOT"
+RAILS_ENV="$ENV" rake --trace db:reset
