@@ -1,6 +1,6 @@
 app:
   build: .
-  dockerfile: Dockerfile.development
+  dockerfile: ./docker/Dockerfile.development
   working_dir: /app/user
   command: 'bash -c ''bundle exec foreman start -f Procfile-dev'''
   container_name: dev_calico_app
@@ -26,8 +26,8 @@ postgresql:
     POSTGRES_DB: ca_development
     POSTGRES_PASSWORD: calico
 webserver:
-  build: .
-  dockerfile: ./docker/Dockerfile.nginx
+  build: ./docker
+  dockerfile: Dockerfile.nginx
   container_name: dev_calico_nginx
   restart: always
   ports:
