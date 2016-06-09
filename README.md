@@ -91,7 +91,7 @@ To install and run Calico, execute these commands:
 
 Access Calico in your browser using the IP address output by the last command.  
 
-Setting up and deploying Calico in production in Heroku is documented on the [wiki] (https://github.com/Casecommons/calico/wiki).  
+Setting up and deploying Calico in production in Heroku is documented on the [wiki] (https://github.com/Casecommons/calico/wiki/Deploying-in-Heroku).  
 
 ## Further Information
 
