@@ -11,7 +11,7 @@ export default class ConversationHistory extends Component {
     const messages = this.props.channel.get('messages')
     const nextMessages =  nextProps.channel.get('messages')
     return this.props.channel.get('id') !== nextProps.channel.get('id') ||
-      messages.length !== nextMessages.length
+      messages.size !== nextMessages.size
   }
 
   componentDidUpdate(prevProps, prevState) {
