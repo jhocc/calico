@@ -1,8 +1,8 @@
 import {Views} from '../components/view'
 import React from 'react'
 
-Views.PagesIndex = (json) => {
+Views.ChannelzIndex = (json) => {
   return (
-    <div></div>
+    <div>hihhlelo</div>
   )
 }
