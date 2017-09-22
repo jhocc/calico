@@ -14,7 +14,8 @@ gem 'fog'
 gem 'mini_magick', git: 'https://github.com/fschwahn/mini_magick.git'
 gem 'dragonfly'
 gem 'avatar_magick'
-
+gem 'breezy_template', path: '../Breezy/breezy_template'
+gem 'breezy', path: '../Breezy/breezy_rails'
 
 group :production do
   gem 'newrelic_rpm'
