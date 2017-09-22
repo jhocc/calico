@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  resources :channelz, only: [:index, :create] do
+    put :mark
+    resources :messages, only: [:create]
+  end
+
   # Avatar routes
   get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
     app.generate(:initial_avatar,

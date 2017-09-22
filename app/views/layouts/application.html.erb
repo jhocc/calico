@@ -11,6 +11,12 @@
   <%= javascript_include_tag gulp_asset_path('app.js'), defer: true %>
   <%= csrf_meta_tags %>
 
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+      <%= breezy_snippet %>
+    });
+  </script>
+
 </head>
 <body class="has-drawer">
   <div id="drawer" class="drawer drawer-right fold" aria-labelledby="drawer">
