@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "@jho406/breezy": "file:///Users/ccuser/workspace/Breezy/breezy",
     "babel-polyfill": "6.2.0",
     "bootstrap": "^3.3.6",
     "flux": "2.0.3",
