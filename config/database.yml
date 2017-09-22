@@ -8,12 +8,10 @@ default: &default
 development:
   <<: *default
   database: ca_development
-  username: casebook
 
 test:
   <<: *default
   database: ca_test
-  username: casebook
 
 production:
   <<: *default
