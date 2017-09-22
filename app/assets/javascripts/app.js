@@ -11,7 +11,7 @@ import 'presenter'
 import _ from 'lodash'
 import Breezy from '@jho406/breezy'
 import {View} from 'components/view'
-import 'views/channelz_index'
+import 'views/channelz_show'
 import 'layouts/default'
 
 if (!window.Breezy) {

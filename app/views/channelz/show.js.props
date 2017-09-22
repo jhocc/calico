@@ -1,0 +1,41 @@
+current_channel = Channel.find(params[:id])
+conversee = current_channel
+      .channels_users
+      .where.not(user_id: current_user.id)
+      .first.user
+
+json.header "#{conversee.first_name} #{conversee.last_name}"
+json.badge current_user.profile_photo_url
+json.channelz_message_path channelz_message_path(current_channel.id)
+json.csrf_token form_authenticity_token
+
+json.channels do
+  channels = current_user
+    .channels
+    .includes({channels_users: :user})
+    .order(Channel.arel_table[:updated_at].desc)
+
+  json.array! channels do |channel|
+    channel_user = channel
+      .channels_users
+      .where.not(user_id: current_user.id)
+      .first
+
+    json.id channel.id
+    json.active channel.id == current_channel.id
+    json.url channelz_path(channel.id)
+    json.name channel_user.user.name
+    json.photo channel_user.user.profile_photo_url
+  end
+end
+
+json.messages do
+  json.array! current_channel.messages do |msg|
+    user = msg.user
+    json.name "#{user.first_name} #{user.last_name}"
+    json.id msg.id
+    json.created_at msg.created_at
+    json.content msg.content
+    json.profile_photo_url msg.user.profile_photo_url
+  end
+end

@@ -11,9 +11,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :channelz, only: [:index, :create] do
+  resources :channelz do
     put :mark
-    resources :messages, only: [:create]
+    post :message
   end
 
   # Avatar routes

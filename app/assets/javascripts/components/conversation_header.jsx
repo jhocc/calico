@@ -1,5 +1,3 @@
-import * as ChannelUtil from 'util/channels'
-import Immutable from 'immutable'
 import React, { Component, DOM } from 'react'
 
 export default class ConversationHeader extends Component {
@@ -11,4 +9,3 @@ export default class ConversationHeader extends Component {
     )
   }
 }
-
